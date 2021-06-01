@@ -1,4 +1,4 @@
-package com.sytoss.edu2021.apicabin;
+package com.sytoss.edu2021;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

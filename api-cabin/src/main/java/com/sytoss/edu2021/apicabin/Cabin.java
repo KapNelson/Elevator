@@ -3,9 +3,6 @@ package com.sytoss.edu2021.apicabin;
 
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Getter
 
 public class Cabin {
@@ -24,11 +21,11 @@ public class Cabin {
     }
 
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         Cabin cab = new Cabin();
 
 
-    }
+    }*/
 
 }
 

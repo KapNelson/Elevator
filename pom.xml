@@ -24,9 +24,18 @@
     <modules>
         <module>srv-config</module>
         <module>api-common</module>
+        <module>api-cabin</module>
     </modules>
 
     <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.20</version>
+                <scope>provided</scope>
+            </dependency>
+        </dependencies>
     </dependencyManagement>
 
     <!--<dependencies>

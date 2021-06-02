@@ -19,7 +19,7 @@ public class Cabin {
     @Setter
     private boolean isOverloaded;
     Engine engine;
-    List<Integer>
+
 
     private void setFloors(int floorsNumber) {
 

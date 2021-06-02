@@ -25,6 +25,7 @@
         <module>srv-config</module>
         <module>api-common</module>
         <module>api-cabin</module>
+        <module>api-engine</module>
     </modules>
 
     <dependencyManagement>

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ElevatorDriver.iml" filepath="$PROJECT_DIR$/ElevatorDriver.iml" />
       <module fileurl="file://$PROJECT_DIR$/api-cabin/api-cabin.iml" filepath="$PROJECT_DIR$/api-cabin/api-cabin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api-engine/api-engine.iml" filepath="$PROJECT_DIR$/api-engine/api-engine.iml" />
     </modules>
   </component>
 </project>

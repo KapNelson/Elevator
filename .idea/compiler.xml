@@ -8,11 +8,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="api-cabin" />
+        <module name="api-engine" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api-cabin" target="1.8" />
       <module name="api-common" target="8" />
+      <module name="api-engine" target="1.8" />
       <module name="ElevatorDriver" target="1.8" />
       <module name="srv-config" target="8" />
     </bytecodeTargetLevel>
@@ -21,6 +23,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-cabin" options="-parameters" />
       <module name="api-common" options="-parameters" />
+      <module name="api-engine" options="-parameters" />
       <module name="srv-config" options="-parameters" />
     </option>
   </component>

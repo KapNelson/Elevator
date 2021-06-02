@@ -1,11 +1,9 @@
 package com.sytoss.edu2021.controllers;
 
+import com.sytoss.edu2021.models.Cabin;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -15,6 +13,16 @@ public class MainController {
     @GetMapping("/")
     @ResponseBody
     public String writeLine() {
-        return "Hello world!";
+
+        Cabin cabin = new Cabin(9);
+
+        return cabin.toString();
+    }
+
+    @GetMapping("/login")
+    @ResponseBody
+    public String writeSmth(@RequestParam(name = "id", required = false) String str,@RequestParam(name = "number",required = false) int a)
+    {
+        return "залогиньтесь " + str + " " + a*a;
     }
 }

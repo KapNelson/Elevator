@@ -14,7 +14,7 @@ public class MainController {
     @ResponseBody
     public String writeLine() {
 
-        Cabin cabin = new Cabin(9);
+        Cabin cabin = new Cabin(1,9);
 
         return cabin.toString();
     }

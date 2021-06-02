@@ -19,28 +19,48 @@ public class Cabin {
     @Setter
     private boolean isOverloaded;
     Engine engine;
+    List<Integer> queueOfFloors;
 
 
-    private void setFloors(int floorsNumber) {
+    public void addFloorToStop(int floorNumber)
+    {
+        if(floorNumber < floorButtons[0] || floorNumber > floorButtons[floorButtons.length - 1] || queueOfFloors.contains(floorNumber))
+        {
+            return;
+        }
+        else
+        {
+            queueOfFloors.add(floorNumber);
 
+        }
+
+    }
+
+    private void setFloors(int startFloor,int endFloor) {
+
+        int floorsNumber = endFloor - startFloor + 1;
         floorButtons = new int[floorsNumber];
 
+        int curfloor = startFloor;
         for (int i = 0; i < floorsNumber; i++) {
-            floorButtons[i] = i + 1;
+            floorButtons[i] = curfloor;
+            ++curfloor;
         }
     }
 
-    public Cabin(int floorsNumber) {
-        setFloors(floorsNumber);
+    public Cabin(int startFloor,int endFloor) {
+        setFloors( startFloor, endFloor);
 
 
     }
 
     public static void main(String[] args) {
 
-        Cabin cab = new Cabin(5);
+        Cabin cab = new Cabin(1,5);
 
     }
+
+
 }
 
 

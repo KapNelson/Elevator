@@ -1,4 +1,4 @@
-package com.sytoss.edu2021.models;
+package com.sytoss.edu2021.apicabin.models;
 
 import org.junit.jupiter.api.Test;
 

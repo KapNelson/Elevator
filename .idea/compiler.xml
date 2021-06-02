@@ -14,7 +14,7 @@
     <bytecodeTargetLevel>
       <module name="api-cabin" target="1.8" />
       <module name="api-common" target="8" />
-      <module name="api-engine" target="1.8" />
+      <module name="api-engine" target="8" />
       <module name="ElevatorDriver" target="1.8" />
       <module name="srv-config" target="8" />
     </bytecodeTargetLevel>

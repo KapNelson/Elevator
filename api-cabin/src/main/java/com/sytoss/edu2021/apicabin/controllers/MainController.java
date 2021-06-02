@@ -1,11 +1,8 @@
-package com.sytoss.edu2021.controllers;
+package com.sytoss.edu2021.apicabin.controllers;
 
-import com.sytoss.edu2021.models.Cabin;
+import com.sytoss.edu2021.apicabin.models.Cabin;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.concurrent.atomic.AtomicLong;
 
 @Controller
 public class MainController {

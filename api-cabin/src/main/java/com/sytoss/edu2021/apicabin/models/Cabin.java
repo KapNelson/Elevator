@@ -1,7 +1,7 @@
-package com.sytoss.edu2021.models;
+package com.sytoss.edu2021.apicabin.models;
 
 
-import com.sytoss.edu2021.apiengine.models.Engine;
+//import com.sytoss.edu2021.apiengine.models.Engine;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,7 +18,7 @@ public class Cabin {
     private boolean isDoorOpened;
     @Setter
     private boolean isOverloaded;
-    Engine engine;
+    //Engine engine;
     List<Integer> queueOfFloors;
 
 
@@ -53,14 +53,6 @@ public class Cabin {
 
 
     }
-
-    public static void main(String[] args) {
-
-        Cabin cab = new Cabin(1,5);
-
-    }
-
-
 }
 
 

@@ -1,4 +1,4 @@
-package com.sytoss.edu2021.apicabin;
+package com.sytoss.edu2021.apicabin.apicabin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

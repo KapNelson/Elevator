@@ -22,7 +22,6 @@
     </properties>
 
     <modules>
-
         <module>api-cabin</module>
         <module>api-engine</module>
     </modules>

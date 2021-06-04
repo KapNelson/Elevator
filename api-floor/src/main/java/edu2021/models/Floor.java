@@ -6,6 +6,7 @@ import lombok.Setter;
 
 
 public class Floor {
+    @Getter
     private int numberOfFloor;
     @Getter
     @Setter

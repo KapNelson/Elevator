@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Floor</title>
+</head>
+<body>
+<div class="button_panel" >
+    <p th:text=" 'floor is: ' + ${panel}"></p>
+    <button >Up</button>
+    <button>Down</button>
+</div>
+
+<div>
+    <form action="/?floor=${floor}" method="post">
+    <nav class="list_floors">
+        <ul>
+            <li th:each="el : ${listFloor}">
+                <a th:href="'/?floor=' + ${el}" th:text="${el}"></a>
+            </li>
+        </ul>
+    </nav>
+    </form>
+</div>
+</body>
+</html>

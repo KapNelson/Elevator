@@ -15,6 +15,7 @@ public class Cabin {
     private boolean isDoorOpened;
     @Setter
     private boolean isOverloaded;
+    private boolean isMoving;
 
     private final Engine engine;
 
@@ -26,25 +27,36 @@ public class Cabin {
             return;
         } else {
             queueOfFloors.add(floorNumber);
-
-        }
-
-    }
-
-    private void setFloors(int startFloor, int endFloor) {
-
-        int floorsNumber = endFloor - startFloor + 1;
-        floorButtons = new int[floorsNumber];
-
-        int curfloor = startFloor;
-        for (int i = 0; i < floorsNumber; i++) {
-            floorButtons[i] = curfloor;
-            ++curfloor;
         }
     }
 
-    public Cabin(int startFloor, int endFloor) {
-        setFloors(startFloor, endFloor);
+    private void setFloors(int numberOfFloors) {
+
+        floorButtons = new int[numberOfFloors];
+
+        for (int i = 1; i < numberOfFloors + 1; ++i) {
+            floorButtons[i] = i;
+        }
+    }
+
+    public Cabin(int numberOfFloors) {
+        setFloors(numberOfFloors);
         engine = new Engine();
     }
+
+    public void setMovingState(boolean pState) {
+        isMoving = pState;
+    }
+
+    public void openDoor() {
+        if (!isDoorOpened || !isMoving)
+            isDoorOpened = true;
+    }
+
+    public void closeDoor() {
+        if (isDoorOpened) {
+            isDoorOpened = false;
+        }
+    }
+
 }

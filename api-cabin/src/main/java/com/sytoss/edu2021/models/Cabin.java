@@ -1,55 +1,77 @@
+
 package com.sytoss.edu2021.models;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Getter
 @ToString()
 public class Cabin {
 
-    private int[] floorButtons;
+    private Integer[] floorButtons;
     @Setter
     private boolean isDoorOpened;
     @Setter
     private boolean isOverloaded;
-    private boolean isMoving;
-
     private final Engine engine;
-
     private List<Integer> queueOfFloors;
-
+    @Setter
+    private int currentFloor;
+    private Direction direction = Direction.STABLE;
 
     public void addFloorToStop(int floorNumber) {
-        if (floorNumber < floorButtons[0] || floorNumber > floorButtons[floorButtons.length - 1] || queueOfFloors.contains(floorNumber)) {
+        if (floorNumber > floorButtons[0] && floorNumber < floorButtons[floorButtons.length - 1] && queueOfFloors.contains(floorNumber)) {
+
             return;
-        } else {
-            queueOfFloors.add(floorNumber);
         }
+
+        direction = setDirection(currentFloor, floorNumber);
+        queueOfFloors.add(floorNumber);
+        Collections.sort(queueOfFloors, Collections.reverseOrder());
+
+
     }
 
-    private void setFloors(int numberOfFloors) {
+    public Direction setDirection(int initFloor, int aimFloor) {
 
-        floorButtons = new int[numberOfFloors];
-
-        for (int i = 1; i < numberOfFloors + 1; ++i) {
-            floorButtons[i] = i;
+        if (initFloor < aimFloor)
+            return Direction.UP;
+        else if (initFloor > aimFloor)
+            return Direction.DOWN;
+        else {
+            System.err.println("You have already reached this floor.");
+            return Direction.STABLE;
         }
+
     }
 
-    public Cabin(int numberOfFloors) {
-        setFloors(numberOfFloors);
+    private void setFloors(int startFloor, int endFloor) {
+
+        int floorsNumber = endFloor - startFloor + 1;
+        floorButtons = new Integer[floorsNumber];
+
+        int curfloor = startFloor;
+        for (int i = 0; i < floorsNumber; i++) {
+            floorButtons[i] = curfloor;
+            ++curfloor;
+        }
+
+        this.currentFloor = startFloor;
+    }
+
+    public Cabin(int startFloor, int endFloor) {
+        setFloors(startFloor, endFloor);
         engine = new Engine();
-    }
-
-    public void setMovingState(boolean pState) {
-        isMoving = pState;
+        queueOfFloors = new ArrayList<>();
     }
 
     public void openDoor() {
-        if (!isDoorOpened || !isMoving)
+        if (!isDoorOpened)
             isDoorOpened = true;
     }
 

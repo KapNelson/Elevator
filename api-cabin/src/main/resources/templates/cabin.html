@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ua" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+
+    <div>
+        CURRENT DIRECTION: <div th:text="${dir}"></div>
+    </div>
+
+
+    <nav>
+        <li class="page__item" th:each="el : ${buttonsList}">
+            <a  th:href="'/?newFloor=' + ${el}" th:text="${el}" name="newFloor"></a>
+        </li>
+    </nav>
+
+
+
+</head>
+
+<body>
+</body>
+
+</html>

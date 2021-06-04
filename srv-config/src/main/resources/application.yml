@@ -1,0 +1,15 @@
+server:
+  port: 6002
+spring:
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/configuration
+  profiles:
+    active: native
+  security:
+    user:
+      name: ${config.server.username:configUser}
+      password: ${config.server.password:configPassword}
+      role: SYSTEM

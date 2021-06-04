@@ -14,6 +14,7 @@
         <module>api-cabin</module>
         <module>api-admin</module>
         <module>api-floor</module>
+        <module>srv-config</module>
     </modules>
 
     <properties>

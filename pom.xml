@@ -12,6 +12,7 @@
     <modules>
         <module>api-engine</module>
         <module>api-cabin</module>
+        <module>api-admin</module>
     </modules>
 
     <properties>

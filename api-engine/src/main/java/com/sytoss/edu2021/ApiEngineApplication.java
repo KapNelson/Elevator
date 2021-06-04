@@ -1,14 +1,14 @@
-package com.sytoss.edu2021.apicabin;
+package com.sytoss.edu2021;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class ApiCabinApplication {
+public class ApiEngineApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ApiCabinApplication.class, args);
+        SpringApplication.run(ApiEngineApplication.class, args);
     }
 
 }

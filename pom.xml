@@ -13,6 +13,7 @@
         <module>api-engine</module>
         <module>api-cabin</module>
         <module>api-admin</module>
+        <module>api-floor</module>
     </modules>
 
     <properties>

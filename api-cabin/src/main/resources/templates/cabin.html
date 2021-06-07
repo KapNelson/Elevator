@@ -4,18 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${title}"></title>
+    <link rel="stylesheet" href="css/style.css">
 
-    <div>
-        CURRENT DIRECTION: <div th:text="${dir}"></div>
+    <div class="row">
+        <div class="column">
+            <h1 th:text= "'DIRECTION: ' + ${dir}"></h1>
+            <form action="#" th:action="@{/addFloor}" method="post">
+                <div th:each="el : ${buttonsList}">
+                    <button type="submit" th:text="${el}" th:value="${el}" name="newFloor"></button>
+                </div>
+            </form>
+        </div>
+        <div class="column">
+            <h1>The queue:</h1>
+            <div th:each="el : ${stopsList}">
+                <div th:text="${el}"></div>
+            </div>
+        </div>
     </div>
-
-
-    <nav>
-        <li class="page__item" th:each="el : ${buttonsList}">
-            <a  th:href="'/?newFloor=' + ${el}" th:text="${el}" name="newFloor"></a>
-        </li>
-    </nav>
-
 
 
 </head>

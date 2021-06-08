@@ -10,6 +10,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <modules>
+        <module>api-common</module>
         <module>api-engine</module>
         <module>api-cabin</module>
         <module>api-admin</module>

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Arrays;
 import java.util.Collections;
 
+
 @Controller
 public class CabinController {
 
@@ -18,8 +19,8 @@ public class CabinController {
         Arrays.sort(cabin.getFloorButtons(), Collections.reverseOrder());
         model.addAttribute("title", "Cabin Interface");
         model.addAttribute("buttonsList", cabin.getFloorButtons());
-        model.addAttribute("dir", cabin.getDirection());
-        model.addAttribute("stopsList", cabin.getQueueOfFloors());
+        model.addAttribute("dir", cabin.getRoute().getDirection());
+        model.addAttribute("stopsList", cabin.getRoute().getQueueOfFloors());
 
         return "cabin";
     }

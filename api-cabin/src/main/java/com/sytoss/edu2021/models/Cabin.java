@@ -5,12 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 @Getter
-@ToString()
+@ToString
 public class Cabin {
 
     private Integer[] floorButtons;
@@ -18,38 +14,15 @@ public class Cabin {
     private boolean isDoorOpened;
     @Setter
     private boolean isOverloaded;
-    private final Engine engine;
-    private List<Integer> queueOfFloors;
     @Setter
-    private int currentFloor;
-    private Direction direction = Direction.STABLE;
+    private Integer currentFloor;
 
-    public void addFloorToStop(int floorNumber) {
-        if (floorNumber > floorButtons[0] && floorNumber < floorButtons[floorButtons.length - 1] && queueOfFloors.contains(floorNumber)) {
+    private final Engine engine;
+    private final Route route;
 
-            return;
-        }
-
-        direction = setDirection(currentFloor, floorNumber);
-        queueOfFloors.add(floorNumber);
-        Collections.sort(queueOfFloors, Collections.reverseOrder());
-
-
+    public void startMovement() {
+        engine.move(currentFloor);
     }
-
-    public Direction setDirection(int initFloor, int aimFloor) {
-
-        if (initFloor < aimFloor)
-            return Direction.UP;
-        else if (initFloor > aimFloor)
-            return Direction.DOWN;
-        else {
-            System.err.println("You have already reached this floor.");
-            return Direction.STABLE;
-        }
-
-    }
-
     private void setFloors(int startFloor, int endFloor) {
 
         int floorsNumber = endFloor - startFloor + 1;
@@ -63,22 +36,35 @@ public class Cabin {
 
         this.currentFloor = startFloor;
     }
-
     public Cabin(int startFloor, int endFloor) {
         setFloors(startFloor, endFloor);
-        engine = new Engine();
-        queueOfFloors = new ArrayList<>();
-    }
+        route = new Route();
+        engine = new Engine(route);
 
+    }
+    public void addFloorToStop(int floorNumber) {
+        if (floorNumber > floorButtons[0] && floorNumber < floorButtons[floorButtons.length - 1]) {
+            return;
+        }
+        route.addRoutFloor(currentFloor, floorNumber);
+
+    }
     public void openDoor() {
         if (!isDoorOpened)
             isDoorOpened = true;
     }
-
     public void closeDoor() {
         if (isDoorOpened) {
             isDoorOpened = false;
         }
+    }
+
+    public String  displayCabinInfo(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(route.getDirection());
+        stringBuilder.append(" ");
+        stringBuilder.append(currentFloor);
+        return stringBuilder.toString();
     }
 
 }

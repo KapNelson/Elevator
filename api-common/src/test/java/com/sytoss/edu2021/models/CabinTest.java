@@ -1,4 +1,4 @@
-package com.sytoss.edu2021;
+package java.com.sytoss.edu2021.models;
 
 import com.sytoss.edu2021.models.Cabin;
 import org.junit.jupiter.api.Test;

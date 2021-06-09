@@ -1,8 +1,6 @@
-package edu2021.models;
+package com.sytoss.edu2021.models;
 
-import com.sytoss.edu2021.models.Cabin;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 

@@ -1,4 +1,4 @@
-package com.sytoss.edu2021.controller;
+package com.sytoss.edu2021.controllers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

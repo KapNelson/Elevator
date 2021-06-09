@@ -18,11 +18,11 @@
 
     <modules>
         <module>srv-config</module>
-
         <module>api-common</module>
-
         <module>api-admin</module>
         <module>api-floor</module>
+        <module>api-engine</module>
+        <module>api-cabin</module>
     </modules>
 
     <properties>
@@ -70,8 +70,27 @@
             <artifactId>lombok</artifactId>
             <version>1.18.20</version>
         </dependency>
+
+        <!--MySQL-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.6</version>
+        </dependency>
+
     </dependencies>
 
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

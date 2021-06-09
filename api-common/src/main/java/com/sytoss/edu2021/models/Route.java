@@ -18,14 +18,11 @@ public class Route {
     }
     public void addRoutFloor(int currentFloor, int floorNumber) {
         if (queueOfFloors.contains(floorNumber)) {
-
             return;
         }
-
         setDirection(currentFloor, floorNumber);
         queueOfFloors.add(floorNumber);
         queueOfFloors.sort(Collections.reverseOrder());
-
     }
     public void clearRoute() {
         direction = Direction.STABLE;

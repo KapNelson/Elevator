@@ -1,9 +1,12 @@
-package com.sytoss.edu2021.controllers;
+package com.sytoss.edu2021.contollers;
 
-import com.sytoss.edu2021.models.Cabin;
+//import com.sytoss.edu2021.models.Cabin;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -11,7 +14,7 @@ import java.util.Collections;
 @Controller
 public class CabinController {
 
-    private final Cabin cabin = new Cabin(-3, 12);
+/*    private final Cabin cabin = new Cabin(-3, 12);
 
     @GetMapping("/")
     public String cabinInterfaceLogic(Model model) {
@@ -30,6 +33,6 @@ public class CabinController {
     public String processForm(@RequestParam(name = "newFloor") Integer floor) {
         cabin.addFloorToStop(floor);
         return "redirect:/";
-    }
+    }*/
 
 }

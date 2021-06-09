@@ -4,18 +4,26 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
     <groupId>com.sytoss.edu2021</groupId>
     <artifactId>ElevatorDriver</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
 
     <modules>
+        <module>srv-config</module>
+
         <module>api-common</module>
         <module>api-engine</module>
         <module>api-cabin</module>
         <module>api-admin</module>
         <module>api-floor</module>
-        <module>srv-config</module>
     </modules>
 
     <properties>
@@ -24,6 +32,7 @@
     </properties>
 
     <dependencyManagement>
+<!--
         <dependencies>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -33,6 +42,7 @@
                 <scope>import</scope>
             </dependency>
         </dependencies>
+-->
     </dependencyManagement>
 
     <dependencies>
@@ -60,18 +70,9 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.20</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.5.0</version>
-            </plugin>
-        </plugins>
-    </build>
+
 
 </project>

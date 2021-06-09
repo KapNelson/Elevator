@@ -1,4 +1,3 @@
-
 package com.sytoss.edu2021.models;
 
 import lombok.Getter;

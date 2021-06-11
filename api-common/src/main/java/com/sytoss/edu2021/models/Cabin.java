@@ -22,6 +22,7 @@ public class Cabin {
     public void startMovement() {
         engine.move(currentFloor);
     }
+
     private void setFloors(int startFloor, int endFloor) {
 
         int floorsNumber = endFloor - startFloor + 1;
@@ -35,12 +36,14 @@ public class Cabin {
 
         this.currentFloor = startFloor;
     }
+
     public Cabin(int startFloor, int endFloor) {
         setFloors(startFloor, endFloor);
         route = new Route();
         engine = new Engine(route);
 
     }
+
     public void addFloorToStop(int floorNumber) {
         if (floorNumber > floorButtons[0] && floorNumber < floorButtons[floorButtons.length - 1]) {
             return;
@@ -48,22 +51,32 @@ public class Cabin {
         route.addRoutFloor(currentFloor, floorNumber);
 
     }
+
     public void openDoor() {
         if (!isDoorOpened)
             isDoorOpened = true;
     }
+
     public void closeDoor() {
         if (isDoorOpened) {
             isDoorOpened = false;
         }
     }
 
-    public String  displayCabinInfo(){
+    public String displayCabinInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(route.getDirection());
         stringBuilder.append(" ");
         stringBuilder.append(currentFloor);
+        if (isOverloaded) {
+            stringBuilder.append(" Overloaded!!!");
+        }
+
         return stringBuilder.toString();
+    }
+
+    public void callEmergencyStop() {
+        engine.callEmergencyStop();
     }
 
 }

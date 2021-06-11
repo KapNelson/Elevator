@@ -35,7 +35,6 @@ public class Floor {
         return cabin.displayCabinInfo();
     }
 
-
     public void callToUp() {
         buttonUp = true;
     }

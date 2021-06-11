@@ -20,9 +20,8 @@
         <module>srv-config</module>
         <module>api-common</module>
         <module>api-admin</module>
-        <module>api-floor</module>
         <module>api-engine</module>
-        <module>api-cabin</module>
+        <module>api-cabin-floor</module>
     </modules>
 
     <properties>

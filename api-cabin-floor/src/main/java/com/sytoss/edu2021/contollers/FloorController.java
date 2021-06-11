@@ -1,4 +1,4 @@
-package edu2021.controller;
+package com.sytoss.edu2021.contollers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -7,11 +7,10 @@
     <parent>
         <artifactId>ElevatorDriver</artifactId>
         <groupId>com.sytoss.edu2021</groupId>
-        <version>0.0.4-SNAPSHOT</version>
+        <version>0.0.3-SNAPSHOT</version>
     </parent>
 
-
-    <artifactId>api-common</artifactId>
+    <artifactId>api-engine</artifactId>
 
 
 </project>

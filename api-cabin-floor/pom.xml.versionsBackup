@@ -7,24 +7,17 @@
     <parent>
         <artifactId>ElevatorDriver</artifactId>
         <groupId>com.sytoss.edu2021</groupId>
-        <version>0.0.4-SNAPSHOT</version>
+        <version>0.0.3-SNAPSHOT</version>
     </parent>
 
-
-    <artifactId>srv-config</artifactId>
+    <artifactId>api-cabin</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-server</artifactId>
-            <version>3.0.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <groupId>com.sytoss.edu2021</groupId>
+            <artifactId>api-common</artifactId>
+            <version>0.0.3-SNAPSHOT</version>
         </dependency>
     </dependencies>
-
 
 </project>

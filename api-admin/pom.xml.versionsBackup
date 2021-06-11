@@ -7,24 +7,31 @@
     <parent>
         <artifactId>ElevatorDriver</artifactId>
         <groupId>com.sytoss.edu2021</groupId>
-        <version>0.0.4-SNAPSHOT</version>
+        <version>0.0.3-SNAPSHOT</version>
     </parent>
 
 
-    <artifactId>srv-config</artifactId>
+    <artifactId>api-admin</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-server</artifactId>
-            <version>3.0.4</version>
+            <groupId>com.sytoss.edu2021</groupId>
+            <artifactId>api-common</artifactId>
+            <version>0.0.3-SNAPSHOT</version>
         </dependency>
 
+
+        <!--MySQL-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-    </dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>6.0.6</version>
+        </dependency>
 
+    </dependencies>
 
 </project>

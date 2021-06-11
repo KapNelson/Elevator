@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CabinTest {
 
-    Cabin cab = new Cabin(-3, 12);
+    private final Cabin cab = new Cabin(-3, 12);
 
     @Test
     public void testCabinButtonsSize() {

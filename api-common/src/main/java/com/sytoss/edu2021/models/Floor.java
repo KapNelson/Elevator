@@ -14,6 +14,7 @@ public class Floor {
     @Getter
     @Setter
     private boolean buttonDown;
+    @Getter
     private boolean hasCabinOnFloor;
 
     public Floor(int numberOfFloor, Cabin pCabin) {

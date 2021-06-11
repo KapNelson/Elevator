@@ -52,13 +52,8 @@ public class Engine {
                     route.getQueueOfFloors().remove(route.getQueueOfFloors().indexOf(currentFloor));
                     stop();
                 }
-
             }
-
-        } else {
-            route.getQueueOfFloors().remove(route.getQueueOfFloors().indexOf(currentFloor));
         }
-
         route.setDirection(Direction.STABLE);
 
     }

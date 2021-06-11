@@ -13,21 +13,26 @@ public class Route {
 
     private List<Integer> queueOfFloors;
     private Direction direction = Direction.STABLE;
+
     public Route() {
         queueOfFloors = new ArrayList<>();
     }
+
     public void addRoutFloor(int currentFloor, int floorNumber) {
         if (queueOfFloors.contains(floorNumber)) {
             return;
         }
         setDirection(currentFloor, floorNumber);
-        queueOfFloors.add(floorNumber);
+        if (currentFloor != floorNumber)
+            queueOfFloors.add(floorNumber);
         queueOfFloors.sort(Collections.reverseOrder());
     }
+
     public void clearRoute() {
         direction = Direction.STABLE;
         queueOfFloors.clear();
     }
+
     public void setDirection(int initFloor, int aimFloor) {
 
         if (initFloor < aimFloor)

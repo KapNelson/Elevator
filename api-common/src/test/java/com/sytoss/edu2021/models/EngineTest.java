@@ -2,12 +2,14 @@ package com.sytoss.edu2021.models;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class EngineTest {
 
     private final Route route = new Route();
-    private final Engine engine = new Engine(route);
+    private final Engine engine = new Engine(route, new ArrayList<Floor>(15));
 
 
     @Test

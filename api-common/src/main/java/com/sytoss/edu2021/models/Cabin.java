@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
+
 @Getter
 @ToString
 public class Cabin {
@@ -40,7 +42,7 @@ public class Cabin {
     public Cabin(int startFloor, int endFloor) {
         setFloors(startFloor, endFloor);
         route = new Route();
-        engine = new Engine(route);
+        engine = new Engine(route, new ArrayList<Floor>(Math.abs(startFloor) + Math.abs(endFloor)));
 
     }
 

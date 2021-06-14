@@ -3,15 +3,19 @@ package com.sytoss.edu2021.models;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
+
 @Getter
 public class Engine {
 
     private boolean isMoving;
     private final Route route;
+    private final ArrayList<Floor> listOfFloors;
     private boolean isEmergencyStop;
 
-    public Engine(Route route) {
+    public Engine(Route route, ArrayList<Floor> listOfFloors) {
         this.route = route;
+        this.listOfFloors = listOfFloors;
     }
 
     public void move(int currentFloor) {
@@ -22,7 +26,15 @@ public class Engine {
             int maxFloor = route.getQueueOfFloors().get(0);
 
             for (; currentFloor <= maxFloor; currentFloor++) {
-
+                if(listOfFloors.size()!=0) {
+                    for (int i = 0; i <= listOfFloors.size(); ++i) {
+                        if (currentFloor == listOfFloors.get(i).getNumberOfFloor()) {
+                            if (listOfFloors.get(i) != null) {
+                                listOfFloors.get(i).setButtonUp(false);
+                            }
+                        }
+                    }
+                }
                 if (isEmergencyStop) {
                     emergencyStop(currentFloor);
                 }
@@ -42,6 +54,16 @@ public class Engine {
             int minFloor = route.getQueueOfFloors().get(route.getQueueOfFloors().size() - 1);
 
             for (; currentFloor >= minFloor; currentFloor--) {
+
+                if(listOfFloors.size()!=0) {
+                    for (int i = 0; i <= listOfFloors.size(); ++i) {
+                        if (currentFloor == listOfFloors.get(i).getNumberOfFloor()) {
+                            if (listOfFloors.get(i) != null) {
+                                listOfFloors.get(i).setButtonDown(false);
+                            }
+                        }
+                    }
+                }
 
                 if (isEmergencyStop) {
                     emergencyStop(currentFloor);

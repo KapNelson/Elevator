@@ -1,0 +1,46 @@
+version: "2.3"
+services:
+  api-admin:
+    image: api-admin:latest
+    container_name: api-admin
+    environment:
+      - APP_ENV=local-docker
+    ports:
+      - "16060:6060"
+  api-cabin:
+    image: api-cabin:latest
+    container_name: api-cabin
+    environment:
+      - APP_ENV=local-docker
+    ports:
+      - "16070:6070"
+  api-common:
+    image: api-common:latest
+    container_name: api-common
+    environment:
+      - APP_ENV=local-docker
+    ports:
+      - "16080:6080"
+  api-engine:
+    image: api-engine:latest
+    container_name: api-engine
+    environment:
+      - APP_ENV=local-docker
+    ports:
+      - "16010:6010"
+  srv-config:
+    image: srv-config:latest
+    container_name: srv-config
+    environment:
+      - APP_ENV=local-docker
+    ports:
+      - "16002:6002"
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=qa123Z45
+      - MYSQL_ALLOW_EMPTY_PASSWORD=Y
+      - MYSQL_RANDOM_ROOT_PASSWORD=N
+    ports:
+      - "13306:3306"

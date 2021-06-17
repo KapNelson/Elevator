@@ -6,7 +6,11 @@ services:
     environment:
       - APP_ENV=local-docker
     ports:
+<<<<<<< HEAD
       - "16060:6060"
+=======
+      - "16010:6010"
+>>>>>>> ED_9
   api-cabin:
     image: api-cabin:latest
     container_name: api-cabin
@@ -27,7 +31,11 @@ services:
     environment:
       - APP_ENV=local-docker
     ports:
+<<<<<<< HEAD
       - "16010:6010"
+=======
+      - "16050:6050"
+>>>>>>> ED_9
   srv-config:
     image: srv-config:latest
     container_name: srv-config

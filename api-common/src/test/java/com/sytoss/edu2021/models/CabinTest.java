@@ -1,6 +1,5 @@
 package com.sytoss.edu2021.models;
 
-import com.sytoss.edu2021.models.Cabin;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

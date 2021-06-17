@@ -1,31 +1,20 @@
 package com.sytoss.edu2021.controllers;
 
-
-import com.sytoss.edu2021.models.Building;
-import com.sytoss.edu2021.models.User;
-import com.sytoss.edu2021.repo.BuildingRepository;
-import com.sytoss.edu2021.repo.CabinRepository;
-import com.sytoss.edu2021.repo.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RefreshScope
+@RestController
 public class AdminController {
-
-    @Autowired
-    BuildingRepository buildingRepository;
-    @Autowired
-    CabinRepository cabinRepository;
-    @Autowired
-    UserRepository userRepository;
-
-    @GetMapping("/admin")
+    @GetMapping("/")
     @ResponseBody
-    public Iterable<User> writeEngine() {
-
-        return userRepository.findAll();
+    public String hello(){
+        return "Hello, World";
     }
 
 }
+

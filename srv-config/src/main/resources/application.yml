@@ -13,3 +13,5 @@ spring:
       name: ${config.server.username:configUser}
       password: ${config.server.password:configPassword}
       role: SYSTEM
+
+  messages: hi

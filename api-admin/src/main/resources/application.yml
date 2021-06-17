@@ -1,16 +1,10 @@
 server:
-  port: 6010
+  port: 6060
 spring:
-  application:
-      name: api-admin
   jpa:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/testdb
+    url: jdbc:mysql://${MYSQL_HOST:192.168.20.180}:3306/admin_db
     username: root
     password: admin123
-  liquibase:
-    enabled: true
-    change-log: classpath:/db/db.changelog.xml
-    default-schema: testdb

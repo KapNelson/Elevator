@@ -14,4 +14,4 @@ spring:
       password: ${config.server.password:2}
       role: SYSTEM
 
-  messages: hi
+message: hi

@@ -6,19 +6,22 @@
                                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
                    logicalFilePath="create.app_user.table.xml">
 
-    <changeSet author="YevgenyV" id="initial creating table app_users" context="all">
+    <changeSet author="YevgenyV" id="initial creating table app_builds" context="all">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="app_user"/>
+                <tableExists tableName="app_build"/>
             </not>
         </preConditions>
-        <createTable tableName="app_user">
-            <column name="id_user" type="int">
+        <createTable tableName="app_build">
+            <column name="id_build"  type="int" autoIncrement="true">
                 <constraints nullable="false"
                              primaryKey="true"/>
             </column>
-            <column name="user_name" type="varchar(255)">
-                <constraints nullable="false"/>
+            <column name="address" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="number_of_floors" type="varchar(255)">
+                <constraints nullable="false" />
             </column>
         </createTable>
     </changeSet>

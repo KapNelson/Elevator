@@ -4,5 +4,5 @@ spring:
       name: api-admin
       uri: ${config.server.path:http://127.0.0.1:6002}
       fail-fast: true
-      username: ${config.server.username:configUser}
-      password: ${config.server.password:configPassword}
+      username: ${config.server.username:1}
+      password: ${config.server.password:2}

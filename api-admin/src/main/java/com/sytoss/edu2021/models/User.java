@@ -1,7 +1,6 @@
 package com.sytoss.edu2021.models;
 
 import lombok.ToString;
-
 import javax.persistence.*;
 
 @Entity(name="app_user")

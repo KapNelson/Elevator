@@ -10,8 +10,8 @@ spring:
     active: native
   security:
     user:
-      name: ${config.server.username:configUser}
-      password: ${config.server.password:configPassword}
+      name: ${config.server.username:1}
+      password: ${config.server.password:2}
       role: SYSTEM
 
   messages: hi

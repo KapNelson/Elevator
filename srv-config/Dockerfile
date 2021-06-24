@@ -2,6 +2,8 @@ FROM openjdk:17
 
 RUN mkdir -p /app/app-web
 
-COPY target/srv-config-0.0.4-SNAPSHOT.jar /app/app-web/api-config.jar
+COPY target/srv-config.jar /app/app-web/srv-config.jar
 
-ENTRYPOINT ["java", "-jar", "/app/app-web/api-config.jar"]
+EXPOSE 6002
+
+ENTRYPOINT ["java", "-jar", "/app/app-web/srv-config.jar"]

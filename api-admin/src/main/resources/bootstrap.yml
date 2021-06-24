@@ -6,3 +6,5 @@ spring:
       fail-fast: true
       username: ${config.server.username:1}
       password: ${config.server.password:2}
+  profiles:
+    active: ${APP_ENV:local}

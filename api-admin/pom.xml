@@ -33,8 +33,9 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>6.0.6</version>
+            <version>8.0.25</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -52,4 +53,29 @@
 
     </dependencies>
 
+    <build>
+        <finalName>api-admin</finalName>
+        <plugins>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.36.0</version>
+
+                <configuration>
+                    <dockerFile>./Dockerfile</dockerFile>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
 </project>

@@ -9,30 +9,32 @@ services:
       - MYSQL_RANDOM_ROOT_PASSWORD=N
     ports:
       - "13306:3306"
-
   srv-config:
-    image: edu2021/srv-config
+    image: srv-config:latest
     container_name: srv-config
     environment:
-      - APP_ENV=dev
+      - APP_ENV=local-docker
     ports:
       - "16002:6002"
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://127.0.0.1:6002/actuator/health" ]
-      timeout: 10s
-      retries: 3
-    depends_on:
-      mysql:
-        condition: service_started
 
   api-admin:
-    image: edu2021/api-admin:latest
+    image: api-admin:latest
     container_name: api-admin
     environment:
       - APP_ENV=dev
-      - config.server.path=http://srv-config:6002
     ports:
       - "16060:6060"
-    depends_on:
-      srv-config:
-        condition: service_healthy
+  api-cabin:
+    image: api-cabin:latest
+    container_name: api-cabin
+    environment:
+      - APP_ENV=local-docker
+    ports:
+      - "16070:6070"
+  api-engine:
+    image: api-engine:latest
+    container_name: api-engine
+    environment:
+      - APP_ENV=local-docker
+    ports:
+      - "16010:6010"

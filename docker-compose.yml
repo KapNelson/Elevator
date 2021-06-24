@@ -8,6 +8,8 @@ services:
       MYSQL_ALLOW_EMPTY_ROOT_PASSWORD: 'yes'
     ports:
       - "13306:3306"
+    volumes:
+      - "/Projects/IdeaProjects/ElevatorDriver/mysql_data:/var/lib/mysql"
 
   srv-config:
     image: edu2021/srv-config:latest

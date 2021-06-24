@@ -7,6 +7,7 @@ services:
       - MYSQL_ROOT_PASSWORD=qa123Z45
       - MYSQL_ALLOW_EMPTY_PASSWORD=Y
       - MYSQL_RANDOM_ROOT_PASSWORD=N
+      - MYSQL_ROOT_HOST='%'
     ports:
       - "13306:3306"
   srv-config:

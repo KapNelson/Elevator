@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,6 +14,12 @@ import java.util.Collections;
 
 @Controller
 public class CabinController {
+
+    @GetMapping("/cabin")
+    @ResponseBody
+    public String writeEngine() {
+        return "I am cabin";
+    }
 
 /*    private final Cabin cabin = new Cabin(-3, 12);
 
@@ -34,5 +41,7 @@ public class CabinController {
         cabin.addFloorToStop(floor);
         return "redirect:/";
     }*/
+
+
 
 }

@@ -5,7 +5,8 @@ spring:
     hibernate:
       ddl-auto: none
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/testdb
+   # url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/testdb
+    url: jdbc:mysql://127.0.0.1:3306/testdb
     username: root
     password: admin123
   liquibase:

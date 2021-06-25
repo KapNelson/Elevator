@@ -1,18 +1,18 @@
 version: "2.3"
 services:
-  mysql:
-    image: mysql:latest
-    container_name: mysql
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
     environment:
-      - MYSQL_ROOT_PASSWORD=qa123Z45
-      - MYSQL_ALLOW_EMPTY_PASSWORD=Y
-      - MYSQL_RANDOM_ROOT_PASSWORD=N
-#      - MYSQL_ROOT_HOST='%'
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_ALLOW_EMPTY_ROOT_PASSWORD: 'yes'
     ports:
       - "13306:3306"
+    volumes:
+      - "/Projects/IdeaProjects/ElevatorDriver/mysql_data:/var/lib/mysql"
 
   srv-config:
-    image: edu2021/srv-config
+    image: edu2021/srv-config:latest
     container_name: srv-config
     environment:
       - APP_ENV=dev
@@ -23,7 +23,7 @@ services:
       timeout: 10s
       retries: 3
     depends_on:
-      mysql:
+      mariadb:
         condition: service_started
 
   api-admin:

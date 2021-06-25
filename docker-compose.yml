@@ -9,7 +9,7 @@ services:
     ports:
       - "13306:3306"
     volumes:
-      - "/Projects/IdeaProjects/ElevatorDriver/mysql_data:/var/lib/mysql"
+      - "/DevEnv/Compilers/ElevatorDriver/mysql_data:/var/lib/mysql"
 
   srv-config:
     image: edu2021/srv-config:latest
@@ -34,6 +34,27 @@ services:
       - config.server.path=http://srv-config:6002
     ports:
       - "16060:6060"
+      - "17010:7010"
     depends_on:
       srv-config:
         condition: service_healthy
+  api-cabin-floor:
+    image: edu2021/api-cabin-floor:latest
+    container_name: api-cabin-floor
+    environment:
+      - config.server.path=http://srv-config:6002
+    ports:
+      - "16070:6070"
+    depends_on:
+     srv-config:
+      condition: service_healthy
+  api-engine:
+    image: edu2021/api-engine:latest
+    container_name: api-engine
+    environment:
+      - config.server.path=http://srv-config:6002
+    ports:
+      - "16050:6050"
+    depends_on:
+     srv-config:
+      condition: service_healthy

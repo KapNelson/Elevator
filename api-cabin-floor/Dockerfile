@@ -2,8 +2,8 @@ FROM openjdk:17
 
 RUN mkdir -p /app/app-web
 
-COPY target/api-cabin-0.0.5-SNAPSHOT.jar /app/app-web/api-cabin.jar
+COPY target/api-cabin-floor.jar /app/app-web/api-cabin-floor.jar
 
-EXPOSE
+EXPOSE 6070
 
-ENTRYPOINT ["java", "-jar", "/app/app-web/api-cabin.jar"]
+ENTRYPOINT ["java", "-jar", "/app/app-web/api-cabin-floor.jar"]

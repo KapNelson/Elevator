@@ -10,7 +10,7 @@
         <version>0.0.5-SNAPSHOT</version>
     </parent>
 
-    <artifactId>api-cabin</artifactId>
+    <artifactId>api-cabin-floor</artifactId>
 
     <dependencies>
         <dependency>
@@ -19,5 +19,31 @@
             <version>0.0.5-SNAPSHOT</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>api-cabin-floor</finalName>
+        <plugins>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.36.0</version>
+
+                <configuration>
+                    <!-- <dockerFile>./Dockerfile</dockerFile>-->
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
 
 </project>

@@ -44,4 +44,11 @@ public class CabinController {
 
 
 
+
+
+    @GetMapping("/")
+    @ResponseBody
+    public String cabinInterfaceLogic() {
+        return "hello";
+    }
 }

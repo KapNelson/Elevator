@@ -4,8 +4,7 @@ services:
     image: mariadb:latest
     container_name: mariadb
     environment:
-      MYSQL_ROOT_PASSWORD: admin123
-      MYSQL_ALLOW_EMPTY_ROOT_PASSWORD: 'yes'
+      - MYSQL_ROOT_PASSWORD=admin123
     ports:
       - "13306:3306"
     volumes:

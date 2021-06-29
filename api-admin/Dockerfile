@@ -7,5 +7,3 @@ COPY target/api-admin.jar /app/app-web/api-admin.jar
 EXPOSE 6060
 
 ENTRYPOINT ["java", "-jar", "/app/app-web/api-admin.jar"]
-
-

@@ -62,7 +62,7 @@
                 <version>0.36.0</version>
 
                 <configuration>
-                    <dockerFile>./Dockerfile</dockerFile>
+                   <!-- <dockerFile>./Dockerfile</dockerFile>-->
                 </configuration>
 
                 <executions>

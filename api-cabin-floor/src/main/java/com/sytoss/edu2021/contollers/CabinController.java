@@ -17,6 +17,14 @@ public class CabinController {
 
     private final Cabin cabin = new Cabin(-3, 12);
 
+    @GetMapping("/cabin")
+    @ResponseBody
+    public String writeEngine() {
+        return "I am cabin";
+    }
+}
+/*    private final Cabin cabin = new Cabin(-3, 12);
+
 
     @GetMapping("/")
     public String cabinInterfaceLogic(Model model, @RequestParam(name = "curFloor", required = true,defaultValue="-13") Integer floor) {
@@ -37,4 +45,13 @@ public class CabinController {
         return "redirect:";
     }
 
+
+
+
+
+    @GetMapping("/")
+    @ResponseBody
+    public String cabinInterfaceLogic() {
+        return "hello";
+    }
 }

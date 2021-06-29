@@ -37,6 +37,7 @@ services:
     depends_on:
       srv-config:
         condition: service_healthy
+
   api-cabin-floor:
     image: edu2021/api-cabin-floor:latest
     container_name: api-cabin-floor
@@ -45,8 +46,9 @@ services:
     ports:
       - "16070:6070"
     depends_on:
-     srv-config:
-      condition: service_healthy
+      srv-config:
+       condition: service_healthy
+
   api-engine:
     image: edu2021/api-engine:latest
     container_name: api-engine
@@ -55,5 +57,5 @@ services:
     ports:
       - "16050:6050"
     depends_on:
-     srv-config:
-      condition: service_healthy
+      srv-config:
+       condition: service_healthy

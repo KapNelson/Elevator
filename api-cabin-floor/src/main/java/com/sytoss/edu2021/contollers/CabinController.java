@@ -1,7 +1,6 @@
 package com.sytoss.edu2021.contollers;
 
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers;
-import com.sytoss.edu2021.models.Cabin;
 import lombok.Builder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +14,7 @@ import java.util.Collections;
 @Controller
 public class CabinController {
 
-    private final Cabin cabin = new Cabin(-3, 12);
+    //private final Cabin cabin = new Cabin(-3, 12);
 
     @GetMapping("/cabin")
     @ResponseBody
@@ -54,4 +53,4 @@ public class CabinController {
     public String cabinInterfaceLogic() {
         return "hello";
     }
-}
+}*/

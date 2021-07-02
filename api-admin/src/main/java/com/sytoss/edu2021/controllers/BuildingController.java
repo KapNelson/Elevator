@@ -6,6 +6,7 @@ import com.sytoss.edu2021.repo.BuildingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,9 +16,11 @@ public class BuildingController {
     @Autowired
     private BuildingRepository buildingRepository;
 
-    @GetMapping
-    public Building registerBuilding(@RequestParam String address,@RequestParam Integer floorAmount ) {
+
+    @PostMapping
+    public Building registerBuilding(@RequestParam String address,@RequestParam Integer floorAmount) {
         Building building = new Building(address,floorAmount);
+
         // TODO: validate building
         if (building.isValid()) {
             // TODO: check is object exists with the same address

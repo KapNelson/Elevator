@@ -8,9 +8,9 @@
 
 <body>
 
-<form action="/api/building" th:action="@{/api/building}" method="post">
-    <input name="address"/>
-    <input name="floorAmount">
+<form action="/api/building" th:action="@{/api/building}" th:object="${building}" method="post">
+    <input name="address" th:field="*{address}"/>
+    <input name="floorAmount" th:field="*{floorsAmount}">
     <button type="submit"></button>
 </form>
 

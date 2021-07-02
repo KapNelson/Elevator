@@ -11,18 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 @RestController
 public class AdminController {
-    @RefreshScope
-    @RestController
-    class MessageRestController {
 
-        @Value("${message:Hello default}")
-        private String message;
+    // TODO: register a building
+    // TODO: register a cabin for building
+    // TODO: get full information about building by id
 
-        @RequestMapping("/message")
-        String getMessage() {
-            return this.message;
-        }
-    }
-
+    // TODO: search building by address ???
 }
 

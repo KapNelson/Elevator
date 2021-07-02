@@ -22,7 +22,6 @@ public class FloorController {
         RedirectView view = new RedirectView("/elevatorCall/");
         view.addStaticAttribute("curFloor",numFloor);
         return view;
-
     }
 
     @GetMapping("/elevatorCall")

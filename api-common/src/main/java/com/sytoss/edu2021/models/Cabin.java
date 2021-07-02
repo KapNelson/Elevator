@@ -21,6 +21,13 @@ public class Cabin {
     private final Engine engine;
     private final Route route;
 
+    public Cabin(int startFloor, int endFloor) {
+        setFloors(startFloor, endFloor);
+        route = new Route();
+        engine = new Engine(route, new ArrayList<Floor>(Math.abs(startFloor) + Math.abs(endFloor)));
+
+    }
+
     public void startMovement() {
         engine.move(currentFloor);
     }
@@ -39,12 +46,6 @@ public class Cabin {
         this.currentFloor = startFloor;
     }
 
-    public Cabin(int startFloor, int endFloor) {
-        setFloors(startFloor, endFloor);
-        route = new Route();
-        engine = new Engine(route, new ArrayList<Floor>(Math.abs(startFloor) + Math.abs(endFloor)));
-
-    }
 
     public void addFloorToStop(int floorNumber) {
         if (floorNumber > floorButtons[0] && floorNumber < floorButtons[floorButtons.length - 1]) {

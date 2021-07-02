@@ -1,6 +1,7 @@
 package com.sytoss.edu2021.contollers;
 
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers;
+//import com.sytoss.edu2021.models.Cabin;
 import lombok.Builder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,11 +22,8 @@ public class CabinController {
     public String writeEngine() {
         return "I am cabin";
     }
-}
-/*    private final Cabin cabin = new Cabin(-3, 12);
 
-
-    @GetMapping("/")
+   /* @GetMapping("/")
     public String cabinInterfaceLogic(Model model, @RequestParam(name = "curFloor", required = true,defaultValue="-13") Integer floor) {
 
         cabin.setCurrentFloor(floor);
@@ -42,15 +40,5 @@ public class CabinController {
         cabin.addFloorToStop(floor);
 
         return "redirect:";
-    }
-
-
-
-
-
-    @GetMapping("/")
-    @ResponseBody
-    public String cabinInterfaceLogic() {
-        return "hello";
-    }
-}*/
+    }*/
+}

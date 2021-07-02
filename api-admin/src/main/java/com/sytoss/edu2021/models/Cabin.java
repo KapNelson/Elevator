@@ -13,10 +13,7 @@ public class Cabin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    /*@Column(name="ID_building")
-    @Getter
-    @Setter
-    private int idBuilding;*/
+
     @Getter
     @Setter
     private int number;

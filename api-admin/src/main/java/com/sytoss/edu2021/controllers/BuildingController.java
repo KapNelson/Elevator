@@ -2,7 +2,9 @@ package com.sytoss.edu2021.controllers;
 
 import com.sytoss.edu2021.models.Building;
 import com.sytoss.edu2021.models.BuildingBOM;
+import com.sytoss.edu2021.models.Cabin;
 import com.sytoss.edu2021.repo.BuildingRepository;
+import com.sytoss.edu2021.repo.CabinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Controller;
@@ -15,8 +17,10 @@ public class BuildingController {
 
     @Autowired
     private BuildingRepository buildingRepository;
+    @Autowired
+    private CabinRepository cabinRepository;
 
-
+    // TODO: register a building
     @PostMapping
     public Building registerBuilding(@RequestParam String address,@RequestParam Integer floorAmount) {
         Building building = new Building(address,floorAmount);
@@ -41,11 +45,13 @@ public class BuildingController {
 
 
 
-
-
-    // TODO: register a building
     // TODO: register a cabin for building
     // TODO: get full information about building by id
+    @GetMapping
+    public String getFullInformation(@PathVariable Integer id){
+        Cabin cabin = cabinRepository.findCabinById(id);
+        return cabin.toString();
+    }
 
     // TODO: search building by address ???
 

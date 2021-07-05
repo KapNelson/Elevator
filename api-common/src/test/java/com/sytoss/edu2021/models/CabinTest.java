@@ -9,9 +9,7 @@ class CabinTest {
 
     @Test
     public void testCabinButtonsSize() {
-
         assertEquals(cab.getFloorButtons().length, 16);
-
     }
 
     @Test

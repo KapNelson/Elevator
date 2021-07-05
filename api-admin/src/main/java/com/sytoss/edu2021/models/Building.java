@@ -19,6 +19,7 @@ public class Building {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_build")
+    @Getter
     private int id;
 
     @Column
@@ -33,20 +34,30 @@ public class Building {
 
     @OneToMany(mappedBy = "building")
     @Setter
+    @Getter
     private List<Cabin> cabins;
 
-    public Building(){
+    public Building() {
 
     }
 
-    public Building(String address,int floorsAmount){
-        this.address =address;
+    public Building(String address, int floorsAmount) {
+        this.address = address;
         this.floorsAmount = floorsAmount;
         this.cabins = new ArrayList<>(1);
     }
 
-    public List<Cabin> getCabins() {
-        return Collections.unmodifiableList(cabins);
+    /*  public List<Cabin> getCabins() {
+          return Collections.unmodifiableList(cabins);
+      }*/
+    public List<String> getCabins() {
+        List<String> cabinNumbers = new ArrayList<>();
+
+        for (Cabin cabin : cabins) {
+            String tmp = "number: " + cabin.getNumber();
+            cabinNumbers.add(tmp);
+        }
+        return Collections.unmodifiableList(cabinNumbers);
     }
 
     public void addCabin(Cabin cabin) {

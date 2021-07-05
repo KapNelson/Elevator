@@ -14,13 +14,13 @@
     <build>
         <finalName>api-engine</finalName>
         <plugins>
-            <plugin>
+         <!--   <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.36.0</version>
 
                 <configuration>
-                    <!-- <dockerFile>./Dockerfile</dockerFile>-->
+                    &lt;!&ndash; <dockerFile>./Dockerfile</dockerFile>&ndash;&gt;
                 </configuration>
 
                 <executions>
@@ -32,6 +32,11 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>-->
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
 

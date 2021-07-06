@@ -1,11 +1,11 @@
-package com.sytoss.edu2021.models;
+package com.sytoss.edu2021.repo.dto;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class FloorTest {
-    private final Cabin cabin = new Cabin(-3,12);
+    private final CabinBOM cabin = new CabinBOM(-3,12);
     private final Floor floor = new Floor(5,cabin);
 
 

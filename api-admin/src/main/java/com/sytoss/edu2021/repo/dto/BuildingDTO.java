@@ -1,4 +1,4 @@
-package com.sytoss.edu2021.models;
+package com.sytoss.edu2021.repo.dto;
 
 
 import lombok.Getter;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Entity(name = "app_build")
 @ToString
-public class Building {
+public class BuildingDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,22 +35,23 @@ public class Building {
     @OneToMany(mappedBy = "building")
     @Setter
     @Getter
-    private List<Cabin> cabins;
+    private List<CabinDTO> cabins;
 
-    public Building() {
+    public BuildingDTO() {
 
     }
 
-    public Building(String address, int floorsAmount) {
+    public BuildingDTO(String address, int floorsAmount) {
         this.address = address;
         this.floorsAmount = floorsAmount;
         this.cabins = new ArrayList<>(1);
     }
 
-    /*  public List<Cabin> getCabins() {
-          return Collections.unmodifiableList(cabins);
-      }*/
-    public List<String> getCabins() {
+    public List<CabinDTO> getCabins() {
+        return Collections.unmodifiableList(cabins);
+    }
+
+    /*public List<String> getCabins() {
         List<String> cabinNumbers = new ArrayList<>();
 
         for (Cabin cabin : cabins) {
@@ -58,9 +59,9 @@ public class Building {
             cabinNumbers.add(tmp);
         }
         return Collections.unmodifiableList(cabinNumbers);
-    }
+    }*/
 
-    public void addCabin(Cabin cabin) {
+    public void addCabin(CabinDTO cabin) {
         cabins.add(cabin);
     }
 

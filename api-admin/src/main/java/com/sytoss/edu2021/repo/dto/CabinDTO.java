@@ -1,4 +1,4 @@
-package com.sytoss.edu2021.models;
+package com.sytoss.edu2021.repo.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity(name = "app_cabin")
 @ToString
-public class Cabin {
+public class CabinDTO {
     @Id
     @Column(name = "id_cabin")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,14 +23,24 @@ public class Cabin {
     @ManyToOne
     @JoinColumn(name = "id_build")
     @Getter
-    private Building building;
+    @Setter
+    private BuildingDTO building;
 
-    public Cabin(int number,Building building){
+    public CabinDTO(int number, BuildingDTO building) {
         this.number = number;
-        this.building =building;
+        this.building = building;
     }
 
-    public Cabin() {
+    public CabinDTO() {
 
     }
+
+    public String getBuilding() {
+        String result = "address: " + building.getAddress();
+        return result;
+    }
+    public BuildingDTO getBuildingObj(){
+        return building;
+    }
+
 }

@@ -1,11 +1,11 @@
-package com.sytoss.edu2021.models;
+package com.sytoss.edu2021.repo.dto;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CabinTest {
 
-    private final Cabin cab = new Cabin(-3, 12);
+    private final CabinBOM cab = new CabinBOM(-3, 12);
 
     @Test
     public void testCabinButtonsSize() {

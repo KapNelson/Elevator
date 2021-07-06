@@ -1,11 +1,11 @@
-package com.sytoss.edu2021.models;
+package com.sytoss.edu2021.repo.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 
 public class Floor {
-    private Cabin cabin;
+    private CabinBOM cabin;
     @Getter
     private int numberOfFloor;
     @Getter
@@ -17,7 +17,7 @@ public class Floor {
     @Getter
     private boolean hasCabinOnFloor;
 
-    public Floor(int numberOfFloor, Cabin pCabin) {
+    public Floor(int numberOfFloor, CabinBOM pCabin) {
         buttonDown = false;
         buttonDown = false;
         this.cabin=pCabin;

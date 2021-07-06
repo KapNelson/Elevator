@@ -1,14 +1,25 @@
-package com.sytoss.edu2021.models;
+package com.sytoss.edu2021.repo.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.util.ArrayList;
 
 @Getter
 @ToString
-public class Cabin {
+public class CabinBOM {
+
+    @Getter
+    private int id;
+    @Getter
+    @Setter
+    private int number;
+    @Getter
+    @Setter
+    private BuildingBOM building;
 
     private Integer[] floorButtons;
     @Setter
@@ -21,7 +32,7 @@ public class Cabin {
     private final Engine engine;
     private final Route route;
 
-    public Cabin(int startFloor, int endFloor) {
+    public CabinBOM(int startFloor, int endFloor) {
         setFloors(startFloor, endFloor);
         route = new Route();
         engine = new Engine(route, new ArrayList<Floor>(Math.abs(startFloor) + Math.abs(endFloor)));

@@ -1,15 +1,15 @@
-package com.sytoss.edu2021.models;
+package com.sytoss.edu2021.repo.dto;
 
 public class Admin {
     private int[] listOfFloors;
-    private Cabin[] listOfCabins;
+    private CabinBOM[] listOfCabins;
 
     public Admin(){
     }
 
     public Admin(int numberOfFloors, int numberOfCabins){
         listOfFloors = new int[numberOfFloors];
-        listOfCabins = new Cabin[numberOfCabins];
+        listOfCabins = new CabinBOM[numberOfCabins];
     }
 
     private void emergencyStop(){
@@ -22,7 +22,7 @@ public class Admin {
 
     }
 
-    private String getInfoAboutCabin(Cabin cabin){
+    private String getInfoAboutCabin(CabinBOM cabin){
         return "status";
     }
 }

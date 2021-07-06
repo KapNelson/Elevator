@@ -30,8 +30,12 @@ public class CabinService {
                 throw new AlreadyExistsException("Cabin is already exists in this building");
             } else {
                 CabinDTO cabinDTO = new CabinDTO();
-                new BuildingConvertor().fromDTO(building, new BuildingBOM());
+                cabinDTO.setBuilding(building);
+                cabin.setBuilding(new BuildingBOM("",1));
+                //new BuildingConvertor().fromDTO(cabinDTO.getBuildingObj(),cabin.getBuilding());
+
                 new CabinConvertor().toDTO(cabin, cabinDTO);
+
                 cabinDTO = cabinRepository.save(cabinDTO);
                 building.addCabin(cabinDTO);
 

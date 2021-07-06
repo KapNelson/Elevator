@@ -33,4 +33,16 @@ public class BuildingService {
             throw new ValidationException("data is not valid");
         }
     }
+
+    public BuildingBOM searchByAddress(String address){
+        // TODO: check is object exists with the same address
+        BuildingDTO building = buildingRepository.findBuildingByAddress(address);
+        if (building != null) {
+            BuildingBOM buildingBOM = new BuildingBOM();
+            new BuildingConvertor().fromDTO(building,buildingBOM);
+            return buildingBOM;
+        } else {
+            throw new IllegalArgumentException("There is no building on this address: " + address);
+        }
+    }
 }

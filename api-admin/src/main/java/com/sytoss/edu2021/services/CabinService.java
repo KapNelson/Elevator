@@ -22,17 +22,24 @@ public class CabinService {
 
     public CabinBOM register(Integer id, CabinBOM cabin) {
 
+
         BuildingDTO building = buildingRepository.findBuildingById(id);
         if (building != null) {
+
+            BuildingBOM buildingBOM = new BuildingBOM();
+            new BuildingConvertor().fromDTO(building,buildingBOM);
+            cabin.setBuilding(buildingBOM);
+
+
             // TODO: check is object exists with the same number
             CabinDTO checkCabin = cabinRepository.findCabinByBuilding_IdAndAndNumber(id, cabin.getNumber());
             if (checkCabin != null) {
                 throw new AlreadyExistsException("Cabin is already exists in this building");
             } else {
+                buildingBOM.addCabin(cabin);
+
                 CabinDTO cabinDTO = new CabinDTO();
                 cabinDTO.setBuilding(building);
-                cabin.setBuilding(new BuildingBOM("",1));
-                //new BuildingConvertor().fromDTO(cabinDTO.getBuildingObj(),cabin.getBuilding());
 
                 new CabinConvertor().toDTO(cabin, cabinDTO);
 
@@ -40,6 +47,7 @@ public class CabinService {
                 building.addCabin(cabinDTO);
 
                 new CabinConvertor().fromDTO(cabinDTO, cabin);
+
                 // TODO: return object with filled id
                 return cabin;
             }

@@ -35,12 +35,12 @@ public class CabinDTO {
 
     }
 
-    public String getBuilding() {
+    /*public String getBuilding() {
         String result = "address: " + building.getAddress();
         return result;
     }
     public BuildingDTO getBuildingObj(){
         return building;
-    }
+    }*/
 
 }

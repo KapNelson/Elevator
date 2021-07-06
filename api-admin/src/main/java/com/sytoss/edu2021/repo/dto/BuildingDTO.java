@@ -13,13 +13,14 @@ import java.util.List;
 
 
 @Entity(name = "app_build")
-@ToString
+/*@ToString*/
 public class BuildingDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_build")
     @Getter
+    @Setter
     private int id;
 
     @Column
@@ -44,7 +45,7 @@ public class BuildingDTO {
     public BuildingDTO(String address, int floorsAmount) {
         this.address = address;
         this.floorsAmount = floorsAmount;
-        this.cabins = new ArrayList<>(1);
+        this.cabins = new ArrayList<>();
     }
 
     public List<CabinDTO> getCabins() {
@@ -54,7 +55,7 @@ public class BuildingDTO {
     /*public List<String> getCabins() {
         List<String> cabinNumbers = new ArrayList<>();
 
-        for (Cabin cabin : cabins) {
+        for (CabinDTO cabin : cabins) {
             String tmp = "number: " + cabin.getNumber();
             cabinNumbers.add(tmp);
         }

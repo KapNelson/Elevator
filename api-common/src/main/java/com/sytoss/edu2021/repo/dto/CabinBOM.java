@@ -1,5 +1,6 @@
 package com.sytoss.edu2021.repo.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,31 +14,41 @@ import java.util.ArrayList;
 public class CabinBOM {
 
     @Getter
+    @Setter
     private int id;
     @Getter
     @Setter
     private int number;
+
     @Getter
     @Setter
     private BuildingBOM building;
 
+    @JsonIgnore
     private Integer[] floorButtons;
     @Setter
+    @JsonIgnore
     private boolean isDoorOpened;
     @Setter
+    @JsonIgnore
     private boolean isOverloaded;
     @Setter
+    @JsonIgnore
     private Integer currentFloor;
+    @JsonIgnore
+    private Engine engine = null;
+    @JsonIgnore
+    private Route route = null;
 
-    private final Engine engine;
-    private final Route route;
+    public CabinBOM() {
+    }
 
     public CabinBOM(int startFloor, int endFloor) {
         setFloors(startFloor, endFloor);
         route = new Route();
         engine = new Engine(route, new ArrayList<Floor>(Math.abs(startFloor) + Math.abs(endFloor)));
-
     }
+
 
     public void startMovement() {
         engine.move(currentFloor);
@@ -57,6 +68,14 @@ public class CabinBOM {
         this.currentFloor = startFloor;
     }
 
+    /*public String getBuilding() {
+        String result = "address: " + building.getAddress();
+        return result;
+    }*/
+
+    /*public BuildingBOM getBuilding(){
+        return building;
+    }*/
 
     public void addFloorToStop(int floorNumber) {
         if (floorNumber > floorButtons[0] && floorNumber < floorButtons[floorButtons.length - 1]) {

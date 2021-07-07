@@ -33,7 +33,7 @@ public class BuildingDTO {
     @Column(name = "number_of_floors")
     private int floorsAmount;
 
-    @OneToMany(mappedBy = "building")
+    @OneToMany(mappedBy = "building",  fetch = FetchType.EAGER)
     @Setter
     @Getter
     private List<CabinDTO> cabins;

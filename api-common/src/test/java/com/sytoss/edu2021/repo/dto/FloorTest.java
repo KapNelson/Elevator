@@ -8,6 +8,18 @@ class FloorTest {
     private final CabinBOM cabin = new CabinBOM(-3,12);
     private final Floor floor = new Floor(5,cabin);
 
+    @Test
+    public void isFloorInTheMiddleOfBuilding(){
+        floor.setButtonDown(true);
+        floor.setButtonUp(true);
+        assertTrue(floor.isButtonDown());
+        assertTrue(floor.isButtonUp());
+    }
+
+    @Test
+    public void checkNumberOfFloor(){
+        assertEquals(5, floor.getNumberOfFloor());
+    }
 
     @Test
     public void isCallToUp() {
@@ -31,5 +43,9 @@ class FloorTest {
         cabin.setCurrentFloor(1);
         floor.checkCabinOnFloor();
         assertFalse(floor.isHasCabinOnFloor());
+    }
+    @Test
+    public void displayCabinInfoTest(){
+        assertEquals(floor.displayCabinInfo(), cabin.displayCabinInfo());
     }
 }

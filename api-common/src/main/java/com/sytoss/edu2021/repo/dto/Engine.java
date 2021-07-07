@@ -36,7 +36,7 @@ public class Engine {
                     }
                 }
                 if (isEmergencyStop) {
-                    emergencyStop(currentFloor);
+                    emergencyStop();
                 }
                 if (!isMoving) start();
 
@@ -66,7 +66,7 @@ public class Engine {
                 }
 
                 if (isEmergencyStop) {
-                    emergencyStop(currentFloor);
+                    emergencyStop();
                 }
                 if (!isMoving) start();
 
@@ -89,7 +89,7 @@ public class Engine {
         isMoving = false;
     }
 
-    private void emergencyStop(int currentFloor) {
+    private void emergencyStop() {
 
         route.clearRoute();
         stop();
@@ -99,6 +99,7 @@ public class Engine {
 
     public void callEmergencyStop() {
         if (isMoving) {
+            emergencyStop();
             isEmergencyStop = true;
         }
     }

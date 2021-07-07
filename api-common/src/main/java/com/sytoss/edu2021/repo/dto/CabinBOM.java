@@ -35,12 +35,14 @@ public class CabinBOM {
     @Setter
     @JsonIgnore
     private Integer currentFloor;
+    @Setter
     @JsonIgnore
     private Engine engine = null;
     @JsonIgnore
     private Route route = null;
 
     public CabinBOM() {
+
     }
 
     public CabinBOM(int startFloor, int endFloor) {
@@ -78,7 +80,7 @@ public class CabinBOM {
     }*/
 
     public void addFloorToStop(int floorNumber) {
-        if (floorNumber > floorButtons[0] && floorNumber < floorButtons[floorButtons.length - 1]) {
+        if (floorNumber < floorButtons[0] && floorNumber > floorButtons[floorButtons.length - 1]) {
             return;
         }
         route.addRoutFloor(currentFloor, floorNumber);

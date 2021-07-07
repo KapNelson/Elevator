@@ -41,7 +41,6 @@ public class BuildingBOM {
             }
         }
         return Collections.unmodifiableList(cabinNumbers);
-
     }
 
     public void addCabin(CabinBOM cabin) {

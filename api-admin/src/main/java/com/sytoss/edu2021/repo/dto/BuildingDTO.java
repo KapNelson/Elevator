@@ -49,7 +49,7 @@ public class BuildingDTO {
     }
 
     public List<CabinDTO> getCabins() {
-        return Collections.unmodifiableList(cabins);
+        return cabins;
     }
 
     /*public List<String> getCabins() {

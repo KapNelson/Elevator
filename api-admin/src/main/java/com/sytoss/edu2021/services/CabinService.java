@@ -11,8 +11,6 @@ import com.sytoss.edu2021.services.convertor.CabinConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
-
 @Service
 public class CabinService {
     @Autowired
@@ -25,31 +23,35 @@ public class CabinService {
 
         BuildingDTO building = buildingRepository.findBuildingById(id);
         if (building != null) {
+            if (cabin.isValid()) {
+                BuildingBOM buildingBOM = new BuildingBOM();
+                new BuildingConvertor().fromDTO(building, buildingBOM);
+                cabin.setBuilding(buildingBOM);
 
-            BuildingBOM buildingBOM = new BuildingBOM();
-            new BuildingConvertor().fromDTO(building,buildingBOM);
-            cabin.setBuilding(buildingBOM);
 
+                // TODO: check is object exists with the same number
+                CabinDTO checkCabin = cabinRepository.findCabinByBuilding_IdAndAndNumber(id, cabin.getNumber());
+                if (checkCabin != null) {
+                    throw new AlreadyExistsException("Cabin is already exists in this building");
+                } else {
+                    buildingBOM.addCabin(cabin);
 
-            // TODO: check is object exists with the same number
-            CabinDTO checkCabin = cabinRepository.findCabinByBuilding_IdAndAndNumber(id, cabin.getNumber());
-            if (checkCabin != null) {
-                throw new AlreadyExistsException("Cabin is already exists in this building");
+                    CabinDTO cabinDTO = new CabinDTO();
+                    cabinDTO.setBuilding(building);
+
+                    new CabinConvertor().toDTO(cabin, cabinDTO);
+
+                    cabinDTO = cabinRepository.save(cabinDTO);
+                    building.addCabin(cabinDTO);
+
+                    new CabinConvertor().fromDTO(cabinDTO, cabin);
+
+                    // TODO: return object with filled id
+                    return cabin;
+                }
+
             } else {
-                buildingBOM.addCabin(cabin);
-
-                CabinDTO cabinDTO = new CabinDTO();
-                cabinDTO.setBuilding(building);
-
-                new CabinConvertor().toDTO(cabin, cabinDTO);
-
-                cabinDTO = cabinRepository.save(cabinDTO);
-                building.addCabin(cabinDTO);
-
-                new CabinConvertor().fromDTO(cabinDTO, cabin);
-
-                // TODO: return object with filled id
-                return cabin;
+                throw new ValidationException("Invalid cabin number (number should be >0)");
             }
         } else {
             throw new ValidationException("There is no such building " + id);

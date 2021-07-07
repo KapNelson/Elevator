@@ -8,7 +8,9 @@ import com.sytoss.edu2021.repo.dto.CabinDTO;
 public class BuildingConvertor {
 
     public void toDTO(BuildingBOM source, BuildingDTO destination){
-        destination.setId(source.getId());
+        if(source.getId()!=null) {
+            destination.setId(source.getId());
+        }
         destination.setAddress(source.getAddress());
         destination.setFloorsAmount(source.getFloorsAmount());
         if (source.getCabins() != null && source.getCabins().size() > 0){

@@ -112,4 +112,7 @@ public class CabinBOM {
         engine.callEmergencyStop();
     }
 
+    public boolean isValid() {
+        return number > 0;
+    }
 }

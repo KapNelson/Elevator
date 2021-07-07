@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = ApiAdminApplication.class)
 class BuildingControllerTest {
 
-    private String address = "fff";
+    private String address = "fff0";
     private int floorsAmount = 3;
     private BuildingDTO buildingDTO;
 

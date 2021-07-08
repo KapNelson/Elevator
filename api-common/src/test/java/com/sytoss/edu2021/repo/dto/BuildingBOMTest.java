@@ -60,5 +60,4 @@ public class BuildingBOMTest {
         build.setAddress("Address");
         assertTrue(build.isValid());
     }
-
 }

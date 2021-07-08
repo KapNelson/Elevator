@@ -67,5 +67,4 @@ public class BuildingDTO {
     public boolean isValid() {
         return !ObjectUtils.isEmpty(address) && floorsAmount > 1;
     }
-
 }

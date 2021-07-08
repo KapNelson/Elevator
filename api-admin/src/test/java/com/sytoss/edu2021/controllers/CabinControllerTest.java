@@ -48,14 +48,12 @@ class CabinControllerTest {
         cabinBom = new CabinBOM();
         cabinBom.setNumber(number);
     }
+
     @Test
-    public void normalInsertResult() throws Exception {
+    public void normalInsertResultTest() throws Exception {
         Gson gson = new Gson();
         String json = gson.toJson(cabinBom);
         mockMvc.perform(post("/api/building/"+buildingBom.getId()+"/cabin").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andDo(print()).andExpect(status().isOk()).andReturn();
     }
-
 }
-
-

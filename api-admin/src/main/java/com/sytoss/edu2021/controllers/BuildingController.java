@@ -29,6 +29,4 @@ public class BuildingController {
     public BuildingBOM searchBuildingByAddress(@RequestParam String address) {
        return buildingService.searchByAddress(address);
     }
-
 }
-

@@ -13,6 +13,7 @@ public class BuildingConvertor {
         }
         destination.setAddress(source.getAddress());
         destination.setFloorsAmount(source.getFloorsAmount());
+
         if (source.getCabins() != null && source.getCabins().size() > 0){
             for(CabinBOM cabinBOM: source.getCabins()){
                 CabinDTO cabinDTO = new CabinDTO();
@@ -21,10 +22,12 @@ public class BuildingConvertor {
             }
         }
     }
+
     public void fromDTO(BuildingDTO source, BuildingBOM destination){
         destination.setId(source.getId());
         destination.setAddress(source.getAddress());
         destination.setFloorsAmount(source.getFloorsAmount());
+
         if (source.getCabins() != null && source.getCabins().size() > 0){
             for(CabinDTO cabinDTO: source.getCabins()){
                 CabinBOM cabinBOM = new CabinBOM();
@@ -33,5 +36,4 @@ public class BuildingConvertor {
             }
         }
     }
-
 }

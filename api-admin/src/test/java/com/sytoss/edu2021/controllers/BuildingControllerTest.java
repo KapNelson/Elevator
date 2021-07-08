@@ -31,7 +31,6 @@ class BuildingControllerTest {
     private int floorsAmount = 9;
     private BuildingDTO buildingDTO;
 
-
     @Autowired
     private WebApplicationContext context;
 
@@ -42,6 +41,7 @@ class BuildingControllerTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
         buildingDTO = new BuildingDTO(address,floorsAmount);
     }
+
     @Test
     public void normalInsertResultTest() throws Exception {
 
@@ -51,7 +51,6 @@ class BuildingControllerTest {
                 .andDo(print()).andExpect(jsonPath("$.address")
                 .value(address)).andExpect(jsonPath("$.floorsAmount")
                 .value(floorsAmount)).andExpect(status().isOk()).andReturn();
-
     }
 
     @Test
@@ -62,8 +61,6 @@ class BuildingControllerTest {
                 .value(address)).andExpect(jsonPath("$.floorsAmount")
                 .value(floorsAmount)).andExpect(status().isOk()).andReturn();
     }
-
-
 
     @Test
     public void zeroFloorsTest() throws Exception {
@@ -90,8 +87,4 @@ class BuildingControllerTest {
                 .andDo(print()).andExpect(status().is(409)).andReturn().getResponse().getContentAsString();
         Assert.assertEquals("Building with this address already registered. BuildingId=" + buildingBom.getId(),response);
     }
-
 }
-
-
-

@@ -32,18 +32,21 @@ class FloorTest {
         floor.callToDown();
         assertTrue(floor.isButtonDown());
     }
+
     @Test
     public void checkCabinIsOnFloor() {
         cabin.setCurrentFloor(5);
         floor.checkCabinOnFloor();
         assertTrue(floor.isHasCabinOnFloor());
     }
+
     @Test
     public void checkCabinIsNotOnFloor() {
         cabin.setCurrentFloor(1);
         floor.checkCabinOnFloor();
         assertFalse(floor.isHasCabinOnFloor());
     }
+
     @Test
     public void displayCabinInfoTest(){
         assertEquals(floor.displayCabinInfo(), cabin.displayCabinInfo());

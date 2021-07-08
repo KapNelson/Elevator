@@ -26,6 +26,7 @@ public class BuildingBOM {
         this.address =address;
         this.floorsAmount = floorsAmount;
     }
+
     @JsonIgnore
     public List<CabinBOM> getCabins() {
         return Collections.unmodifiableList(cabins);
@@ -50,5 +51,4 @@ public class BuildingBOM {
     public boolean isValid() {
         return !ObjectUtils.isEmpty(address) && floorsAmount > 1;
     }
-
 }

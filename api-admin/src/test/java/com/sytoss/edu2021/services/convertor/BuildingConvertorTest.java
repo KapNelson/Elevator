@@ -6,6 +6,7 @@ import com.sytoss.edu2021.repo.dto.BuildingDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+
 public class BuildingConvertorTest {
     @Test
     public void toDTOCompareTest()
@@ -34,6 +35,4 @@ public class BuildingConvertorTest {
         Assertions.assertEquals(buildBOM.getAddress(), buildDTO.getAddress());
         Assertions.assertEquals(buildBOM.getFloorsAmount(), buildDTO.getFloorsAmount());
     }
-
-
 }

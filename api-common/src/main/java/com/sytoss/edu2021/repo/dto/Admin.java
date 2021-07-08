@@ -19,7 +19,6 @@ public class Admin {
     }
 
     private void emergencyCloseDoor(){
-
     }
 
     private String getInfoAboutCabin(CabinBOM cabin){

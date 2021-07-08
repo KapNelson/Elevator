@@ -64,7 +64,6 @@ class EngineTest {
         engine.move(1);
         assertEquals(0, route.getQueueOfFloors().size());
         assertEquals(Direction.STABLE, route.getDirection());
-
     }
 
     @Test
@@ -73,7 +72,6 @@ class EngineTest {
         engine.move(10);
         assertEquals(0, route.getQueueOfFloors().size());
         assertEquals(Direction.STABLE, route.getDirection());
-
     }
 
     @Test
@@ -106,12 +104,10 @@ class EngineTest {
 
         assertEquals(0, route.getQueueOfFloors().size());
         assertEquals(Direction.STABLE, route.getDirection());
-
     }
 
     @Test
-    public void emergencyStopWhileStopped()
-    {
+    public void emergencyStopWhileStopped() {
         route.addRoutFloor(10, 1);   //  3
         route.addRoutFloor(10, 5);   //  5
         route.addRoutFloor(10, 7);   //  7

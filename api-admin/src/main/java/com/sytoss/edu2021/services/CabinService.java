@@ -19,15 +19,12 @@ public class CabinService {
     private BuildingRepository buildingRepository;
 
     public CabinBOM register(Integer id, CabinBOM cabin) {
-
-
         BuildingDTO building = buildingRepository.findBuildingById(id);
         if (building != null) {
             if (cabin.isValid()) {
                 BuildingBOM buildingBOM = new BuildingBOM();
                 new BuildingConvertor().fromDTO(building, buildingBOM);
                 cabin.setBuilding(buildingBOM);
-
 
                 // TODO: check is object exists with the same number
                 CabinDTO checkCabin = cabinRepository.findCabinByBuilding_IdAndAndNumber(id, cabin.getNumber());

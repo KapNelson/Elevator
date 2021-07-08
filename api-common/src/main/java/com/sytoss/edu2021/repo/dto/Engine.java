@@ -23,12 +23,11 @@ public class Engine {
     public void move(int currentFloor) {
 
         if (route.getDirection() == Direction.UP) {
-
             start();
             int maxFloor = route.getQueueOfFloors().get(0);
 
             for (; currentFloor <= maxFloor; currentFloor++) {
-                if(listOfFloors.size()!=0) {
+                if (listOfFloors.size() != 0) {
                     for (int i = 0; i <= listOfFloors.size(); ++i) {
                         if (currentFloor == listOfFloors.get(i).getNumberOfFloor()) {
                             if (listOfFloors.get(i) != null) {
@@ -46,18 +45,14 @@ public class Engine {
                     route.getQueueOfFloors().remove(route.getQueueOfFloors().indexOf(currentFloor));
                     stop();
                 }
-
             }
-
-
         } else if (route.getDirection() == Direction.DOWN) {
-
             start();
             int minFloor = route.getQueueOfFloors().get(route.getQueueOfFloors().size() - 1);
 
             for (; currentFloor >= minFloor; currentFloor--) {
 
-                if(listOfFloors.size()!=0) {
+                if (listOfFloors.size() != 0) {
                     for (int i = 0; i <= listOfFloors.size(); ++i) {
                         if (currentFloor == listOfFloors.get(i).getNumberOfFloor()) {
                             if (listOfFloors.get(i) != null) {
@@ -92,11 +87,9 @@ public class Engine {
     }
 
     private void emergencyStop() {
-
         route.clearRoute();
         stop();
         route.setDirection(Direction.STABLE);
-
     }
 
     public void callEmergencyStop() {

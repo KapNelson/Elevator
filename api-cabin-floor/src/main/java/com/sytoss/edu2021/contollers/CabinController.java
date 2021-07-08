@@ -21,6 +21,4 @@ public class CabinController {
         CabinBOM cabinBOM = cabinService.getCabin(address,number);
         return cabinBOM;
     }
-
-
 }

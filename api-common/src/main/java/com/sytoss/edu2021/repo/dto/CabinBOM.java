@@ -22,7 +22,7 @@ public class CabinBOM {
     @Setter
     private BuildingBOM building;
 
-    //@JsonIgnore
+    @JsonIgnore
     @Setter
     private Integer[] floorButtons;
     @Setter
@@ -54,7 +54,6 @@ public class CabinBOM {
         route = new Route();
         engine = new Engine(route, new ArrayList<Floor>(Math.abs(startFloor) + Math.abs(endFloor)));
     }
-
 
     public void startMovement() {
         engine.move(currentFloor);
@@ -88,7 +87,6 @@ public class CabinBOM {
             return;
         }
         route.addRoutFloor(currentFloor, floorNumber);
-
     }
 
     public void openDoor() {

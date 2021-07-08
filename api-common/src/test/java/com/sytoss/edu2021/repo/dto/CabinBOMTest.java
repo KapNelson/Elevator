@@ -109,5 +109,4 @@ class CabinBOMTest {
         cab.setNumber(24);
         assertTrue(cab.isValid());
     }
-
 }

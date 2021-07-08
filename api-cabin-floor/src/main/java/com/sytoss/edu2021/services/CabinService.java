@@ -23,13 +23,16 @@ public class CabinService {
         CabinDTO cabinDTO = cabinRepository.findCabinByBuilding_IdAndAndNumber(buildingDTO.getId(),numberOfCabin);
         CabinBOM cabinBOM = new CabinBOM();
         new CabinConvertor().fromDTO(cabinDTO,cabinBOM);
+
         BuildingBOM buildingBOM = new BuildingBOM();
         new BuildingConvertor().fromDTO(buildingDTO,buildingBOM);
+
         cabinBOM.setBuilding(buildingBOM);
         Integer[] buttons = new Integer[buildingDTO.getFloorsAmount()];
         for(int i=0;i<buttons.length;++i){
             buttons[i] = i+1;
         }
+
         cabinBOM.setFloorButtons(buttons);
         return cabinBOM;
     }

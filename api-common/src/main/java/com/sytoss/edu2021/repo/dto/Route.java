@@ -43,7 +43,5 @@ public class Route {
             System.err.println("You have already reached this floor.");
             direction = Direction.STABLE;
         }
-
     }
-
 }

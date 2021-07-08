@@ -42,5 +42,4 @@ public class CabinDTO {
     public BuildingDTO getBuildingObj(){
         return building;
     }*/
-
 }

@@ -8,9 +8,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.info.ProjectInfoProperties;
 
+
 public class CabinConvertorTest {
-
-
 
     @Test
     public void toDTOCompareTest(){
@@ -35,7 +34,6 @@ public class CabinConvertorTest {
         Assertions.assertEquals(cabinBOM.getBuilding().getId(), cabinDTO.getBuilding().getId());
         Assertions.assertEquals(cabinBOM.getBuilding().getAddress(), cabinDTO.getBuilding().getAddress());
         Assertions.assertEquals(cabinBOM.getBuilding().getFloorsAmount(), cabinDTO.getBuilding().getFloorsAmount());
-
     }
 
     @Test
@@ -51,7 +49,6 @@ public class CabinConvertorTest {
         CabinDTO cabinDTO = new CabinDTO();
         cabinDTO.setNumber(25);
         cabinDTO.setBuilding(buildingDTO);
-
 
         CabinBOM cabinBOM = new CabinBOM();
         new CabinConvertor().fromDTO(cabinDTO, cabinBOM);

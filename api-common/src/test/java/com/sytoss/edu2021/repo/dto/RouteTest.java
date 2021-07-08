@@ -37,7 +37,6 @@ class RouteTest {
         route.clearRoute();
 
         assertEquals(0, route.getQueueOfFloors().size());
-
     }
 
     @Test
@@ -45,7 +44,6 @@ class RouteTest {
         route.addRoutFloor(1, 10);
 
         assertEquals(1, route.getQueueOfFloors().size());
-
     }
 
     @Test
@@ -57,7 +55,6 @@ class RouteTest {
         for (int i = 0; i < route.getQueueOfFloors().size() - 1; i++) {
             assertTrue(route.getQueueOfFloors().get(i) > route.getQueueOfFloors().get(i+1));
         }
-
     }
 
     @Test
@@ -75,25 +72,19 @@ class RouteTest {
 
     @Test
     public void directionTestsUPTest() {
-
         route.addRoutFloor(1, 10);
         assertEquals(Direction.UP, route.getDirection());
-
     }
 
     @Test
     public void directionTestsDOWNTest() {
-
         route.addRoutFloor(10, 1);
         assertEquals(route.getDirection(), Direction.DOWN);
-
     }
 
     @Test
     public void directionTestsTheSameTest() {
-
         route.addRoutFloor(1, 1);
         assertEquals(route.getDirection(), Direction.STABLE);
-
     }
 }

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.info.ProjectInfoProperties;
 
-public class CabinControllerTest {
+public class CabinConvertorTest {
 
 
 

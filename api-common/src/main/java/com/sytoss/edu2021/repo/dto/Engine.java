@@ -2,10 +2,12 @@
 package com.sytoss.edu2021.repo.dto;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 
 @Getter
+@Setter
 public class Engine {
 
     private boolean isMoving;

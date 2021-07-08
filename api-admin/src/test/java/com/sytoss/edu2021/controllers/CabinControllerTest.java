@@ -22,12 +22,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = ApiAdminApplication.class)
 class CabinControllerTest {
 
-    private String address = "test";
+    private String address = "Peremoga Avenue 61";
 
-    private int number = 1;
+    private int number = 2;
 
     private CabinBOM cabinBom;
     private BuildingBOM buildingBom;
@@ -56,11 +57,5 @@ class CabinControllerTest {
     }
 
 }
-
-
-
-
-
-
 
 

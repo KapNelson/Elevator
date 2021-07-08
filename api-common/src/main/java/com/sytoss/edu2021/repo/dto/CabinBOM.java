@@ -22,7 +22,8 @@ public class CabinBOM {
     @Setter
     private BuildingBOM building;
 
-    @JsonIgnore
+    //@JsonIgnore
+    @Setter
     private Integer[] floorButtons;
     @Setter
     @JsonIgnore
@@ -40,7 +41,7 @@ public class CabinBOM {
     private Route route = null;
 
     public CabinBOM() {
-
+        currentFloor = 1;
     }
 
     public CabinBOM(int number, BuildingBOM building) {

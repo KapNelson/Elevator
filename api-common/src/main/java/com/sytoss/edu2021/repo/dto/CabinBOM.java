@@ -13,6 +13,7 @@ public class CabinBOM {
 
     @Getter
     @Setter
+    @JsonIgnore
     private int id;
     @Getter
     @Setter
@@ -20,6 +21,7 @@ public class CabinBOM {
 
     @Getter
     @Setter
+    //TODO: yevgenyv : remove it
     private BuildingBOM building;
 
     @JsonIgnore
@@ -36,7 +38,7 @@ public class CabinBOM {
     private Integer currentFloor;
     @Setter
     @JsonIgnore
-    private Engine engine = null;
+    private EngineBOM engine = null;
     @JsonIgnore
     private Route route = null;
 
@@ -52,7 +54,7 @@ public class CabinBOM {
     public CabinBOM(int startFloor, int endFloor) {
         setFloors(startFloor, endFloor);
         route = new Route();
-        engine = new Engine(route, new ArrayList<Floor>(Math.abs(startFloor) + Math.abs(endFloor)));
+        engine = new EngineBOM(route, new ArrayList<Floor>(Math.abs(startFloor) + Math.abs(endFloor)));
     }
 
     public void startMovement() {

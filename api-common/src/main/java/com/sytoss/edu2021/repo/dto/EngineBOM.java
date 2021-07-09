@@ -8,14 +8,14 @@ import java.util.ArrayList;
 
 @Getter
 @Setter
-public class Engine {
+public class EngineBOM {
 
     private boolean isMoving;
     private final Route route;
     private final ArrayList<Floor> listOfFloors;
     private boolean isEmergencyStop;
 
-    public Engine(Route route, ArrayList<Floor> listOfFloors) {
+    public EngineBOM(Route route, ArrayList<Floor> listOfFloors) {
         this.route = route;
         this.listOfFloors = listOfFloors;
     }

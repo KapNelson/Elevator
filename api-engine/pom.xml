@@ -11,8 +11,8 @@
     </parent>
 
 
-   <!-- <dependencies>
-        &lt;!&ndash; MySQL&ndash;&gt;
+    <dependencies>
+        <!-- MySQL-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -30,13 +30,13 @@
             <version>5.4.30.Final</version>
         </dependency>
 
-        &lt;!&ndash; liquibase&ndash;&gt;
+        <!-- liquibase-->
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
             <scope>runtime</scope>
         </dependency>
-    </dependencies>-->
+    </dependencies>
 
     <artifactId>api-engine</artifactId>
     <build>

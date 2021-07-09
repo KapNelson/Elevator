@@ -14,6 +14,7 @@ public class CabinDTO {
     @Column(name = "id_cabin")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
+    @Setter
     private int id;
 
     @Getter
@@ -35,11 +36,4 @@ public class CabinDTO {
 
     }
 
-    /*public String getBuilding() {
-        String result = "address: " + building.getAddress();
-        return result;
-    }
-    public BuildingDTO getBuildingObj(){
-        return building;
-    }*/
 }

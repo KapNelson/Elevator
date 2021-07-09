@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class EngineTest {
 
     private final Route route = new Route();
-    private final Engine engine = new Engine(route, new ArrayList<Floor>(15));
+    private final EngineBOM engine = new EngineBOM(route, new ArrayList<Floor>(15));
 
     @Test
     public void hasRouteTest(){

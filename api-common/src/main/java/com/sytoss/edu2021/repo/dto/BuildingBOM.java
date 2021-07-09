@@ -15,7 +15,7 @@ public class BuildingBOM {
 
     private Integer id;
     private String address;
-    private Integer floorsAmount;
+    private int floorsAmount;
 
     private ArrayList<CabinBOM> cabins = new ArrayList<>();
 
@@ -50,5 +50,13 @@ public class BuildingBOM {
 
     public boolean isValid() {
         return !ObjectUtils.isEmpty(address) && floorsAmount > 1;
+    }
+
+    public CabinBOM findCabinByNumber(int cabinNumber) {
+        for(CabinBOM cabin : cabins){
+            if (cabin.getNumber() == cabinNumber)
+                return cabin;
+        }
+        return null;
     }
 }

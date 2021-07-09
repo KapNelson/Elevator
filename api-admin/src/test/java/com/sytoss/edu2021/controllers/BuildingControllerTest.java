@@ -56,7 +56,7 @@ class BuildingControllerTest {
     @Test
     public void normalSearchByAddressResultTest() throws Exception
     {
-        mockMvc.perform(get("/api/building/findByAddress").param("address",address)).andDo(print())
+        mockMvc.perform(get("/api/building/find/address/"+address)).andDo(print())
                 .andExpect(jsonPath("$.address")
                 .value(address)).andExpect(jsonPath("$.floorsAmount")
                 .value(floorsAmount)).andExpect(status().isOk()).andReturn();
@@ -77,11 +77,10 @@ class BuildingControllerTest {
 
     @Test
     public void duplicateAddressesInsertTest() throws Exception {
-        int floorsAmount = 100;
         buildingDTO = new BuildingDTO(address,floorsAmount);
         Gson gson = new Gson();
         String json = gson.toJson(buildingDTO);
-        String buildingBomString = mockMvc.perform(get("/api/building/findByAddress").param("address",address)).andReturn().getResponse().getContentAsString();
+        String buildingBomString = mockMvc.perform(get("/api/building/find/address/"+address)).andReturn().getResponse().getContentAsString();
         BuildingBOM buildingBom = gson.fromJson(buildingBomString, BuildingBOM.class);
         String response =  mockMvc.perform(post("/api/building").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andDo(print()).andExpect(status().is(409)).andReturn().getResponse().getContentAsString();

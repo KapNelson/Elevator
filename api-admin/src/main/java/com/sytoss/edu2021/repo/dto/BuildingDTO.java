@@ -13,7 +13,6 @@ import java.util.List;
 
 
 @Entity(name = "app_build")
-/*@ToString*/
 public class BuildingDTO {
 
     @Id
@@ -33,10 +32,10 @@ public class BuildingDTO {
     @Column(name = "number_of_floors")
     private int floorsAmount;
 
-    @OneToMany(mappedBy = "building",  fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "building", fetch = FetchType.EAGER)
     @Setter
     @Getter
-    private List<CabinDTO> cabins;
+    private List<CabinDTO> cabins = new ArrayList<>();
 
     public BuildingDTO() {
 
@@ -51,16 +50,6 @@ public class BuildingDTO {
     public List<CabinDTO> getCabins() {
         return cabins;
     }
-
-    /*public List<String> getCabins() {
-        List<String> cabinNumbers = new ArrayList<>();
-
-        for (CabinDTO cabin : cabins) {
-            String tmp = "number: " + cabin.getNumber();
-            cabinNumbers.add(tmp);
-        }
-        return Collections.unmodifiableList(cabinNumbers);
-    }*/
 
     public void addCabin(CabinDTO cabin) {
         cabins.add(cabin);

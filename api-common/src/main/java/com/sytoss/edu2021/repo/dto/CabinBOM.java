@@ -78,7 +78,7 @@ public class CabinBOM {
         this.currentFloor = startFloor;
     }
 
-    /*public String getBuilding() {
+    /*public String getBuildingInfo() {
         String result = "address: " + building.getAddress();
         return result;
     }*/

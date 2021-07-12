@@ -18,7 +18,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
-public class BuldingServiceTest {
+public class BuildingServiceTest {
 
     @Mock
     private BuildingRepository buildingRepository;

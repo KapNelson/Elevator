@@ -20,20 +20,25 @@ public class CabinService {
 
     public CabinBOM getCabin(String addressOfBuilding, Integer numberOfCabin) {
         BuildingDTO buildingDTO = buildingRepository.findBuildingByAddress(addressOfBuilding);
-        CabinDTO cabinDTO = cabinRepository.findCabinByBuilding_IdAndAndNumber(buildingDTO.getId(),numberOfCabin);
-        CabinBOM cabinBOM = new CabinBOM();
-        new CabinConvertor().fromDTO(cabinDTO,cabinBOM);
 
-        BuildingBOM buildingBOM = new BuildingBOM();
-        new BuildingConvertor().fromDTO(buildingDTO,buildingBOM);
+        CabinDTO cabinDTO = cabinRepository.findCabinByBuilding_IdAndAndNumber(buildingDTO.getId(), numberOfCabin);
+        if (cabinDTO == null) {
+            throw new EntityNotFoundException("There is no such cabin");
+        } else {
+            CabinBOM cabinBOM = new CabinBOM();
+            new CabinConvertor().fromDTO(cabinDTO, cabinBOM);
 
-        cabinBOM.setBuilding(buildingBOM);
-        Integer[] buttons = new Integer[buildingDTO.getFloorsAmount()];
-        for(int i=0;i<buttons.length;++i){
-            buttons[i] = i+1;
+            BuildingBOM buildingBOM = new BuildingBOM();
+            new BuildingConvertor().fromDTO(buildingDTO, buildingBOM);
+
+            cabinBOM.setBuilding(buildingBOM);
+            Integer[] buttons = new Integer[buildingDTO.getFloorsAmount()];
+            for (int i = 0; i < buttons.length; ++i) {
+                buttons[i] = i + 1;
+            }
+
+            cabinBOM.setFloorButtons(buttons);
+            return cabinBOM;
         }
-
-        cabinBOM.setFloorButtons(buttons);
-        return cabinBOM;
     }
 }

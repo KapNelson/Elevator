@@ -36,9 +36,4 @@ public class BuildingController {
     public CabinBOM getCabin(@RequestParam String address, @RequestParam Integer number){
         return cabinService.getCabin(address,number);
     }
-    /*
-    ResponseEntity<CurrencyConversionBean> responseEntity =
-   new RestTemplate().getForEntity(
-        "http://localhost:8091/currency-exchange/from/{from}/to/{to}", CurrencyConversionBean.class,  uriVariables);
-     */
 }

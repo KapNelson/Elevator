@@ -19,26 +19,29 @@ public class CabinBOM {
     @Setter
     private int number;
 
+    @JsonIgnore
     @Getter
     @Setter
     //TODO: yevgenyv : remove it
     private BuildingBOM building;
 
-    @JsonIgnore
+
     @Setter
     private Integer[] floorButtons;
+
     @Setter
-    @JsonIgnore
     private boolean isDoorOpened;
+
     @Setter
-    @JsonIgnore
     private boolean isOverloaded;
+
     @Setter
-    @JsonIgnore
     private Integer currentFloor;
+
     @Setter
     @JsonIgnore
     private EngineBOM engine = null;
+
     @JsonIgnore
     private Route route = null;
 

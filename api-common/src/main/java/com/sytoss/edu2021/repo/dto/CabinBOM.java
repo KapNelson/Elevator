@@ -39,7 +39,7 @@ public class CabinBOM {
     private Integer currentFloor;
 
     @Setter
-    @JsonIgnore
+    //@JsonIgnore
     private EngineBOM engine = null;
 
     @JsonIgnore

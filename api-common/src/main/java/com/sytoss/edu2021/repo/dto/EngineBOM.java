@@ -11,9 +11,12 @@ import java.util.ArrayList;
 public class EngineBOM {
 
     private boolean isMoving;
-    private final Route route;
-    private final ArrayList<Floor> listOfFloors;
+    private Route route;
+    private ArrayList<Floor> listOfFloors = new ArrayList<>();
     private boolean isEmergencyStop;
+
+    public EngineBOM(){
+    }
 
     public EngineBOM(Route route, ArrayList<Floor> listOfFloors) {
         this.route = route;

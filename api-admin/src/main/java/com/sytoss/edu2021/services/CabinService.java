@@ -21,6 +21,10 @@ public class CabinService {
     public CabinBOM getCabin(String addressOfBuilding, Integer numberOfCabin) {
         BuildingDTO buildingDTO = buildingRepository.findBuildingByAddress(addressOfBuilding);
         CabinDTO cabinDTO = cabinRepository.findCabinByBuilding_IdAndAndNumber(buildingDTO.getId(),numberOfCabin);
+        if(cabinDTO == null)
+        {
+            throw new EntityNotFoundException("There is no such cabin");
+        }
         CabinBOM cabinBOM = new CabinBOM();
         new CabinConvertor().fromDTO(cabinDTO,cabinBOM);
 

@@ -7,6 +7,7 @@ import lombok.Setter;
 public class Floor {
     private CabinBOM cabin;
     @Getter
+    @Setter
     private int numberOfFloor;
     @Getter
     @Setter
@@ -15,6 +16,7 @@ public class Floor {
     @Setter
     private boolean buttonDown;
     @Getter
+    @Setter
     private boolean hasCabinOnFloor;
 
     public Floor(int numberOfFloor, CabinBOM pCabin) {

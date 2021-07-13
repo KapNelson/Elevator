@@ -99,7 +99,7 @@ public class BuildingServiceTest {
             new BuildingConvertor().fromDTO(dto,bom);
             service.register(bom);
         }catch(ValidationException e){
-            assertEquals("data is not valid", e.getMessage());
+            assertEquals("Data is not valid", e.getMessage());
         }
     }
 

@@ -32,8 +32,8 @@ public class BuildingController {
     }
 
 
-    @GetMapping("/find/cabin")
-    public CabinBOM getCabin(@RequestParam String address, @RequestParam Integer number){
+    @GetMapping("/find/cabin/{address}/{number}")
+    public CabinBOM getCabin(@PathVariable String address, @PathVariable Integer number){
         return cabinService.getCabin(address,number);
     }
 }

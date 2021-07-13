@@ -81,7 +81,7 @@ class BuildingControllerTest {
         String json = gson.toJson(buildingDTO);
         String response =  mockMvc.perform(post("/api/building").contentType(MediaType.APPLICATION_JSON).content(json))
                 .andDo(print()).andExpect(status().is(418)).andReturn().getResponse().getContentAsString();
-        Assert.assertEquals("data is not valid",response);
+        Assert.assertEquals("Data is not valid",response);
     }
 
     @Test

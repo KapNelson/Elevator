@@ -1,5 +1,6 @@
 package com.sytoss.edu2021.contollers;
 
+
 import com.sytoss.edu2021.services.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

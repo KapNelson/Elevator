@@ -53,8 +53,6 @@ class BuildingControllerTest {
     @Test
     public void normalInsertResultTest() throws Exception {
 
-
-
         Gson gson = new Gson();
         String json = gson.toJson(buildingDTO);
         mockMvc.perform(post("/api/building").contentType(MediaType.APPLICATION_JSON).content(json))

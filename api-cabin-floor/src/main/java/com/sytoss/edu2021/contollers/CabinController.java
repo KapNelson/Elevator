@@ -14,6 +14,7 @@ public class CabinController {
    @Autowired
    private CabinService cabinService;
 
+
     @GetMapping("/call/{buildingId}/{cabinNumber}/{floor}")
     public CabinBOM callToFloor(@PathVariable int buildingId, @PathVariable int cabinNumber, @PathVariable int floor) {
         return cabinService.callToFloor(buildingId,cabinNumber,floor);
@@ -24,6 +25,10 @@ public class CabinController {
         return cabinService.goToFloor(buildingId,cabinNumber,fromFloor,toFloor);
     }
 
+    @GetMapping("/send/message/{idCabin}")
+    public String sendMessage(@PathVariable int idCabin){
+        return cabinService.sendMessage(idCabin);
+    }
 
 
 }

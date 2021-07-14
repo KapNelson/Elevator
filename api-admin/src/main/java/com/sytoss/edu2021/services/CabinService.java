@@ -10,6 +10,7 @@ import com.sytoss.edu2021.services.convertor.BuildingConvertor;
 import com.sytoss.edu2021.services.convertor.CabinConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class CabinService {
@@ -17,6 +18,8 @@ public class CabinService {
     private CabinRepository cabinRepository;
     @Autowired
     private BuildingRepository buildingRepository;
+    @Autowired
+    private RestTemplate restTemplate;
 
     public CabinBOM getCabin(String addressOfBuilding, Integer numberOfCabin) {
         BuildingDTO buildingDTO = buildingRepository.findBuildingByAddress(addressOfBuilding);
@@ -62,8 +65,9 @@ public class CabinService {
         return cabinBOM;
     }
 
-    public CabinBOM getInfoAboutCabin(Integer idCabin) {
-        return new CabinBOM();
+    public String getMessageAboutEmergencyInCabin(Integer idCabin) {
+        String message = restTemplate.getForEntity("http://localhost:6070/api/cabin_floor/cabin/send/message/{idCabin}", String.class, idCabin).getBody();
+        return message;
     }
 
     public CabinBOM getCabinById(Integer idCabin) {

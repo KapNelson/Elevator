@@ -49,13 +49,13 @@ public class BuildingController {
         return cabinService.getCabinByIdBuilding(buildingId,number);
     }
 
-    @GetMapping("/get/information/about/cabin/{idCabin}")
-    public CabinBOM getInformationAboutCabin(@PathVariable Integer idCabin){
-        return cabinService.getInfoAboutCabin(idCabin);
-    }
-
     @GetMapping("/get/cabin/id/{idCabin}")
     public CabinBOM getCabinById(@PathVariable Integer idCabin){
         return cabinService.getCabinById(idCabin);
+    }
+
+    @GetMapping("/get/information/about/cabin/{idCabin}")
+    public String getMessageAboutEmergencyInCabin(@PathVariable Integer idCabin){
+        return cabinService.getMessageAboutEmergencyInCabin(idCabin);
     }
 }

@@ -2,15 +2,16 @@ package com.sytoss.edu2021.services;
 
 import com.sytoss.edu2021.repo.BuildingRepository;
 import com.sytoss.edu2021.repo.CabinRepository;
-import com.sytoss.edu2021.repo.dto.BuildingBOM;
-import com.sytoss.edu2021.repo.dto.BuildingDTO;
-import com.sytoss.edu2021.repo.dto.CabinBOM;
-import com.sytoss.edu2021.repo.dto.CabinDTO;
+import com.sytoss.edu2021.repo.LogRepository;
+import com.sytoss.edu2021.repo.dto.*;
 import com.sytoss.edu2021.services.convertor.BuildingConvertor;
 import com.sytoss.edu2021.services.convertor.CabinConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 public class CabinService {
@@ -18,6 +19,8 @@ public class CabinService {
     private CabinRepository cabinRepository;
     @Autowired
     private BuildingRepository buildingRepository;
+    @Autowired
+    private LogRepository logRepository;
     @Autowired
     private RestTemplate restTemplate;
 
@@ -67,6 +70,7 @@ public class CabinService {
 
     public String getMessageAboutEmergencyInCabin(Integer idCabin) {
         String message = restTemplate.getForEntity("http://localhost:6070/api/cabin_floor/cabin/send/message/{idCabin}", String.class, idCabin).getBody();
+        logRepository.save(new LogDTO(message, LocalDateTime.now()));
         return message;
     }
 

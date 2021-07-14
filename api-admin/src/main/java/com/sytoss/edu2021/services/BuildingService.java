@@ -76,4 +76,15 @@ public class BuildingService {
             throw new EntityNotFoundException("There is no building on this address: " + address);
         }
     }
+
+    public BuildingBOM searchById(Integer id) {
+        BuildingDTO building = buildingRepository.findBuildingById(id);
+        if (building != null) {
+            BuildingBOM buildingBOM = new BuildingBOM();
+            new BuildingConvertor().fromDTO(building, buildingBOM);
+            return buildingBOM;
+        } else {
+            throw new EntityNotFoundException("There is no building on this id: " + id);
+        }
+    }
 }

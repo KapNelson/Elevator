@@ -40,4 +40,27 @@ public class CabinService {
         cabinBOM.setFloorButtons(buttons);
         return cabinBOM;
     }
+
+    public CabinBOM getCabinById(int buildingId, int numberOfCabin) {
+        BuildingDTO buildingDTO = buildingRepository.findBuildingById(buildingId);
+        CabinDTO cabinDTO = cabinRepository.findCabinByBuilding_IdAndAndNumber(buildingDTO.getId(),numberOfCabin);
+        if(cabinDTO == null)
+        {
+            throw new EntityNotFoundException("There is no such cabin");
+        }
+        CabinBOM cabinBOM = new CabinBOM();
+        new CabinConvertor().fromDTO(cabinDTO,cabinBOM);
+
+        BuildingBOM buildingBOM = new BuildingBOM();
+        new BuildingConvertor().fromDTO(buildingDTO,buildingBOM);
+
+        cabinBOM.setBuilding(buildingBOM);
+        Integer[] buttons = new Integer[buildingDTO.getFloorsAmount()];
+        for(int i=0;i<buttons.length;++i){
+            buttons[i] = i+1;
+        }
+
+        cabinBOM.setFloorButtons(buttons);
+        return cabinBOM;
+    }
 }

@@ -31,7 +31,7 @@ public class EngineBOM {
 
             for (; currentFloor <= maxFloor; currentFloor++) {
                 if (listOfFloors.size() != 0) {
-                    for (int i = 0; i <= listOfFloors.size(); ++i) {
+                    for (int i = 0; i < listOfFloors.size(); ++i) {
                         if (currentFloor == listOfFloors.get(i).getNumberOfFloor()) {
                             if (listOfFloors.get(i) != null) {
                                 listOfFloors.get(i).setButtonUp(false);
@@ -56,7 +56,7 @@ public class EngineBOM {
             for (; currentFloor >= minFloor; currentFloor--) {
 
                 if (listOfFloors.size() != 0) {
-                    for (int i = 0; i <= listOfFloors.size(); ++i) {
+                    for (int i = 0; i < listOfFloors.size(); ++i) {
                         if (currentFloor == listOfFloors.get(i).getNumberOfFloor()) {
                             if (listOfFloors.get(i) != null) {
                                 listOfFloors.get(i).setButtonDown(false);

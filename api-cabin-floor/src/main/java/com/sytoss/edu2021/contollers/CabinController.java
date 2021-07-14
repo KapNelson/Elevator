@@ -14,14 +14,14 @@ public class CabinController {
    @Autowired
    private CabinService cabinService;
 
-    @GetMapping("/call/{buildingAddress}/{cabinNumber}/{floor}")
-    public CabinBOM callToFloor(@PathVariable String buildingAddress, @PathVariable int cabinNumber, @PathVariable int floor) {
-        return cabinService.callToFloor(buildingAddress,cabinNumber,floor);
+    @GetMapping("/call/{buildingId}/{cabinNumber}/{floor}")
+    public CabinBOM callToFloor(@PathVariable int buildingId, @PathVariable int cabinNumber, @PathVariable int floor) {
+        return cabinService.callToFloor(buildingId,cabinNumber,floor);
     }
 
-    @GetMapping("/gotofloor/{buildingAddress}/{cabinNumber}/{fromFloor}/{toFloor}")
-    public CabinBOM goToFloor(@PathVariable String buildingAddress, @PathVariable int cabinNumber, @PathVariable int fromFloor, @PathVariable int toFloor) {
-        return cabinService.goToFloor(buildingAddress,cabinNumber,fromFloor,toFloor);
+    @GetMapping("/gotofloor/{buildingId}/{cabinNumber}/{fromFloor}/{toFloor}")
+    public CabinBOM goToFloor(@PathVariable int buildingId, @PathVariable int cabinNumber, @PathVariable int fromFloor, @PathVariable int toFloor) {
+        return cabinService.goToFloor(buildingId,cabinNumber,fromFloor,toFloor);
     }
 
 

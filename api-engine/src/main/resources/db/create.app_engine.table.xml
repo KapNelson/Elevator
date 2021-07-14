@@ -17,12 +17,12 @@
                 <constraints nullable="false"
                              primaryKey="true"/>
             </column>
-            <column name="id_build" type="int">
+         <!--   <column name="id_build" type="int">
                 <constraints nullable="false" foreignKeyName="fk_engine_build" references="app_build(id_build)"/>
             </column>
             <column name="id_cabin" type="int">
                 <constraints nullable="false" foreignKeyName="fk_engine_cabin" references="app_cabin(id_cabin)"/>
-            </column>
+            </column>-->
         </createTable>
     </changeSet>
 </databaseChangeLog>

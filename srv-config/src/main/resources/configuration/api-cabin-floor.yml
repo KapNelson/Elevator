@@ -1,2 +1,5 @@
 server:
   port: 6070
+services:
+  admin:
+    url: http://127.0.0.1:6060

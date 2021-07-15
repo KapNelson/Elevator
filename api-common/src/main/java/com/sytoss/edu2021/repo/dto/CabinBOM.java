@@ -38,6 +38,7 @@ public class CabinBOM {
     @Setter
     private Integer currentFloor;
 
+    @Getter
     @Setter
     //@JsonIgnore
     private EngineBOM engine = null;

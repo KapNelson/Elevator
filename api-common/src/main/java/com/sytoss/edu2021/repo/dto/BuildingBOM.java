@@ -37,8 +37,9 @@ public class BuildingBOM {
 
         if(cabins!=null) {
             for (CabinBOM cabin : cabins) {
-                String tmp = "number: " + cabin.getNumber();
+                String tmp = "number: " + cabin.getNumber() + " engine id: " + cabin.getEngine().getId();
                 cabinNumbers.add(tmp);
+
             }
         }
         return Collections.unmodifiableList(cabinNumbers);
@@ -58,5 +59,13 @@ public class BuildingBOM {
                 return cabin;
         }
         return null;
+    }
+    @JsonIgnore
+    public Integer[] getCabinIdList(){
+        Integer[] cabId = new Integer[cabins.size()];
+        for (int i = 0; i < cabins.size(); i++) {
+            cabId[i]=cabins.get(i).getId();
+        }
+        return cabId;
     }
 }

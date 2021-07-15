@@ -2,14 +2,14 @@ package com.sytoss.edu2021.services;
 
 import com.sytoss.edu2021.repo.BuildingRepository;
 import com.sytoss.edu2021.repo.CabinRepository;
-import com.sytoss.edu2021.repo.dto.BuildingBOM;
-import com.sytoss.edu2021.repo.dto.BuildingDTO;
-import com.sytoss.edu2021.repo.dto.CabinBOM;
-import com.sytoss.edu2021.repo.dto.CabinDTO;
+import com.sytoss.edu2021.repo.dto.*;
 import com.sytoss.edu2021.services.convertor.BuildingConvertor;
 import com.sytoss.edu2021.services.convertor.CabinConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @Service
 public class BuildingService {
@@ -19,6 +19,9 @@ public class BuildingService {
 
     @Autowired
     private CabinRepository cabinRepository;
+
+    @Autowired
+    RestTemplate restTemplate;
 
     public BuildingBOM getBuildingById(int id) {
         BuildingDTO dto = buildingRepository.findBuildingById(id);
@@ -47,21 +50,30 @@ public class BuildingService {
         }
     }
 
+
     public BuildingBOM addCabin(int buildingId, CabinBOM cabin) {
         if (cabin.isValid()) {
             BuildingBOM building = getBuildingById(buildingId);
             if (building.findCabinByNumber(cabin.getNumber()) != null) {
                 throw new ValidationException("Building id = " + buildingId + " already contains cabin with number = " + cabin.getNumber());
             } else {
+                Integer[] cabinIds = building.getCabinIdList();
+
+                EngineBOM[] engines = restTemplate.postForEntity("http://127.0.0.1:6050/api/engine/engines/",cabinIds, EngineBOM[].class).getBody();
+                for (int i = 0; i < building.getCabins().size(); i++) {
+                    building.getCabins().get(i).setEngine(engines[i]);
+                }
                 CabinDTO cabinDTO = new CabinDTO();
                 new CabinConvertor().toDTO(cabin, cabinDTO);
                 new CabinConvertor().toDTO(building, cabinDTO);
                 cabinRepository.save(cabinDTO);
                 building.addCabin(cabin);
+                EngineBOM engineBOM = restTemplate.getForEntity("http://127.0.0.1:6050/api/engine/{idCabin}", EngineBOM.class,cabinDTO.getId()).getBody();
+                cabin.setEngine(engineBOM);
                 return building;
             }
         } else {
-            throw new ValidationException("Invalid cabin number (number should be >0)");
+            throw new ValidationException("Invalid cabin number (number should be > 0)");
         }
     }
 

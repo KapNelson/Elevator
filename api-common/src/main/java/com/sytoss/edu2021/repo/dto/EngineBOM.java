@@ -1,21 +1,32 @@
-
 package com.sytoss.edu2021.repo.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.ArrayList;
 
 @Getter
 @Setter
+@ToString
 public class EngineBOM {
 
     private boolean isMoving;
     private Route route;
     private ArrayList<Floor> listOfFloors = new ArrayList<>();
     private boolean isEmergencyStop;
+    private Integer id;
 
     public EngineBOM(){
+        listOfFloors = new ArrayList<>();
+        route = new Route();
+    }
+
+    public EngineBOM(int id){
+        this.id = id;
+        listOfFloors = new ArrayList<>();
+        route = new Route();
     }
 
     public EngineBOM(Route route, ArrayList<Floor> listOfFloors) {

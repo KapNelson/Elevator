@@ -13,7 +13,7 @@
             </not>
         </preConditions>
         <createTable tableName="app_engine">
-            <column name="id_engine"  type="int" autoIncrement="true">
+            <column name="id_engine"  type="int">
                 <constraints nullable="false"
                              primaryKey="true"/>
             </column>

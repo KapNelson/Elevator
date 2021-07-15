@@ -3,7 +3,6 @@ package com.sytoss.edu2021.controllers;
 import com.sytoss.edu2021.repo.dto.EngineBOM;
 import com.sytoss.edu2021.services.EngineService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,9 +12,14 @@ public class EngineController {
     @Autowired
     private EngineService engineService;
 
-    @GetMapping
-    public EngineBOM create(){
-        return engineService.create();
+    @GetMapping("/{idCabin}")
+    public EngineBOM create(@PathVariable Integer idCabin){
+        return engineService.create(idCabin);
+    }
+
+    @PostMapping ("/engines/")
+    public EngineBOM[] getEngines(@RequestBody Integer[] ids){
+        return engineService.getEngines(ids);
     }
 
 }

@@ -45,7 +45,17 @@ public class BuildingController {
     }
 
     @GetMapping("/find/cabin/id/{buildingId}/{number}")
-    public CabinBOM getCabinById(@PathVariable Integer buildingId, @PathVariable Integer number){
-        return cabinService.getCabinById(buildingId,number);
+    public CabinBOM getCabinByIdBuilding(@PathVariable Integer buildingId, @PathVariable Integer number){
+        return cabinService.getCabinByIdBuilding(buildingId,number);
+    }
+
+    @GetMapping("/get/cabin/id/{idCabin}")
+    public CabinBOM getCabinById(@PathVariable Integer idCabin){
+        return cabinService.getCabinById(idCabin);
+    }
+
+    @GetMapping("/get/information/about/cabin/{idCabin}")
+    public String getMessageAboutEmergencyInCabin(@PathVariable Integer idCabin){
+        return cabinService.getMessageAboutEmergencyInCabin(idCabin);
     }
 }

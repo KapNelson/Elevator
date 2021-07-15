@@ -37,7 +37,7 @@ public class CabinService {
             throw new EntityNotFoundException(e.getResponseBodyAsString());
             //throw new EntityNotFoundException("There is no such cabin");
         }
-        if(cabin.getCurrentFloor() == floor) {
+        if (cabin.getCurrentFloor() == floor) {
             cabin.openDoor();
         } else {
             cabin.setCurrentFloor(floor);
@@ -75,8 +75,8 @@ public class CabinService {
         route.addRoutFloor(cabin.getCurrentFloor(), endFlow);
         cabin.getEngine().setRoute(route);
         cabin.getEngine().move(endFlow);
-        cabin.getEngine().getListOfFloors().get(currentFloor-1).setHasCabinOnFloor(false);
-        cabin.getEngine().getListOfFloors().get(endFlow-1).setHasCabinOnFloor(true);
+        cabin.getEngine().getListOfFloors().get(currentFloor - 1).setHasCabinOnFloor(false);
+        cabin.getEngine().getListOfFloors().get(endFlow - 1).setHasCabinOnFloor(true);
         return cabin;
 
     }
@@ -101,4 +101,12 @@ public class CabinService {
         return engine;
     }
 
+    public String sendMessage(int idCabin) {
+        try {
+            CabinBOM cabinBOM = restTemplate.getForEntity("http://127.0.0.1:6060/api/building/get/cabin/id/{idCabin}", CabinBOM.class, idCabin).getBody();
+            return "Emergency in the cabin: " + idCabin;
+        }catch (HttpStatusCodeException e){
+            throw new EntityNotFoundException(e.getMessage());
+        }
+    }
 }

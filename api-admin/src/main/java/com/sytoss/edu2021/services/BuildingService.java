@@ -50,14 +50,6 @@ public class BuildingService {
         }
     }
 
-    private class IntegerArray
-    {
-        private Integer[] array;
-        public IntegerArray(Integer[] array)
-        {
-            this.array = array;
-        }
-    }
 
     public BuildingBOM addCabin(int buildingId, CabinBOM cabin) {
         if (cabin.isValid()) {

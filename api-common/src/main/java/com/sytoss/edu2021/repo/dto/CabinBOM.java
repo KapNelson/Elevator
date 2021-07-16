@@ -35,6 +35,7 @@ public class CabinBOM {
     @Setter
     private boolean isOverloaded;
 
+    @Getter
     @Setter
     private Integer currentFloor;
 

@@ -20,7 +20,10 @@ public class CabinDTO {
     @Getter
     @Setter
     private int number;
-
+    @Setter
+    @Getter
+    @Column(name="current_floor")
+    private int currentFloor;
     @ManyToOne
     @JoinColumn(name = "id_build")
     @Getter
@@ -30,10 +33,11 @@ public class CabinDTO {
     public CabinDTO(int number, BuildingDTO building) {
         this.number = number;
         this.building = building;
+        currentFloor=1;
     }
 
     public CabinDTO() {
-
+        currentFloor=1;
     }
 
 }

@@ -22,4 +22,9 @@ public class EngineController {
         return engineService.getEngines(ids);
     }
 
+    @GetMapping ("/get/{idCabin}")
+    public EngineBOM getEngine(@PathVariable Integer idCabin){
+        return engineService.getEngine(idCabin);
+    }
+
 }

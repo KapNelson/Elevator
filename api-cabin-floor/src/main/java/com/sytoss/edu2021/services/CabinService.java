@@ -43,7 +43,7 @@ public class CabinService {
             cabin.setCurrentFloor(floor);
         }
         try {
-            engine = setEngine(cabin);
+            engine = restTemplate.getForEntity("http://localhost:6050/api/engine/{idCabin}", EngineBOM.class, cabin.getId()).getBody();;
         } catch (HttpStatusCodeException e) {
             throw new EntityNotFoundException("There is no such engine");
         }

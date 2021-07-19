@@ -17,7 +17,9 @@ public class EngineBOM {
     private ArrayList<Floor> listOfFloors = new ArrayList<>();
     private boolean isEmergencyStop;
     private Integer id;
-
+    @Getter
+    @Setter
+    private Integer currentFloor=1;
     public EngineBOM(){
         listOfFloors = new ArrayList<>();
         route = new Route();
@@ -29,12 +31,13 @@ public class EngineBOM {
         route = new Route();
     }
 
-    public EngineBOM(Route route, ArrayList<Floor> listOfFloors) {
+    public EngineBOM(Route route, ArrayList<Floor> listOfFloors, Integer currentFloor) {
         this.route = route;
         this.listOfFloors = listOfFloors;
+        this.currentFloor=currentFloor;
     }
 
-    public void move(int currentFloor) {
+    public void move() {
 
         if (route.getDirection() == Direction.UP) {
             start();

@@ -35,14 +35,14 @@ class FloorTest {
 
     @Test
     public void checkCabinIsOnFloor() {
-        cabin.setCurrentFloor(5);
+        cabin.getEngine().setCurrentFloor(5);
         floor.checkCabinOnFloor();
         assertTrue(floor.isHasCabinOnFloor());
     }
 
     @Test
     public void checkCabinIsNotOnFloor() {
-        cabin.setCurrentFloor(1);
+        cabin.getEngine().setCurrentFloor(1);
         floor.checkCabinOnFloor();
         assertFalse(floor.isHasCabinOnFloor());
     }

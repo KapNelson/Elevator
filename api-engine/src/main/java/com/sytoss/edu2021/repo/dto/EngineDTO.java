@@ -14,5 +14,8 @@ public class EngineDTO {
     @Id
     @Column(name = "id_engine")
     Integer id;
-
+    @Getter
+    @Setter
+    @Column(name="current_floor")
+    int currentFloor;
 }

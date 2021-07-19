@@ -28,7 +28,7 @@ public class Floor {
     }
 
     public void checkCabinOnFloor(){
-        if(numberOfFloor == cabin.getCurrentFloor())
+        if(numberOfFloor == cabin.getEngine().getCurrentFloor())
             hasCabinOnFloor = true;
         else hasCabinOnFloor = false;
     }

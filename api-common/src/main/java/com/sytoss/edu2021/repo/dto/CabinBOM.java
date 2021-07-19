@@ -35,9 +35,7 @@ public class CabinBOM {
     @Setter
     private boolean isOverloaded;
 
-    @Getter
-    @Setter
-    private Integer currentFloor;
+
 
     @Getter
     @Setter
@@ -48,7 +46,7 @@ public class CabinBOM {
     private Route route = null;
 
     public CabinBOM() {
-        currentFloor = 1;
+        engine = new EngineBOM(route,null,1);
     }
 
     public CabinBOM(int number, BuildingBOM building) {
@@ -57,13 +55,13 @@ public class CabinBOM {
     }
 
     public CabinBOM(int startFloor, int endFloor) {
-        setFloors(startFloor, endFloor);
         route = new Route();
-        engine = new EngineBOM(route, new ArrayList<Floor>(Math.abs(startFloor) + Math.abs(endFloor)));
+        engine = new EngineBOM(route, new ArrayList<Floor>(Math.abs(startFloor) + Math.abs(endFloor)),startFloor);
+        setFloors(startFloor, endFloor);
     }
 
     public void startMovement() {
-        engine.move(currentFloor);
+        engine.move();
     }
 
     private void setFloors(int startFloor, int endFloor) {
@@ -77,7 +75,7 @@ public class CabinBOM {
             ++curfloor;
         }
 
-        this.currentFloor = startFloor;
+        this.engine.setCurrentFloor(startFloor);
     }
 
     /*public String getBuildingInfo() {
@@ -93,7 +91,7 @@ public class CabinBOM {
         if (floorNumber < floorButtons[0] && floorNumber > floorButtons[floorButtons.length - 1]) {
             return;
         }
-        route.addRoutFloor(currentFloor, floorNumber);
+        route.addRoutFloor(engine.getCurrentFloor(), floorNumber);
     }
 
     public void openDoor() {
@@ -111,7 +109,7 @@ public class CabinBOM {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(route.getDirection());
         stringBuilder.append(" ");
-        stringBuilder.append(currentFloor);
+        stringBuilder.append(engine.getCurrentFloor());
         if (isOverloaded) {
             stringBuilder.append(" Overloaded!!!");
         }

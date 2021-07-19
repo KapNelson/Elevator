@@ -46,36 +46,26 @@ class CabinBOMTest {
         assertEquals(cab.getFloorButtons().length, 16);
     }
 
-//    @Test
-//    public void movementTest(){
-//        cab.startMovement();
-//        assertFalse(cab.getEngine().isMoving());
-//    }
-
     @Test
-    public void addFloorToStopTest()
-    {
-        cab.getRoute().clearRoute();
-        cab.addFloorToStop(6);
-        cab.addFloorToStop(9);
-
-        assertEquals(2, cab.getRoute().getQueueOfFloors().length);
+    public void movementTest(){
+        cab.startMovement();
+        assertFalse(cab.getEngine().isMoving());
     }
 
-    @Test
-    public void clearRouteTest(){
-        cab.addFloorToStop(6);
-        cab.addFloorToStop(7);
-        cab.getRoute().clearRoute();
-
-        assertEquals(0, cab.getRoute().getQueueOfFloors().length);
-    }
 
     @Test
     public void openDoorTest(){
         cab.setDoorOpened(false);
         cab.openDoor();
         assertTrue(cab.isDoorOpened());
+    }
+
+    @Test
+    public void addFloorToStopTest() {
+        cab.addFloorToStop(6);
+        cab.addFloorToStop(9);
+
+        assertEquals(2, cab.getRoute().getQueueOfFloors().size());
     }
 
     @Test

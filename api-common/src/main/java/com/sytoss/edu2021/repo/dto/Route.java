@@ -12,21 +12,26 @@ import java.util.List;
 @Getter
 public class Route {
 
-    private final boolean[] queueOfFloors;
+    private List<Integer> queueOfFloors;
     private Direction direction = Direction.STABLE;
 
-    public Route(int numOfFloors) {
-        queueOfFloors = new boolean[numOfFloors];
-        Arrays.fill(queueOfFloors, false);
+    public Route() {
+        queueOfFloors = new ArrayList<>();
     }
 
-    public void addRoutFloor(int floorIndex) {
-        queueOfFloors[floorIndex] = true;
+    public void addRoutFloor(int currentFloor, int floorNumber) {
+        if (queueOfFloors.contains(floorNumber)) {
+            return;
+        }
+        setDirection(currentFloor, floorNumber);
+        if (currentFloor != floorNumber)
+            queueOfFloors.add(floorNumber);
+        queueOfFloors.sort(Collections.reverseOrder());
     }
 
     public void clearRoute() {
         direction = Direction.STABLE;
-        Arrays.fill(queueOfFloors, false);
+        queueOfFloors.clear();
     }
 
     public void setDirection(int initFloor, int aimFloor) {

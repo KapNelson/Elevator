@@ -18,25 +18,27 @@ public class EngineBOM {
     private boolean isEmergencyStop;
     private Integer id;
 
-    public EngineBOM(){
+    private Integer currentFloor = 1;
+
+    public EngineBOM() {
         listOfFloors = new ArrayList<>();
         route = new Route();
-        currentFloor = 1;
     }
 
     public EngineBOM(int id){
         this.id = id;
         listOfFloors = new ArrayList<>();
         route = new Route();
-        currentFloor = 1;
+
     }
 
-    public EngineBOM(Route route, ArrayList<Floor> listOfFloors) {
+    public EngineBOM(Route route, ArrayList<Floor> listOfFloors, Integer currentFloor) {
         this.route = route;
         this.listOfFloors = listOfFloors;
-    }
+        this.currentFloor=currentFloor;
 
-    public void move(int currentFloor) {
+    }
+    public void move() {
 
         if (route.getDirection() == Direction.UP) {
             start();

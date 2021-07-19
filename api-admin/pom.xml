@@ -14,8 +14,6 @@
     <artifactId>api-admin</artifactId>
 
 
-
-
     <dependencies>
         <dependency>
             <groupId>com.sytoss.edu2021</groupId>
@@ -24,8 +22,7 @@
         </dependency>
 
 
-
-           <!-- MySQL-->
+        <!-- MySQL-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -75,7 +72,7 @@
                 <version>0.36.0</version>
 
                 <configuration>
-                   <!-- <dockerFile>./Dockerfile</dockerFile>-->
+                    <!-- <dockerFile>./Dockerfile</dockerFile>-->
                 </configuration>
 
                 <executions>

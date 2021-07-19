@@ -54,13 +54,14 @@ public class CabinBOM {
     }
 
     public CabinBOM(int startFloor, int endFloor) {
-        route = new Route(Math.abs(startFloor) + Math.abs(endFloor));
-        engine = new EngineBOM(route, new ArrayList<Floor>(Math.abs(startFloor) + Math.abs(endFloor)), startFloor);
+        route = new Route();
+        engine = new EngineBOM(route, new ArrayList<Floor>(Math.abs(startFloor) + Math.abs(endFloor)),startFloor);
         setFloors(startFloor, endFloor);
     }
 
     public void startMovement() {
         engine.move();
+
     }
 
     private void setFloors(int startFloor, int endFloor) {
@@ -90,7 +91,8 @@ public class CabinBOM {
         if (floorNumber < floorButtons[0] && floorNumber > floorButtons[floorButtons.length - 1]) {
             return;
         }
-        route.addRoutFloor(floorNumber);
+        route.addRoutFloor(engine.getCurrentFloor(), floorNumber);
+
     }
 
     public void openDoor() {

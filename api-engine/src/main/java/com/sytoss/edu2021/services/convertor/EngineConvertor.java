@@ -7,6 +7,7 @@ public class EngineConvertor {
     public void fromDTO(EngineDTO source, EngineBOM destination)
     {
         destination.setId(source.getId());
+        destination.setCurrentFloor(source.getCurrentFloor());
     }
 
     public void toDTO(EngineBOM source, EngineDTO destination)
@@ -15,5 +16,6 @@ public class EngineConvertor {
         {
             destination.setId(source.getId());
         }
+        destination.setCurrentFloor(source.getCurrentFloor());
     }
 }

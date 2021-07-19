@@ -22,7 +22,6 @@ public class CabinService {
     /*@Resource(name = "services.admin.url")
     private String adminBaseUrl;*/
 
-
     public CabinBOM callToFloor(int buildingId, int cabinNumber, int floor) {
         Map<String, String> variablesForCabin = new HashMap<>();
         variablesForCabin.put("buildingId", String.valueOf(buildingId));
@@ -93,9 +92,7 @@ public class CabinService {
         cabin.getEngine().getListOfFloors().get(currentFloor - 1).setHasCabinOnFloor(false);
         cabin.getEngine().getListOfFloors().get(endFlow - 1).setHasCabinOnFloor(true);
         return cabin;
-
     }
-
 
     public String sendMessage(int idCabin) {
         try {

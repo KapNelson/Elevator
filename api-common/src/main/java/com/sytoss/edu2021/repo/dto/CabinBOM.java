@@ -13,7 +13,6 @@ public class CabinBOM {
 
     @Getter
     @Setter
-    @JsonIgnore
     private int id;
     @Getter
     @Setter

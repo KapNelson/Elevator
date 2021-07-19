@@ -1,0 +1,26 @@
+.column {
+    padding: 10px;
+    border: solid;
+    border-color: darkgray;
+    border-radius: 10px;
+    float: left;
+    width: 15%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+button {
+    width: 50px;
+}
+
+button:hover {
+    background-color: antiquewhite;
+}
+
+h1 {
+    font-size: 16px;
+}

@@ -62,7 +62,7 @@ public class CabinService {
         return cabin;
     }
 
-    public CabinBOM goToFloor(int buildingId, int cabinNumber, int currentFloor, int endFlow) {
+    public CabinBOM goToFloor(int buildingId, int cabinNumber, int endFlow) {
         Map<String, String> variablesForCabin = new HashMap<>();
         variablesForCabin.put("buildingId", String.valueOf(buildingId));
         variablesForCabin.put("number", String.valueOf(cabinNumber));
@@ -85,11 +85,11 @@ public class CabinService {
             }
         }
         cabin.setEngine(engine);
-        Route route = new Route();
-        route.addRoutFloor(cabin.getEngine().getCurrentFloor(), endFlow);
+        Route route = new Route(cabin.getBuilding().getFloorsAmount());
+        route.addRoutFloor(endFlow);
         cabin.getEngine().setRoute(route);
         cabin.getEngine().move();
-        cabin.getEngine().getListOfFloors().get(currentFloor - 1).setHasCabinOnFloor(false);
+        //cabin.getEngine().getListOfFloors().get(currentFloor - 1).setHasCabinOnFloor(false);
         cabin.getEngine().getListOfFloors().get(endFlow - 1).setHasCabinOnFloor(true);
         return cabin;
     }

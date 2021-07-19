@@ -36,7 +36,6 @@ public class CabinBOM {
     private boolean isOverloaded;
 
 
-
     @Getter
     @Setter
     //@JsonIgnore
@@ -46,7 +45,7 @@ public class CabinBOM {
     private Route route = null;
 
     public CabinBOM() {
-        engine = new EngineBOM(route,null,1);
+        engine = new EngineBOM(route, null, 1);
     }
 
     public CabinBOM(int number, BuildingBOM building) {
@@ -55,8 +54,8 @@ public class CabinBOM {
     }
 
     public CabinBOM(int startFloor, int endFloor) {
-        route = new Route();
-        engine = new EngineBOM(route, new ArrayList<Floor>(Math.abs(startFloor) + Math.abs(endFloor)),startFloor);
+        route = new Route(Math.abs(startFloor) + Math.abs(endFloor));
+        engine = new EngineBOM(route, new ArrayList<Floor>(Math.abs(startFloor) + Math.abs(endFloor)), startFloor);
         setFloors(startFloor, endFloor);
     }
 
@@ -91,7 +90,7 @@ public class CabinBOM {
         if (floorNumber < floorButtons[0] && floorNumber > floorButtons[floorButtons.length - 1]) {
             return;
         }
-        route.addRoutFloor(engine.getCurrentFloor(), floorNumber);
+        route.addRoutFloor(floorNumber);
     }
 
     public void openDoor() {

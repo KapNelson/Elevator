@@ -20,17 +20,19 @@ public class EngineBOM {
     @Getter
     @Setter
     private Integer currentFloor=1;
-
     public EngineBOM(){
-
+        listOfFloors = new ArrayList<>();
     }
 
     public EngineBOM(int id){
-
+        this.id = id;
+        listOfFloors = new ArrayList<>();
     }
 
     public EngineBOM(Route route, ArrayList<Floor> listOfFloors, Integer currentFloor) {
-
+        this.route = route;
+        this.listOfFloors = listOfFloors;
+        this.currentFloor=currentFloor;
     }
 
     public void move() {
@@ -38,18 +40,24 @@ public class EngineBOM {
     }
 
     public void start() {
-
+        isMoving = true;
+        isEmergencyStop = false;
     }
 
     public void stop() {
-
+        isMoving = false;
     }
 
     private void emergencyStop() {
-
+        route.clearRoute();
+        stop();
+        route.setDirection(Direction.STABLE);
     }
 
     public void callEmergencyStop() {
-
+        if (isMoving) {
+            emergencyStop();
+            isEmergencyStop = true;
+        }
     }
 }

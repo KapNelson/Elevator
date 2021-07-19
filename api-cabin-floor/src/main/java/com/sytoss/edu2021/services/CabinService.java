@@ -23,10 +23,10 @@ public class CabinService {
     private String adminBaseUrl;*/
 
     public CabinBOM callToFloor(int buildingId, int cabinNumber, int floor) {
-        CabinBOM cabin = null;
-       /* Map<String, String> variablesForCabin = new HashMap<>();
+        Map<String, String> variablesForCabin = new HashMap<>();
         variablesForCabin.put("buildingId", String.valueOf(buildingId));
         variablesForCabin.put("number", String.valueOf(cabinNumber));
+        CabinBOM cabin;
         EngineBOM engine;
 
         try {
@@ -58,16 +58,15 @@ public class CabinService {
                 }
             }
             cabin.setEngine(engine);
-        }*/
+        }
         return cabin;
     }
 
     public CabinBOM goToFloor(int buildingId, int cabinNumber, int endFlow) {
-        CabinBOM cabin=null;
-        /*Map<String, String> variablesForCabin = new HashMap<>();
+        Map<String, String> variablesForCabin = new HashMap<>();
         variablesForCabin.put("buildingId", String.valueOf(buildingId));
         variablesForCabin.put("number", String.valueOf(cabinNumber));
-
+        CabinBOM cabin;
         try {
             cabin = restTemplate.getForEntity("http://127.0.0.1:6060/api/building/find/cabin/id/{buildingId}/{number}", CabinBOM.class, variablesForCabin).getBody();
         } catch (HttpStatusCodeException e) {
@@ -90,8 +89,8 @@ public class CabinService {
         route.addRoutFloor(endFlow);
         cabin.getEngine().setRoute(route);
         cabin.getEngine().move();
-        cabin.getEngine().getListOfFloors().get(currentFloor - 1).setHasCabinOnFloor(false);
-        cabin.getEngine().getListOfFloors().get(endFlow - 1).setHasCabinOnFloor(true);*/
+        //cabin.getEngine().getListOfFloors().get(currentFloor - 1).setHasCabinOnFloor(false);
+        cabin.getEngine().getListOfFloors().get(endFlow - 1).setHasCabinOnFloor(true);
         return cabin;
     }
 

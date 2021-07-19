@@ -34,10 +34,10 @@ public class CabinService {
         } catch (HttpStatusCodeException e) {
             throw new EntityNotFoundException(e.getResponseBodyAsString());
         }
-        if (cabin.getCurrentFloor() == floor) {
+        if (cabin.getEngine().getCurrentFloor() == floor) {
             cabin.openDoor();
         } else {
-            cabin.setCurrentFloor(floor);
+            cabin.getEngine().setCurrentFloor(floor);
         }
         try {
             engine = restTemplate.getForEntity("http://localhost:6050/api/engine/{idCabin}", EngineBOM.class, cabin.getId()).getBody();
@@ -53,7 +53,7 @@ public class CabinService {
             }
             engine.setListOfFloors(floors);
             for (int i = 1; i <= engine.getListOfFloors().size(); ++i) {
-                if (engine.getListOfFloors().get(i - 1).getNumberOfFloor() == cabin.getCurrentFloor()) {
+                if (engine.getListOfFloors().get(i - 1).getNumberOfFloor() == cabin.getEngine().getCurrentFloor()) {
                     engine.getListOfFloors().get(i - 1).setHasCabinOnFloor(true);
                 }
             }
@@ -72,7 +72,7 @@ public class CabinService {
         } catch (HttpStatusCodeException e) {
             throw new EntityNotFoundException("There is no such cabin");
         }
-        cabin.setCurrentFloor(endFlow);
+        cabin.getEngine().setCurrentFloor(endFlow);
         EngineBOM engine = restTemplate.getForEntity("http://localhost:6050/api/engine/{idCabin}", EngineBOM.class, cabin.getId()).getBody();;
         ArrayList<Floor> floors = new ArrayList<>();
         for (int i = 1; i <= cabin.getFloorButtons().length; ++i) {
@@ -80,15 +80,15 @@ public class CabinService {
         }
         engine.setListOfFloors(floors);
         for (int i = 1; i <= engine.getListOfFloors().size(); ++i) {
-            if (engine.getListOfFloors().get(i - 1).getNumberOfFloor() == cabin.getCurrentFloor()) {
+            if (engine.getListOfFloors().get(i - 1).getNumberOfFloor() == cabin.getEngine().getCurrentFloor()) {
                 engine.getListOfFloors().get(i - 1).setHasCabinOnFloor(true);
             }
         }
         cabin.setEngine(engine);
         Route route = new Route();
-        route.addRoutFloor(cabin.getCurrentFloor(), endFlow);
+        route.addRoutFloor(cabin.getEngine().getCurrentFloor(), endFlow);
         cabin.getEngine().setRoute(route);
-        cabin.getEngine().move(endFlow);
+        cabin.getEngine().move();
         cabin.getEngine().getListOfFloors().get(currentFloor - 1).setHasCabinOnFloor(false);
         cabin.getEngine().getListOfFloors().get(endFlow - 1).setHasCabinOnFloor(true);
         return cabin;

@@ -30,15 +30,15 @@ class CabinBOMTest {
 
     @Test
     public void checkCurrentFloorTest(){
-        cab.setCurrentFloor(10);
-        assertEquals(10, cab.getCurrentFloor());
+        cab.getEngine().setCurrentFloor(10);
+        assertEquals(10, cab.getEngine().getCurrentFloor());
     }
 
     @Test
     public void checkDefaultCurrentFloorTest(){
         CabinBOM testCab = new CabinBOM();
-        testCab.setCurrentFloor(1);
-        assertEquals(1, testCab.getCurrentFloor());
+        testCab.getEngine().setCurrentFloor(1);
+        assertEquals(1, testCab.getEngine().getCurrentFloor());
     }
 
     @Test
@@ -88,7 +88,7 @@ class CabinBOMTest {
     public void displayCabinInfoTest(){
         cab.getRoute().setDirection(Direction.DOWN);
         cab.setOverloaded(false);
-        String msg = "DOWN " + cab.getCurrentFloor();
+        String msg = "DOWN " + cab.getEngine().getCurrentFloor();
         assertEquals(msg, cab.displayCabinInfo());
     }
 

@@ -17,13 +17,13 @@
                 <constraints nullable="false"
                              primaryKey="true"/>
             </column>
+
             <column name="current_floor" type="int">
                 <constraints nullable="false"/>
             </column>
             <column name="statement" type="varchar(30)">
                 <constraints nullable="false"/>
             </column>
-
         </createTable>
     </changeSet>
 </databaseChangeLog>

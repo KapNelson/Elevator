@@ -20,9 +20,9 @@ public class CabinController {
         return cabinService.callToFloor(buildingId,cabinNumber,floor);
     }
 
-    @GetMapping("/gotofloor/{buildingId}/{cabinNumber}/{fromFloor}/{toFloor}")
-    public CabinBOM goToFloor(@PathVariable int buildingId, @PathVariable int cabinNumber, @PathVariable int fromFloor, @PathVariable int toFloor) {
-        return cabinService.goToFloor(buildingId,cabinNumber,fromFloor,toFloor);
+    @GetMapping("/gotofloor/{buildingId}/{cabinNumber}/{toFloor}")
+    public CabinBOM goToFloor(@PathVariable int buildingId, @PathVariable int cabinNumber, @PathVariable int toFloor) {
+        return cabinService.goToFloor(buildingId,cabinNumber,toFloor);
     }
 
     @GetMapping("/send/message/{idCabin}")

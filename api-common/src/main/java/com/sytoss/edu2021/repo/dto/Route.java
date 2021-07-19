@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -11,26 +12,21 @@ import java.util.List;
 @Getter
 public class Route {
 
-    private List<Integer> queueOfFloors;
+    private final boolean[] queueOfFloors;
     private Direction direction = Direction.STABLE;
 
-    public Route() {
-        queueOfFloors = new ArrayList<>();
+    public Route(int numOfFloors) {
+        queueOfFloors = new boolean[numOfFloors];
+        Arrays.fill(queueOfFloors, false);
     }
 
-    public void addRoutFloor(int currentFloor, int floorNumber) {
-        if (queueOfFloors.contains(floorNumber)) {
-            return;
-        }
-        setDirection(currentFloor, floorNumber);
-        if (currentFloor != floorNumber)
-            queueOfFloors.add(floorNumber);
-        queueOfFloors.sort(Collections.reverseOrder());
+    public void addRoutFloor(int floorIndex) {
+        queueOfFloors[floorIndex] = true;
     }
 
     public void clearRoute() {
         direction = Direction.STABLE;
-        queueOfFloors.clear();
+        Arrays.fill(queueOfFloors, false);
     }
 
     public void setDirection(int initFloor, int aimFloor) {
@@ -40,7 +36,6 @@ public class Route {
         else if (initFloor > aimFloor)
             direction = Direction.DOWN;
         else {
-            System.err.println("You have already reached this floor.");
             direction = Direction.STABLE;
         }
     }

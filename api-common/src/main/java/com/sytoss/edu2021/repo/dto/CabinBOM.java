@@ -22,7 +22,6 @@ public class CabinBOM {
     @JsonIgnore
     @Getter
     @Setter
-    //TODO: yevgenyv : remove it
     private BuildingBOM building;
 
 
@@ -36,7 +35,6 @@ public class CabinBOM {
     private boolean isOverloaded;
 
 
-
     @Getter
     @Setter
     //@JsonIgnore
@@ -46,79 +44,44 @@ public class CabinBOM {
     private Route route = null;
 
     public CabinBOM() {
-        engine = new EngineBOM(route,null,1);
+
     }
 
     public CabinBOM(int number, BuildingBOM building) {
-        this.number = number;
-        this.building = building;
+
     }
 
     public CabinBOM(int startFloor, int endFloor) {
-        route = new Route();
-        engine = new EngineBOM(route, new ArrayList<Floor>(Math.abs(startFloor) + Math.abs(endFloor)),startFloor);
-        setFloors(startFloor, endFloor);
+
     }
 
     public void startMovement() {
-        engine.move();
+
     }
 
     private void setFloors(int startFloor, int endFloor) {
 
-        int floorsNumber = endFloor - startFloor + 1;
-        floorButtons = new Integer[floorsNumber];
-
-        int curfloor = startFloor;
-        for (int i = 0; i < floorsNumber; i++) {
-            floorButtons[i] = curfloor;
-            ++curfloor;
-        }
-
-        this.engine.setCurrentFloor(startFloor);
     }
 
-    /*public String getBuildingInfo() {
-        String result = "address: " + building.getAddress();
-        return result;
-    }*/
-
-    /*public BuildingBOM getBuilding(){
-        return building;
-    }*/
 
     public void addFloorToStop(int floorNumber) {
-        if (floorNumber < floorButtons[0] && floorNumber > floorButtons[floorButtons.length - 1]) {
-            return;
-        }
-        route.addRoutFloor(engine.getCurrentFloor(), floorNumber);
+
     }
 
     public void openDoor() {
-        if (!isDoorOpened)
-            isDoorOpened = true;
+
     }
 
     public void closeDoor() {
-        if (isDoorOpened) {
-            isDoorOpened = false;
-        }
+
     }
 
     public String displayCabinInfo() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(route.getDirection());
-        stringBuilder.append(" ");
-        stringBuilder.append(engine.getCurrentFloor());
-        if (isOverloaded) {
-            stringBuilder.append(" Overloaded!!!");
-        }
-
-        return stringBuilder.toString();
+        return null;
     }
 
     public void callEmergencyStop() {
-        engine.callEmergencyStop();
+
     }
 
     public boolean isValid() {

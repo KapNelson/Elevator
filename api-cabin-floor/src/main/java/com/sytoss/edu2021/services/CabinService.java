@@ -85,8 +85,8 @@ public class CabinService {
             }
         }
         cabin.setEngine(engine);
-        Route route = new Route(cabin.getBuilding().getFloorsAmount());
-        route.addRoutFloor(endFlow);
+        Route route = new Route();
+        route.addRoutFloor(engine.getCurrentFloor(),endFlow);
         cabin.getEngine().setRoute(route);
         cabin.getEngine().move();
         //cabin.getEngine().getListOfFloors().get(currentFloor - 1).setHasCabinOnFloor(false);

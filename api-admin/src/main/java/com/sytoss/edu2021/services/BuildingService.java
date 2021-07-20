@@ -1,5 +1,6 @@
 package com.sytoss.edu2021.services;
 
+import com.sytoss.edu2021.controllers.FeignProxy;
 import com.sytoss.edu2021.repo.BuildingRepository;
 import com.sytoss.edu2021.repo.CabinRepository;
 import com.sytoss.edu2021.repo.dto.*;
@@ -20,6 +21,9 @@ public class BuildingService {
 
     @Autowired
     RestTemplate restTemplate;
+
+    @Autowired
+    private FeignProxy proxy;
 
     public BuildingBOM getBuildingById(int id) {
         BuildingDTO dto = buildingRepository.findBuildingById(id);
@@ -57,7 +61,8 @@ public class BuildingService {
             } else {
                 Integer[] cabinIds = building.getCabinIdList();
 
-                EngineBOM[] engines = restTemplate.postForEntity("http://127.0.0.1:6050/api/engine/engines/",cabinIds, EngineBOM[].class).getBody();
+                EngineBOM[] engines = proxy.getEngines(cabinIds);
+
                 for (int i = 0; i < building.getCabins().size(); i++) {
                     building.getCabins().get(i).setEngine(engines[i]);
                 }
@@ -66,7 +71,7 @@ public class BuildingService {
                 new CabinConvertor().toDTO(building, cabinDTO);
                 cabinRepository.save(cabinDTO);
                 building.addCabin(cabin);
-                EngineBOM engineBOM = restTemplate.getForEntity("http://127.0.0.1:6050/api/engine/{idCabin}", EngineBOM.class,cabinDTO.getId()).getBody();
+                EngineBOM engineBOM = proxy.getEngine(cabinDTO.getId());
                 cabin.setEngine(engineBOM);
                 return building;
             }

@@ -15,6 +15,7 @@ public class CabinController {
    private CabinService cabinService;
 
 
+
     @GetMapping("/call/{buildingId}/{cabinNumber}/{floor}")
     public CabinBOM callToFloor(@PathVariable int buildingId, @PathVariable int cabinNumber, @PathVariable int floor) {
         return cabinService.callToFloor(buildingId,cabinNumber,floor);

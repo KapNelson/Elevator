@@ -26,9 +26,13 @@ class EngineTest {
 
     @Test
     public void engineMovementDownOnePoint() {
-        //engine.setCurrentFloor(10);
+        engine.setCurrentFloor(10);
         route.addRoutFloor(10, 1);
-        engine.move();
+
+        while (engine.getCurrentFloor() != 1) {
+            engine.start();
+        }
+
         assertEquals(0, route.getQueueOfFloors().size());
         assertEquals(Direction.STABLE, route.getDirection());
     }
@@ -41,7 +45,9 @@ class EngineTest {
         route.addRoutFloor(1, 7);   //  7
         route.addRoutFloor(1, 10);  //  10
 
-        engine.move();
+        while (engine.getCurrentFloor() != 10) {
+            engine.start();
+        }
 
         assertEquals(0, route.getQueueOfFloors().size());
         assertEquals(Direction.STABLE, route.getDirection());
@@ -53,7 +59,10 @@ class EngineTest {
         route.addRoutFloor(10, 1);   //  3
         route.addRoutFloor(10, 5);   //  5
         route.addRoutFloor(10, 7);   //  7
-        engine.move();
+
+        while (engine.getCurrentFloor() != 1) {
+            engine.start();
+        }
 
         assertEquals(0, route.getQueueOfFloors().size());
         assertEquals(Direction.STABLE, route.getDirection());

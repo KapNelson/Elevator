@@ -25,7 +25,7 @@ public class EngineBOM {
         route = new Route();
     }
 
-    public EngineBOM(int id){
+    public EngineBOM(int id) {
         this.id = id;
         listOfFloors = new ArrayList<>();
         route = new Route();
@@ -35,28 +35,33 @@ public class EngineBOM {
     public EngineBOM(Route route, ArrayList<Floor> listOfFloors, Integer currentFloor) {
         this.route = route;
         this.listOfFloors = listOfFloors;
-        this.currentFloor=currentFloor;
+        this.currentFloor = currentFloor;
 
     }
+
     public void move() {
-        if(route.getDirection().equals(Direction.UP)){
-            if(currentFloor + 1 <= route.getMaxValue()) {
+        if (route.getDirection().equals(Direction.UP)) {
+            if (currentFloor + 1 <= route.getMaxValue()) {
                 currentFloor++;
-                if(route.getQueueOfFloors().contains(currentFloor)) {
+                if (route.getQueueOfFloors().contains(currentFloor)) {
                     stop();
                     route.getQueueOfFloors().remove(currentFloor);
                 }
             }
         }
 
-        if(route.getDirection().equals(Direction.DOWN)){
-            if(currentFloor-- >= route.getMinValue()) {
+        if (route.getDirection().equals(Direction.DOWN)) {
+            if (currentFloor - 1 >= route.getMinValue()) {
                 currentFloor--;
-                if(route.getQueueOfFloors().contains(currentFloor)) {
+                if (route.getQueueOfFloors().contains(currentFloor)) {
                     stop();
                     route.getQueueOfFloors().remove(currentFloor);
                 }
             }
+        }
+
+        if(route.getQueueOfFloors().isEmpty()) {
+            route.setDirection(Direction.STABLE);
         }
     }
 
@@ -68,7 +73,6 @@ public class EngineBOM {
 
     public void stop() {
         isMoving = false;
-        route.setDirection(Direction.STABLE);
     }
 
     private void emergencyStop() {

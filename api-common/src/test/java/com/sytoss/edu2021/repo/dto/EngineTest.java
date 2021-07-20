@@ -9,22 +9,30 @@ import static org.junit.jupiter.api.Assertions.*;
 class EngineTest {
 
     private final Route route = new Route();
-    private final EngineBOM engine = new EngineBOM(route, new ArrayList<Floor>(15),1);
+    private final EngineBOM engine = new EngineBOM(route, new ArrayList<Floor>(15), 1);
 
     @Test
     public void engineMovementUpOnePoint() {
         engine.setCurrentFloor(1);
         route.addRoutFloor(1, 10);
-        engine.move();
+
+        while (engine.getCurrentFloor() != 10) {
+            engine.start();
+        }
+
         assertEquals(0, route.getQueueOfFloors().size());
         assertEquals(Direction.STABLE, route.getDirection());
     }
 
     @Test
     public void engineMovementDownOnePoint() {
-        //engine.setCurrentFloor(10);
+        engine.setCurrentFloor(10);
         route.addRoutFloor(10, 1);
-        engine.move();
+
+        while (engine.getCurrentFloor() != 1) {
+            engine.start();
+        }
+
         assertEquals(0, route.getQueueOfFloors().size());
         assertEquals(Direction.STABLE, route.getDirection());
     }
@@ -37,7 +45,9 @@ class EngineTest {
         route.addRoutFloor(1, 7);   //  7
         route.addRoutFloor(1, 10);  //  10
 
-        engine.move();
+        while (engine.getCurrentFloor() != 10) {
+            engine.start();
+        }
 
         assertEquals(0, route.getQueueOfFloors().size());
         assertEquals(Direction.STABLE, route.getDirection());
@@ -49,7 +59,10 @@ class EngineTest {
         route.addRoutFloor(10, 1);   //  3
         route.addRoutFloor(10, 5);   //  5
         route.addRoutFloor(10, 7);   //  7
-        engine.move();
+
+        while (engine.getCurrentFloor() != 1) {
+            engine.start();
+        }
 
         assertEquals(0, route.getQueueOfFloors().size());
         assertEquals(Direction.STABLE, route.getDirection());

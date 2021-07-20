@@ -23,6 +23,13 @@ public class Route {
         if (queueOfFloors.contains(floorNumber)) {
             return;
         }
+        if(direction.equals(Direction.UP) && floorNumber < this.getMinValue()) {
+            return;
+        }
+        if(direction.equals(Direction.DOWN) && floorNumber > this.getMaxValue()) {
+            return;
+        }
+
         setDirection(currentFloor, floorNumber);
         if (currentFloor != floorNumber)
             queueOfFloors.add(floorNumber);
@@ -43,5 +50,13 @@ public class Route {
         else {
             direction = Direction.STABLE;
         }
+    }
+
+    public int getMaxValue() {
+        return Collections.max(queueOfFloors);
+    }
+
+    public int getMinValue() {
+        return Collections.min(queueOfFloors);
     }
 }

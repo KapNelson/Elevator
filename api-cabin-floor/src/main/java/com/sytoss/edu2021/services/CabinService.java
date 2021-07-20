@@ -1,14 +1,14 @@
 package com.sytoss.edu2021.services;
 
+import com.sytoss.edu2021.contollers.FeignProxyAdmin;
+import com.sytoss.edu2021.contollers.FeignProxyEngine;
 import com.sytoss.edu2021.repo.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,15 +22,17 @@ public class CabinService {
     /*@Resource(name = "services.admin.url")
     private String adminBaseUrl;*/
 
+    @Autowired
+    private FeignProxyAdmin proxyAdmin;
+
+    @Autowired
+    private FeignProxyEngine proxyEngine;
+
     public CabinBOM callToFloor(int buildingId, int cabinNumber, int floor) {
-        Map<String, String> variablesForCabin = new HashMap<>();
-        variablesForCabin.put("buildingId", String.valueOf(buildingId));
-        variablesForCabin.put("number", String.valueOf(cabinNumber));
         CabinBOM cabin;
         EngineBOM engine;
-
         try {
-            cabin = restTemplate.getForEntity("http://127.0.0.1:6060/api/building/find/cabin/id/{buildingId}/{number}", CabinBOM.class, variablesForCabin).getBody();
+            cabin = proxyAdmin.getCabinByIdBuilding(buildingId, cabinNumber);
         } catch (HttpStatusCodeException e) {
             throw new EntityNotFoundException(e.getResponseBodyAsString());
         }
@@ -40,7 +42,7 @@ public class CabinService {
             cabin.getEngine().setCurrentFloor(floor);
         }
         try {
-            engine = restTemplate.getForEntity("http://localhost:6050/api/engine/{idCabin}", EngineBOM.class, cabin.getId()).getBody();
+            engine = proxyEngine.getEngine(cabin.getId());
         } catch (HttpStatusCodeException e) {
             throw new EntityNotFoundException("There is no such engine");
         }
@@ -68,12 +70,12 @@ public class CabinService {
         variablesForCabin.put("number", String.valueOf(cabinNumber));
         CabinBOM cabin;
         try {
-            cabin = restTemplate.getForEntity("http://127.0.0.1:6060/api/building/find/cabin/id/{buildingId}/{number}", CabinBOM.class, variablesForCabin).getBody();
+            cabin =proxyAdmin.getCabinByIdBuilding(buildingId,cabinNumber);
         } catch (HttpStatusCodeException e) {
             throw new EntityNotFoundException("There is no such cabin");
         }
         cabin.getEngine().setCurrentFloor(endFlow);
-        EngineBOM engine = restTemplate.getForEntity("http://localhost:6050/api/engine/{idCabin}", EngineBOM.class, cabin.getId()).getBody();;
+        EngineBOM engine = proxyEngine.getEngine(cabin.getId());
         ArrayList<Floor> floors = new ArrayList<>();
         for (int i = 1; i <= cabin.getFloorButtons().length; ++i) {
             floors.add(new Floor(i, cabin));
@@ -86,7 +88,7 @@ public class CabinService {
         }
         cabin.setEngine(engine);
         Route route = new Route();
-        route.addRoutFloor(engine.getCurrentFloor(),endFlow);
+        route.addRoutFloor(engine.getCurrentFloor(), endFlow);
         cabin.getEngine().setRoute(route);
         cabin.getEngine().move();
         //cabin.getEngine().getListOfFloors().get(currentFloor - 1).setHasCabinOnFloor(false);

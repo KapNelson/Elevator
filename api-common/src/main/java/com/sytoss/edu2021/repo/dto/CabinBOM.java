@@ -59,8 +59,7 @@ public class CabinBOM {
     }
 
     public void startMovement() {
-        engine.move();
-
+        engine.start();
     }
 
     private void setFloors(int startFloor, int endFloor) {

@@ -19,9 +19,6 @@ public class CabinService {
     @Autowired
     private RestTemplate restTemplate;
 
-    /*@Resource(name = "services.admin.url")
-    private String adminBaseUrl;*/
-
     @Autowired
     private FeignProxyAdmin proxyAdmin;
 
@@ -61,38 +58,6 @@ public class CabinService {
             }
             cabin.setEngine(engine);
         }
-        return cabin;
-    }
-
-    public CabinBOM goToFloor(int buildingId, int cabinNumber, int endFlow) {
-        Map<String, String> variablesForCabin = new HashMap<>();
-        variablesForCabin.put("buildingId", String.valueOf(buildingId));
-        variablesForCabin.put("number", String.valueOf(cabinNumber));
-        CabinBOM cabin;
-        try {
-            cabin =proxyAdmin.getCabinByIdBuilding(buildingId,cabinNumber);
-        } catch (HttpStatusCodeException e) {
-            throw new EntityNotFoundException("There is no such cabin");
-        }
-        cabin.getEngine().setCurrentFloor(endFlow);
-        EngineBOM engine = proxyEngine.getEngine(cabin.getId());
-        ArrayList<Floor> floors = new ArrayList<>();
-        for (int i = 1; i <= cabin.getFloorButtons().length; ++i) {
-            floors.add(new Floor(i, cabin));
-        }
-        engine.setListOfFloors(floors);
-        for (int i = 1; i <= engine.getListOfFloors().size(); ++i) {
-            if (engine.getListOfFloors().get(i - 1).getNumberOfFloor() == cabin.getEngine().getCurrentFloor()) {
-                engine.getListOfFloors().get(i - 1).setHasCabinOnFloor(true);
-            }
-        }
-        cabin.setEngine(engine);
-        Route route = new Route();
-        route.addRoutFloor(engine.getCurrentFloor(), endFlow);
-        cabin.getEngine().setRoute(route);
-        cabin.getEngine().move();
-        //cabin.getEngine().getListOfFloors().get(currentFloor - 1).setHasCabinOnFloor(false);
-        cabin.getEngine().getListOfFloors().get(endFlow - 1).setHasCabinOnFloor(true);
         return cabin;
     }
 

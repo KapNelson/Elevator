@@ -1,6 +1,7 @@
 package com.sytoss.edu2021.services;
 
-import com.sytoss.edu2021.contollers.FeignProxy;
+import com.sytoss.edu2021.contollers.FeignProxyAdmin;
+import com.sytoss.edu2021.contollers.FeignProxyEngine;
 import com.sytoss.edu2021.repo.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,13 +23,16 @@ public class CabinService {
     private String adminBaseUrl;*/
 
     @Autowired
-    private FeignProxy proxy;
+    private FeignProxyAdmin proxyAdmin;
+
+    @Autowired
+    private FeignProxyEngine proxyEngine;
 
     public CabinBOM callToFloor(int buildingId, int cabinNumber, int floor) {
         CabinBOM cabin;
         EngineBOM engine;
         try {
-            cabin = proxy.getCabinByIdBuilding(buildingId, cabinNumber);
+            cabin = proxyAdmin.getCabinByIdBuilding(buildingId, cabinNumber);
         } catch (HttpStatusCodeException e) {
             throw new EntityNotFoundException(e.getResponseBodyAsString());
         }
@@ -38,7 +42,7 @@ public class CabinService {
             cabin.getEngine().setCurrentFloor(floor);
         }
         try {
-            engine = restTemplate.getForEntity("http://localhost:6050/api/engine/get/{idCabin}", EngineBOM.class, cabin.getId()).getBody();
+            engine = proxyEngine.getEngine(cabin.getId());
         } catch (HttpStatusCodeException e) {
             throw new EntityNotFoundException("There is no such engine");
         }
@@ -66,13 +70,12 @@ public class CabinService {
         variablesForCabin.put("number", String.valueOf(cabinNumber));
         CabinBOM cabin;
         try {
-            cabin = restTemplate.getForEntity("http://127.0.0.1:6060/api/building/find/cabin/id/{buildingId}/{number}", CabinBOM.class, variablesForCabin).getBody();
+            cabin =proxyAdmin.getCabinByIdBuilding(buildingId,cabinNumber);
         } catch (HttpStatusCodeException e) {
             throw new EntityNotFoundException("There is no such cabin");
         }
         cabin.getEngine().setCurrentFloor(endFlow);
-        EngineBOM engine = restTemplate.getForEntity("http://localhost:6050/api/engine/{idCabin}", EngineBOM.class, cabin.getId()).getBody();
-        ;
+        EngineBOM engine = proxyEngine.getEngine(cabin.getId());
         ArrayList<Floor> floors = new ArrayList<>();
         for (int i = 1; i <= cabin.getFloorButtons().length; ++i) {
             floors.add(new Floor(i, cabin));

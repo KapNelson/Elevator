@@ -1,6 +1,6 @@
 package com.sytoss.edu2021.services;
 
-import com.sytoss.edu2021.controllers.FeignProxy;
+import com.sytoss.edu2021.controllers.FeignProxyEngine;
 import com.sytoss.edu2021.repo.BuildingRepository;
 import com.sytoss.edu2021.repo.CabinRepository;
 import com.sytoss.edu2021.repo.dto.*;
@@ -23,7 +23,7 @@ public class BuildingService {
     RestTemplate restTemplate;
 
     @Autowired
-    private FeignProxy proxy;
+    private FeignProxyEngine proxy;
 
     public BuildingBOM getBuildingById(int id) {
         BuildingDTO dto = buildingRepository.findBuildingById(id);

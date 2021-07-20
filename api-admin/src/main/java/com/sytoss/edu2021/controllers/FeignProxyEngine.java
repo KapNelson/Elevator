@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name = "api-engine", url = "localhost:6050/api/engine")
-public interface FeignProxy {
+public interface FeignProxyEngine {
     @GetMapping("/{idCabin}")
     EngineBOM create(@PathVariable Integer idCabin);
 
@@ -18,5 +18,4 @@ public interface FeignProxy {
 
     @GetMapping("/get/{idCabin}")
     EngineBOM getEngine(@PathVariable Integer idCabin);
-
 }

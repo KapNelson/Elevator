@@ -9,13 +9,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class EngineTest {
 
     private final Route route = new Route();
-    private final EngineBOM engine = new EngineBOM(route, new ArrayList<Floor>(15),1);
+    private final EngineBOM engine = new EngineBOM(route, new ArrayList<Floor>(15), 1);
 
     @Test
     public void engineMovementUpOnePoint() {
         engine.setCurrentFloor(1);
         route.addRoutFloor(1, 10);
-        engine.move();
+
+        while (engine.getCurrentFloor() != 10) {
+            engine.start();
+        }
+
         assertEquals(0, route.getQueueOfFloors().size());
         assertEquals(Direction.STABLE, route.getDirection());
     }

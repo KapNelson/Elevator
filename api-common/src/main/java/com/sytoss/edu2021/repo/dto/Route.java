@@ -44,4 +44,12 @@ public class Route {
             direction = Direction.STABLE;
         }
     }
+
+    public int getMaxValue() {
+        return Collections.max(queueOfFloors);
+    }
+
+    public int getMinValue() {
+        return Collections.min(queueOfFloors);
+    }
 }

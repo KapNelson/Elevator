@@ -39,69 +39,36 @@ public class EngineBOM {
 
     }
     public void move() {
-
-        if (route.getDirection() == Direction.UP) {
-            start();
-            int maxFloor = route.getQueueOfFloors().get(0);
-
-            for (; currentFloor <= maxFloor; currentFloor++) {
-                if (listOfFloors.size() != 0) {
-                    for (int i = 0; i < listOfFloors.size(); ++i) {
-                        if (currentFloor == listOfFloors.get(i).getNumberOfFloor()) {
-                            if (listOfFloors.get(i) != null) {
-                                listOfFloors.get(i).setButtonUp(false);
-                            }
-                        }
-                    }
-                }
-                if (isEmergencyStop) {
-                    emergencyStop();
-                }
-                if (!isMoving) start();
-
-                if (route.getQueueOfFloors().contains(currentFloor)) {
-                    route.getQueueOfFloors().remove(route.getQueueOfFloors().indexOf(currentFloor));
+        if(route.getDirection().equals(Direction.UP)){
+            if(currentFloor + 1 <= route.getMaxValue()) {
+                currentFloor++;
+                if(route.getQueueOfFloors().contains(currentFloor)) {
                     stop();
-                }
-            }
-        } else if (route.getDirection() == Direction.DOWN) {
-            start();
-            int minFloor = route.getQueueOfFloors().get(route.getQueueOfFloors().size() - 1);
-
-            for (; currentFloor >= minFloor; currentFloor--) {
-
-                if (listOfFloors.size() != 0) {
-                    for (int i = 0; i < listOfFloors.size(); ++i) {
-                        if (currentFloor == listOfFloors.get(i).getNumberOfFloor()) {
-                            if (listOfFloors.get(i) != null) {
-                                listOfFloors.get(i).setButtonDown(false);
-                            }
-                        }
-                    }
-                }
-
-                if (isEmergencyStop) {
-                    emergencyStop();
-                }
-                if (!isMoving) start();
-
-                if (route.getQueueOfFloors().contains(currentFloor)) {
-                    route.getQueueOfFloors().remove(route.getQueueOfFloors().indexOf(currentFloor));
-                    stop();
+                    route.getQueueOfFloors().remove(currentFloor);
                 }
             }
         }
-        route.setDirection(Direction.STABLE);
 
+        if(route.getDirection().equals(Direction.DOWN)){
+            if(currentFloor-- >= route.getMinValue()) {
+                currentFloor--;
+                if(route.getQueueOfFloors().contains(currentFloor)) {
+                    stop();
+                    route.getQueueOfFloors().remove(currentFloor);
+                }
+            }
+        }
     }
 
     public void start() {
         isMoving = true;
         isEmergencyStop = false;
+        move();
     }
 
     public void stop() {
         isMoving = false;
+        route.setDirection(Direction.STABLE);
     }
 
     private void emergencyStop() {

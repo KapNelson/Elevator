@@ -12,10 +12,14 @@ import java.util.ArrayList;
 @ToString
 public class EngineBOM {
 
+
     private boolean isMoving;
+    @JsonIgnore
     private Route route;
+    @JsonIgnore
     private ArrayList<Floor> listOfFloors = new ArrayList<>();
     private boolean isEmergencyStop;
+
     private Integer id;
 
     private Integer currentFloor = 1;

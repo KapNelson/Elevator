@@ -17,4 +17,8 @@ public interface FeignProxyEngine {
 
     @GetMapping("/get/{idCabin}")
     EngineBOM getEngine(@PathVariable Integer idCabin);
+
+    @PostMapping("/update")
+    void update(@RequestBody EngineBOM engine);
+
 }

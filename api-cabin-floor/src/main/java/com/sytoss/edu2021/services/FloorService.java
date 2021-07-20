@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-@EnableScheduling
 public class FloorService {
     @Autowired
     private FeignProxyAdmin proxyAdmin;
@@ -29,7 +28,7 @@ public class FloorService {
     @Autowired
     private FeignProxyCabin proxyCabin;
 
-    @Scheduled(fixedDelay = 5000)
+
     public CabinBOM goToFloor(int buildingId, int cabinNumber, int endFloor) {
         CabinBOM cabin;
         try {
@@ -54,7 +53,8 @@ public class FloorService {
 
         while (cabin.getEngine().getCurrentFloor() != endFloor) {
             cabin.startMovement();
-            cabin = proxyCabin.goToFloor(buildingId,cabinNumber,endFloor);
+            proxyEngine.update(engine);
+           // cabin = proxyCabin.goToFloor(buildingId,cabinNumber,endFloor);
         }
         cabin.getEngine().getListOfFloors().get(endFloor - 1).setHasCabinOnFloor(true);
         return cabin;

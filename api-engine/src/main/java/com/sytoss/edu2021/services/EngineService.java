@@ -52,4 +52,10 @@ public class EngineService {
         new EngineConvertor().fromDTO(engineDTO, engineBOM);
         return engineBOM;
     }
+
+    public void update(EngineBOM engine) {
+        EngineDTO engineDTO = new EngineDTO();
+        new EngineConvertor().toDTO(engine,engineDTO);
+        engineDTO = repository.save(engineDTO);
+    }
 }

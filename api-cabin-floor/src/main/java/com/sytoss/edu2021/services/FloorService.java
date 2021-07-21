@@ -52,8 +52,13 @@ public class FloorService {
         route.addRoutFloor(engine.getCurrentFloor(), endFloor);
         cabin.getEngine().setRoute(route);
 
-        if (cabin.getEngine().getCurrentFloor() != endFloor) {
+        while (cabin.getEngine().getCurrentFloor() != endFloor) {
             cabin.startMovement();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             proxyEngine.update(engine);
             //cabin = proxyCabin.goToFloor(buildingId,cabinNumber,endFloor);
         }

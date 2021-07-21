@@ -1,6 +1,7 @@
 package com.sytoss.edu2021.repo.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sytoss.edu2021.bom.EngineStatus;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,7 +13,11 @@ import java.util.ArrayList;
 @ToString
 public class EngineBOM {
 
+    private BuildingBOM building;
 
+    private CabinBOM cabin;
+
+    private EngineStatus status;
     private boolean isMoving;
     @JsonIgnore
     private Route route;

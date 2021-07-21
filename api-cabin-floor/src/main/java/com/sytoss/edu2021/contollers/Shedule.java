@@ -6,8 +6,9 @@ import com.sytoss.edu2021.services.FloorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
-//@EnableScheduling
+
 public class Shedule {
     private int buildingId;
     private int cabinNumber;
@@ -22,7 +23,7 @@ public class Shedule {
         this.floorService = floorService;
     }
 
-    //@Scheduled(fixedRate = 2000)
+    @Scheduled(fixedRate = 10000)
     public CabinBOM execute(){
         return floorService.goToFloor(buildingId,cabinNumber,endFloor);
     }

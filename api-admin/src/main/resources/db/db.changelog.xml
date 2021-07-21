@@ -8,4 +8,6 @@
     <include file="create.app_build.table.xml" relativeToChangelogFile="true"/>
     <include file="create.app_cabin.table.xml" relativeToChangelogFile="true"/>
     <include file="create.app_log.table.xml" relativeToChangelogFile="true"/>
+    <include file="create.app_route.table.xml" relativeToChangelogFile="true"/>
+    <include file="create.app_deque.table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

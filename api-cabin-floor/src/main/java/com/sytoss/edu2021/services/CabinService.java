@@ -23,7 +23,7 @@ public class CabinService {
     @Autowired
     private FeignProxyEngine proxyEngine;
 
-    public Route addFloorToRoute(int buildingId, int cabinNumber, int floorNumber) {
+    public void addFloorToRoute(int buildingId, int cabinNumber, int floorNumber) {
         CabinBOM cabin;
         try {
             cabin = proxyAdmin.getCabinByIdBuilding(buildingId, cabinNumber);
@@ -42,7 +42,7 @@ public class CabinService {
 
         route.addRoutFloor(engine.getCurrentFloor(), floorNumber);
 
-        return route;
+        cabin.setRoute(route);
     }
 
     public void startMovement(int buildingId, int cabinNumber) {

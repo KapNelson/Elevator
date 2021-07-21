@@ -32,18 +32,18 @@ public class BuildingBOM {
         return Collections.unmodifiableList(cabins);
     }
 
-    public List<String> getCabinsInfo() {
-        List<String> cabinNumbers = new ArrayList<>();
-
-        if(cabins!=null) {
-            for (CabinBOM cabin : cabins) {
-                String tmp = "number: " + cabin.getNumber() + " engine id: " + cabin.getEngine().getId();
-                cabinNumbers.add(tmp);
-
-            }
-        }
-        return Collections.unmodifiableList(cabinNumbers);
-    }
+//    public List<String> getCabinsInfo() {
+//        List<String> cabinNumbers = new ArrayList<>();
+//
+//        if(cabins!=null) {
+//            for (CabinBOM cabin : cabins) {
+//                String tmp = "number: " + cabin.getNumber() + " engine id: " + cabin.getEngine().getId();
+//                cabinNumbers.add(tmp);
+//
+//            }
+//        }
+//        return Collections.unmodifiableList(cabinNumbers);
+//    }
 
     public void addCabin(CabinBOM cabin) {
         cabins.add(cabin);

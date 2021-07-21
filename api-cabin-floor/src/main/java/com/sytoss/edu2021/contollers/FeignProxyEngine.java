@@ -21,4 +21,6 @@ public interface FeignProxyEngine {
     @PostMapping("/update")
     void update(@RequestBody EngineBOM engine);
 
+    @GetMapping("/start_move/{cabinId}")
+    EngineBOM goToFloor(@RequestBody Integer cabinId);
 }

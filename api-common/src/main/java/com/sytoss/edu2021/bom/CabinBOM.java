@@ -9,11 +9,8 @@ import lombok.ToString;
 @Getter
 @ToString
 public class CabinBOM {
-
-    @Getter
     @Setter
     private int id;
-    @Getter
     @Setter
     private int number;
 
@@ -39,6 +36,7 @@ public class CabinBOM {
     private EngineBOM engine = null;*/
 
     @JsonIgnore
+    @Setter
     private Route route = null;
 
     public CabinBOM() {

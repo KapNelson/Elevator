@@ -39,16 +39,16 @@ public class BuildingBOMTest {
         assertEquals(12, testbuild.getFloorsAmount());
     }
 
-    @Test
-    public void checkCabinsInfoTest1(){
-        assertEquals(0, build.getCabinsInfo().size());
-    }
-
-    @Test
-    public void checkCabinsInfoTest2(){
-        build.addCabin(new CabinBOM());
-        assertEquals(1, build.getCabinsInfo().size());
-    }
+//    @Test
+//    public void checkCabinsInfoTest1(){
+//        assertEquals(0, build.getCabinsInfo().size());
+//    }
+//
+//    @Test
+//    public void checkCabinsInfoTest2(){
+//        build.addCabin(new CabinBOM());
+//        assertEquals(1, build.getCabinsInfo().size());
+//    }
 
     @Test
     public void addCabinTest(){

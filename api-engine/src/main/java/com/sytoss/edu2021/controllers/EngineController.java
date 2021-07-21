@@ -32,4 +32,8 @@ public class EngineController {
         engineService.update(engine);
     }
 
+    @GetMapping("/start_move/{cabinId}")
+    public EngineBOM goToFloor(@RequestBody Integer cabinId) {
+        return engineService.goToFloor(cabinId);
+    }
 }

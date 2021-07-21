@@ -8,7 +8,6 @@ import com.sytoss.edu2021.bom.CabinBOM;
 import com.sytoss.edu2021.repo.BuildingRepository;
 import com.sytoss.edu2021.repo.CabinRepository;
 import com.sytoss.edu2021.repo.LogRepository;
-import com.sytoss.edu2021.repo.dto.*;
 import com.sytoss.edu2021.services.convertor.BuildingConvertor;
 import com.sytoss.edu2021.services.convertor.CabinConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +39,6 @@ public class CabinService {
         BuildingBOM buildingBOM = new BuildingBOM();
         new BuildingConvertor().fromDTO(buildingDTO, buildingBOM);
 
-        cabinBOM.setBuilding(buildingBOM);
         Integer[] buttons = new Integer[buildingDTO.getFloorsAmount()];
         for (int i = 0; i < buttons.length; ++i) {
             buttons[i] = i + 1;
@@ -62,7 +60,6 @@ public class CabinService {
         BuildingBOM buildingBOM = new BuildingBOM();
         new BuildingConvertor().fromDTO(buildingDTO, buildingBOM);
 
-        cabinBOM.setBuilding(buildingBOM);
         Integer[] buttons = new Integer[buildingDTO.getFloorsAmount()];
         for (int i = 0; i < buttons.length; ++i) {
             buttons[i] = i + 1;

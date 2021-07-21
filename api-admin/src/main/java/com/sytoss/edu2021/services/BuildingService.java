@@ -8,7 +8,6 @@ import com.sytoss.edu2021.bom.EngineBOM;
 import com.sytoss.edu2021.controllers.FeignProxyEngine;
 import com.sytoss.edu2021.repo.BuildingRepository;
 import com.sytoss.edu2021.repo.CabinRepository;
-import com.sytoss.edu2021.repo.dto.*;
 import com.sytoss.edu2021.services.convertor.BuildingConvertor;
 import com.sytoss.edu2021.services.convertor.CabinConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +68,7 @@ public class BuildingService {
                 EngineBOM[] engines = proxy.getEngines(cabinIds);
 
                 for (int i = 0; i < building.getCabins().size(); i++) {
-                    building.getCabins().get(i).setEngine(engines[i]);
+                    engines[i].setCabin(building.getCabins().get(i));
                 }
                 CabinDTO cabinDTO = new CabinDTO();
                 new CabinConvertor().toDTO(cabin, cabinDTO);
@@ -77,7 +76,7 @@ public class BuildingService {
                 cabinRepository.save(cabinDTO);
                 building.addCabin(cabin);
                 EngineBOM engineBOM = proxy.getEngine(cabinDTO.getId());
-                cabin.setEngine(engineBOM);
+                engineBOM.setCabin(cabin);
                 return building;
             }
         } else {

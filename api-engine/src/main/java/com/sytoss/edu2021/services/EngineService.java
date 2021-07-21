@@ -4,7 +4,6 @@ import com.sytoss.edu2021.common.Direction;
 import com.sytoss.edu2021.repo.EngineRepository;
 import com.sytoss.edu2021.bom.EngineBOM;
 import com.sytoss.edu2021.EngineDTO;
-import com.sytoss.edu2021.controllers.FeignProxyAdmin;
 import com.sytoss.edu2021.services.convertor.EngineConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +13,6 @@ public class EngineService {
 
     @Autowired
     EngineRepository repository;
-
-    @Autowired
-    private FeignProxyAdmin proxyAdmin;
 
     public EngineBOM create(Integer idCabin) {
 
@@ -60,7 +56,7 @@ public class EngineService {
         engineDTO = repository.save(engineDTO);
     }
 
-    public EngineBOM goToFloor(int cabinId) {
+    public EngineBOM goToFloor(Integer cabinId) {
         EngineDTO engineDTO = repository.findEngineDTById(cabinId);
         EngineBOM engine = new EngineBOM();
         new EngineConvertor().fromDTO(engineDTO, engine);

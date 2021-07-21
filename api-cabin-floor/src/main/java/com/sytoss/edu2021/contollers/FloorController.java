@@ -1,10 +1,8 @@
 package com.sytoss.edu2021.contollers;
-import com.sytoss.edu2021.repo.dto.CabinBOM;
+import com.sytoss.edu2021.bom.CabinBOM;
 import com.sytoss.edu2021.services.FloorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 @RequestMapping("/api/cabin_floor/floor")

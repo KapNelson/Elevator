@@ -1,7 +1,7 @@
 package com.sytoss.edu2021.services.convertor;
 
-import com.sytoss.edu2021.repo.dto.EngineBOM;
-import com.sytoss.edu2021.repo.dto.EngineDTO;
+import com.sytoss.edu2021.bom.EngineBOM;
+import com.sytoss.edu2021.EngineDTO;
 
 public class EngineConvertor {
     public void fromDTO(EngineDTO source, EngineBOM destination)

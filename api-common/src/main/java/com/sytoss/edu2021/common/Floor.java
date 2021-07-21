@@ -1,11 +1,11 @@
-package com.sytoss.edu2021.repo.dto;
+package com.sytoss.edu2021.common;
 
+import com.sytoss.edu2021.bom.CabinBOM;
 import lombok.Getter;
 import lombok.Setter;
 
 
 public class Floor {
-    private CabinBOM cabin;
     @Getter
     @Setter
     private int numberOfFloor;
@@ -22,19 +22,7 @@ public class Floor {
     public Floor(int numberOfFloor, CabinBOM pCabin) {
         buttonDown = false;
         buttonDown = false;
-        this.cabin=pCabin;
         this.numberOfFloor = numberOfFloor;
-        checkCabinOnFloor();
-    }
-
-    public void checkCabinOnFloor(){
-        if(numberOfFloor == cabin.getEngine().getCurrentFloor())
-            hasCabinOnFloor = true;
-        else hasCabinOnFloor = false;
-    }
-
-    public String displayCabinInfo(){
-        return cabin.displayCabinInfo();
     }
 
     public void callToUp() {

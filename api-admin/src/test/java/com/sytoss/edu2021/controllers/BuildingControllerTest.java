@@ -5,8 +5,8 @@ import com.google.gson.Gson;
 import com.sytoss.edu2021.ApiAdminApplication;
 
 import com.sytoss.edu2021.repo.BuildingRepository;
-import com.sytoss.edu2021.repo.dto.BuildingBOM;
-import com.sytoss.edu2021.repo.dto.BuildingDTO;
+import com.sytoss.edu2021.bom.BuildingBOM;
+import com.sytoss.edu2021.BuildingDTO;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

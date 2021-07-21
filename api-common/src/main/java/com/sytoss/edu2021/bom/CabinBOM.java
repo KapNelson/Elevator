@@ -1,11 +1,10 @@
-package com.sytoss.edu2021.repo.dto;
+package com.sytoss.edu2021.bom;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sytoss.edu2021.common.Route;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.util.ArrayList;
 
 @Getter
 @ToString
@@ -18,11 +17,10 @@ public class CabinBOM {
     @Setter
     private int number;
 
-    @JsonIgnore
+/*    @JsonIgnore
     @Getter
     @Setter
-    //TODO: yevgenyv : remove it
-    private BuildingBOM building;
+    private BuildingBOM building;*/
 
 
     @Setter
@@ -35,35 +33,32 @@ public class CabinBOM {
     private boolean isOverloaded;
 
 
-    @Getter
+/*    @Getter
     @Setter
-    //@JsonIgnore
-    private EngineBOM engine = null;
+    @JsonIgnore
+    private EngineBOM engine = null;*/
 
     @JsonIgnore
     private Route route = null;
 
     public CabinBOM() {
-        engine = new EngineBOM(route, null, 1);
     }
 
-    public CabinBOM(int number, BuildingBOM building) {
+    public CabinBOM(int number) {
         this.number = number;
-        this.building = building;
     }
 
     public CabinBOM(int startFloor, int endFloor) {
         route = new Route();
-        engine = new EngineBOM(route, new ArrayList<Floor>(Math.abs(startFloor) + Math.abs(endFloor)),startFloor);
+        //engine = new EngineBOM(route, new ArrayList<Floor>(Math.abs(startFloor) + Math.abs(endFloor)),startFloor);
         setFloors(startFloor, endFloor);
     }
 
-    public void startMovement() {
+/*    public void startMovement() {
         engine.start();
-    }
+    }*/
 
     private void setFloors(int startFloor, int endFloor) {
-
         int floorsNumber = endFloor - startFloor + 1;
         floorButtons = new Integer[floorsNumber];
 
@@ -72,8 +67,6 @@ public class CabinBOM {
             floorButtons[i] = curfloor;
             ++curfloor;
         }
-
-        this.engine.setCurrentFloor(startFloor);
     }
 
     /*public String getBuildingInfo() {
@@ -85,13 +78,12 @@ public class CabinBOM {
         return building;
     }*/
 
-    public void addFloorToStop(int floorNumber) {
+   /* public void addFloorToStop(int floorNumber) {
         if (floorNumber < floorButtons[0] && floorNumber > floorButtons[floorButtons.length - 1]) {
             return;
         }
         route.addRoutFloor(engine.getCurrentFloor(), floorNumber);
-
-    }
+    }*/
 
     public void openDoor() {
         if (!isDoorOpened)
@@ -107,18 +99,16 @@ public class CabinBOM {
     public String displayCabinInfo() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(route.getDirection());
-        stringBuilder.append(" ");
-        stringBuilder.append(engine.getCurrentFloor());
         if (isOverloaded) {
-            stringBuilder.append(" Overloaded!!!");
+            stringBuilder.append(" Overloaded!");
         }
 
         return stringBuilder.toString();
     }
 
-    public void callEmergencyStop() {
+    /*public void callEmergencyStop() {
         engine.callEmergencyStop();
-    }
+    }*/
 
     public boolean isValid() {
         return number > 0;

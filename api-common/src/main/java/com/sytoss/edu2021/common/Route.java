@@ -1,22 +1,20 @@
-package com.sytoss.edu2021.repo.dto;
+package com.sytoss.edu2021.common;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Setter
 @Getter
-public class Route {
+public class
+Route {
 
-    private List<Integer> queueOfFloors;
+    private Set<Integer> queueOfFloors;
     private Direction direction = Direction.STABLE;
 
     public Route() {
-        queueOfFloors = new ArrayList<>();
+        queueOfFloors = new TreeSet<>();
     }
 
     public void addRoutFloor(int currentFloor, int floorNumber) {
@@ -33,7 +31,7 @@ public class Route {
         setDirection(currentFloor, floorNumber);
         if (currentFloor != floorNumber)
             queueOfFloors.add(floorNumber);
-        queueOfFloors.sort(Collections.reverseOrder());
+        //queueOfFloors.sort(Collections.reverseOrder());
     }
 
     public void clearRoute() {

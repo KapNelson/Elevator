@@ -1,49 +1,45 @@
-package com.sytoss.edu2021.repo.dto;
+package com.sytoss.edu2021.bom;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sytoss.edu2021.bom.EngineStatus;
+import com.sytoss.edu2021.common.Direction;
+import com.sytoss.edu2021.common.EngineStatus;
+import com.sytoss.edu2021.common.Route;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.util.ArrayList;
 
 @Getter
 @Setter
 @ToString
 public class EngineBOM {
-
+    @JsonIgnore
     private BuildingBOM building;
-
+    @JsonIgnore
     private CabinBOM cabin;
 
     private EngineStatus status;
-    private boolean isMoving;
-    @JsonIgnore
+
     private Route route;
-    @JsonIgnore
-    private ArrayList<Floor> listOfFloors = new ArrayList<>();
+
     private boolean isEmergencyStop;
 
+    @JsonIgnore
     private Integer id;
 
     private Integer currentFloor = 1;
 
     public EngineBOM() {
-        listOfFloors = new ArrayList<>();
         route = new Route();
     }
 
     public EngineBOM(int id) {
         this.id = id;
-        listOfFloors = new ArrayList<>();
         route = new Route();
 
     }
 
-    public EngineBOM(Route route, ArrayList<Floor> listOfFloors, Integer currentFloor) {
+    public EngineBOM(Route route, Integer currentFloor) {
         this.route = route;
-        this.listOfFloors = listOfFloors;
         this.currentFloor = currentFloor;
 
     }
@@ -75,13 +71,16 @@ public class EngineBOM {
     }
 
     public void start() {
-        isMoving = true;
+        if(route.getDirection().equals(Direction.UP))
+            status = EngineStatus.RUNNING_UP;
+        if(route.getDirection().equals(Direction.DOWN))
+            status = EngineStatus.RUNNING_DOWN;
         isEmergencyStop = false;
         move();
     }
 
     public void stop() {
-        isMoving = false;
+        status = EngineStatus.STOP;
     }
 
     private void emergencyStop() {
@@ -91,7 +90,7 @@ public class EngineBOM {
     }
 
     public void callEmergencyStop() {
-        if (isMoving) {
+        if (status.equals(EngineStatus.RUNNING_UP) || status.equals(EngineStatus.RUNNING_DOWN)) {
             emergencyStop();
             isEmergencyStop = true;
         }

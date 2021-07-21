@@ -1,14 +1,12 @@
-package com.sytoss.edu2021.repo.dto;
+package com.sytoss.edu2021;
 
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.springframework.util.ObjectUtils;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 

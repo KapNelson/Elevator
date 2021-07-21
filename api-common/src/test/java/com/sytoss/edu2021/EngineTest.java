@@ -1,5 +1,9 @@
-package com.sytoss.edu2021.repo.dto;
+package com.sytoss.edu2021;
 
+import com.sytoss.edu2021.bom.EngineBOM;
+import com.sytoss.edu2021.common.Direction;
+import com.sytoss.edu2021.common.Floor;
+import com.sytoss.edu2021.common.Route;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

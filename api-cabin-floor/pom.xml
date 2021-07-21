@@ -19,6 +19,7 @@
             <version>0.0.6-SNAPSHOT</version>
         </dependency>
 
+        <!-- Feign-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>

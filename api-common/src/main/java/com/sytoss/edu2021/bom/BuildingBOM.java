@@ -1,4 +1,4 @@
-package com.sytoss.edu2021.repo.dto;
+package com.sytoss.edu2021.bom;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;

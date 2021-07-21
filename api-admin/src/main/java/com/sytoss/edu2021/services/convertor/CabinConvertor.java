@@ -1,9 +1,9 @@
 package com.sytoss.edu2021.services.convertor;
 
-import com.sytoss.edu2021.repo.dto.BuildingBOM;
-import com.sytoss.edu2021.repo.dto.BuildingDTO;
-import com.sytoss.edu2021.repo.dto.CabinBOM;
-import com.sytoss.edu2021.repo.dto.CabinDTO;
+import com.sytoss.edu2021.bom.BuildingBOM;
+import com.sytoss.edu2021.BuildingDTO;
+import com.sytoss.edu2021.bom.CabinBOM;
+import com.sytoss.edu2021.CabinDTO;
 
 public class CabinConvertor {
     public void toDTO(CabinBOM source, CabinDTO destination){

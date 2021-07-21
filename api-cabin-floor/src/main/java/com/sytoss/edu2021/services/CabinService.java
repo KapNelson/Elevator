@@ -1,17 +1,15 @@
 package com.sytoss.edu2021.services;
 
+import com.sytoss.edu2021.common.Route;
+import com.sytoss.edu2021.bom.CabinBOM;
+import com.sytoss.edu2021.bom.EngineBOM;
 import com.sytoss.edu2021.contollers.FeignProxyAdmin;
 import com.sytoss.edu2021.contollers.FeignProxyEngine;
-import com.sytoss.edu2021.repo.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class CabinService {
@@ -25,39 +23,61 @@ public class CabinService {
     @Autowired
     private FeignProxyEngine proxyEngine;
 
-    public CabinBOM callToFloor(int buildingId, int cabinNumber, int floor) {
+    public Route addFloorToRoute(int buildingId, int cabinNumber, int floorNumber) {
         CabinBOM cabin;
-        EngineBOM engine;
         try {
             cabin = proxyAdmin.getCabinByIdBuilding(buildingId, cabinNumber);
         } catch (HttpStatusCodeException e) {
-            throw new EntityNotFoundException(e.getResponseBodyAsString());
+            throw new EntityNotFoundException("There is no such cabin");
         }
-        if (cabin.getEngine().getCurrentFloor() == floor) {
-            cabin.openDoor();
-        } else {
-            cabin.getEngine().setCurrentFloor(floor);
-        }
+
+        EngineBOM engine;
         try {
             engine = proxyEngine.getEngine(cabin.getId());
         } catch (HttpStatusCodeException e) {
             throw new EntityNotFoundException("There is no such engine");
         }
-        if (cabin.getFloorButtons().length < floor || floor < 0)
-            throw new ValidationException("Incorrect number of floor");
-        else {
-            ArrayList<Floor> floors = new ArrayList<>();
-            for (int i = 1; i <= cabin.getFloorButtons().length; ++i) {
-                floors.add(new Floor(i, cabin));
-            }
-            engine.setListOfFloors(floors);
-            for (int i = 1; i <= engine.getListOfFloors().size(); ++i) {
-                if (engine.getListOfFloors().get(i - 1).getNumberOfFloor() == cabin.getEngine().getCurrentFloor()) {
-                    engine.getListOfFloors().get(i - 1).setHasCabinOnFloor(true);
-                }
-            }
-            cabin.setEngine(engine);
+
+        Route route = cabin.getRoute();
+
+        route.addRoutFloor(engine.getCurrentFloor(), floorNumber);
+
+        return route;
+    }
+
+    public void startMovement(int buildingId, int cabinNumber) {
+        CabinBOM cabin;
+        try {
+            cabin = proxyAdmin.getCabinByIdBuilding(buildingId, cabinNumber);
+        } catch (HttpStatusCodeException e) {
+            throw new EntityNotFoundException("There is no such cabin");
         }
+
+        EngineBOM engine;
+        try {
+            engine = proxyEngine.getEngine(cabin.getId());
+        } catch (HttpStatusCodeException e) {
+            throw new EntityNotFoundException("There is no such engine");
+        }
+
+        engine.setRoute(cabin.getRoute());
+    }
+
+    public CabinBOM getCabinInfo(int buildingId, int cabinNumber) {
+        CabinBOM cabin;
+        try {
+            cabin = proxyAdmin.getCabinByIdBuilding(buildingId, cabinNumber);
+        } catch (HttpStatusCodeException e) {
+            throw new EntityNotFoundException("There is no such cabin");
+        }
+
+        EngineBOM engine;
+        try {
+            engine = proxyEngine.getEngine(cabin.getId());
+        } catch (HttpStatusCodeException e) {
+            throw new EntityNotFoundException("There is no such engine");
+        }
+
         return cabin;
     }
 

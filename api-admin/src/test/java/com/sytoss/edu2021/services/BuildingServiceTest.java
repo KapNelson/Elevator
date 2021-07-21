@@ -2,10 +2,10 @@ package com.sytoss.edu2021.services;
 
 import com.sytoss.edu2021.repo.BuildingRepository;
 import com.sytoss.edu2021.repo.CabinRepository;
-import com.sytoss.edu2021.repo.dto.BuildingBOM;
-import com.sytoss.edu2021.repo.dto.BuildingDTO;
-import com.sytoss.edu2021.repo.dto.CabinBOM;
-import com.sytoss.edu2021.repo.dto.CabinDTO;
+import com.sytoss.edu2021.bom.BuildingBOM;
+import com.sytoss.edu2021.BuildingDTO;
+import com.sytoss.edu2021.bom.CabinBOM;
+import com.sytoss.edu2021.CabinDTO;
 import com.sytoss.edu2021.services.convertor.BuildingConvertor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -125,8 +125,8 @@ public class BuildingServiceTest {
         buildingBOM.setId(1);
         buildingBOM.setAddress("USSR, Leningrad");
         buildingBOM.setFloorsAmount(9);
-        cabinBOM.setBuilding(buildingBOM);
-        service.addCabin(cabinBOM.getBuilding().getId(),cabinBOM);
+//        cabinBOM.setBuilding(buildingBOM);
+//        service.addCabin(cabinBOM.getBuilding().getId(),cabinBOM);
 
         assertEquals(1,cabinDTO.getId());
         assertEquals(1,cabinDTO.getBuilding().getId());

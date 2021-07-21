@@ -1,4 +1,4 @@
-package com.sytoss.edu2021.bom;
+package com.sytoss.edu2021.common;
 
 public enum EngineStatus {
 

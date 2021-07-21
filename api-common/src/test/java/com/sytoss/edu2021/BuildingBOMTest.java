@@ -1,5 +1,7 @@
-package com.sytoss.edu2021.repo.dto;
+package com.sytoss.edu2021;
 
+import com.sytoss.edu2021.bom.BuildingBOM;
+import com.sytoss.edu2021.bom.CabinBOM;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

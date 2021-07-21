@@ -1,4 +1,4 @@
-package com.sytoss.edu2021.repo.dto;
+package com.sytoss.edu2021.common;
 
 public enum Direction {
     UP,

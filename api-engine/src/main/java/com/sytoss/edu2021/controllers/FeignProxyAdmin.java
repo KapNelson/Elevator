@@ -1,4 +1,4 @@
-package com.sytoss.edu2021.contollers;
+package com.sytoss.edu2021.controllers;
 
 import com.sytoss.edu2021.bom.CabinBOM;
 import org.springframework.cloud.openfeign.FeignClient;

@@ -1,6 +1,6 @@
 package com.sytoss.edu2021.controllers;
 
-import com.sytoss.edu2021.repo.dto.EngineBOM;
+import com.sytoss.edu2021.bom.EngineBOM;
 import com.sytoss.edu2021.services.EngineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

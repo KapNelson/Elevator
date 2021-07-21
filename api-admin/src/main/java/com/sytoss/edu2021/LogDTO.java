@@ -1,4 +1,4 @@
-package com.sytoss.edu2021.repo.dto;
+package com.sytoss.edu2021;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;

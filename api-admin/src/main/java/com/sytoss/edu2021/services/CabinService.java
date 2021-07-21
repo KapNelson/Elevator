@@ -1,5 +1,10 @@
 package com.sytoss.edu2021.services;
 
+import com.sytoss.edu2021.BuildingDTO;
+import com.sytoss.edu2021.CabinDTO;
+import com.sytoss.edu2021.LogDTO;
+import com.sytoss.edu2021.bom.BuildingBOM;
+import com.sytoss.edu2021.bom.CabinBOM;
 import com.sytoss.edu2021.repo.BuildingRepository;
 import com.sytoss.edu2021.repo.CabinRepository;
 import com.sytoss.edu2021.repo.LogRepository;
@@ -10,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service

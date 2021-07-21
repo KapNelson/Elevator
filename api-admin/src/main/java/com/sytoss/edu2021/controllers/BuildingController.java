@@ -1,13 +1,11 @@
 package com.sytoss.edu2021.controllers;
 
-import com.sytoss.edu2021.repo.dto.BuildingBOM;
-import com.sytoss.edu2021.repo.dto.CabinBOM;
+import com.sytoss.edu2021.bom.BuildingBOM;
+import com.sytoss.edu2021.bom.CabinBOM;
 import com.sytoss.edu2021.services.BuildingService;
 import com.sytoss.edu2021.services.CabinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.persistence.criteria.CriteriaBuilder;
 
 @RestController
 @RequestMapping("/api/building")

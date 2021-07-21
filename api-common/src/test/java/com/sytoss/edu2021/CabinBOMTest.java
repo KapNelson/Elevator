@@ -1,7 +1,10 @@
-package com.sytoss.edu2021.repo.dto;
+package com.sytoss.edu2021;
 
+import com.sytoss.edu2021.bom.BuildingBOM;
+import com.sytoss.edu2021.bom.CabinBOM;
+import com.sytoss.edu2021.common.Direction;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -65,7 +68,7 @@ class CabinBOMTest {
         cab.addFloorToStop(6);
         cab.addFloorToStop(9);
 
-        assertEquals(2, cab.getRoute().getQueueOfFloors().size());
+        Assertions.assertEquals(2, cab.getRoute().getQueueOfFloors().size());
     }
 
     @Test

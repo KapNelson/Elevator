@@ -1,6 +1,6 @@
 package com.sytoss.edu2021.contollers;
 
-import com.sytoss.edu2021.repo.dto.EngineBOM;
+import com.sytoss.edu2021.bom.EngineBOM;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

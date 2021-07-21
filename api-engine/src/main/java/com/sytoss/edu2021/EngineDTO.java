@@ -1,6 +1,5 @@
-package com.sytoss.edu2021.repo.dto;
+package com.sytoss.edu2021;
 
-import com.sytoss.edu2021.repo.EngineRepository;
 import lombok.Getter;
 import lombok.Setter;
 

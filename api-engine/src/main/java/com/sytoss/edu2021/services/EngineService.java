@@ -1,21 +1,22 @@
 package com.sytoss.edu2021.services;
 
+import com.sytoss.edu2021.common.Direction;
 import com.sytoss.edu2021.repo.EngineRepository;
-import com.sytoss.edu2021.repo.dto.EngineBOM;
-import com.sytoss.edu2021.repo.dto.EngineDTO;
+import com.sytoss.edu2021.bom.EngineBOM;
+import com.sytoss.edu2021.EngineDTO;
+import com.sytoss.edu2021.controllers.FeignProxyAdmin;
 import com.sytoss.edu2021.services.convertor.EngineConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Service
 public class EngineService {
 
     @Autowired
     EngineRepository repository;
+
+    @Autowired
+    private FeignProxyAdmin proxyAdmin;
 
     public EngineBOM create(Integer idCabin) {
 
@@ -57,5 +58,29 @@ public class EngineService {
         EngineDTO engineDTO = new EngineDTO();
         new EngineConvertor().toDTO(engine,engineDTO);
         engineDTO = repository.save(engineDTO);
+    }
+
+    public EngineBOM goToFloor(int cabinId) {
+        EngineDTO engineDTO = repository.findEngineDTById(cabinId);
+        EngineBOM engine = new EngineBOM();
+        new EngineConvertor().fromDTO(engineDTO, engine);
+
+        int endFloor = engine.getCurrentFloor();
+
+        if(engine.getRoute().getDirection().equals(Direction.UP))
+            endFloor = engine.getRoute().getMaxValue();
+        if(engine.getRoute().getDirection().equals(Direction.DOWN))
+            endFloor = engine.getRoute().getMinValue();
+
+        while (engine.getCurrentFloor() != endFloor) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            engine.start();
+        }
+
+        return engine;
     }
 }

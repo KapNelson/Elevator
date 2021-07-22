@@ -23,6 +23,10 @@ public class CabinDTO {
     @Setter
     private int number;
 
+    @Getter
+    @Setter
+    @OneToOne(mappedBy = "cabin", fetch = FetchType.EAGER)
+    private EngineDTO engine;
 
 
     public CabinDTO(int number) {

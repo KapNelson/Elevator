@@ -15,7 +15,7 @@ public class EngineBOM {
     private Integer id;
 
     private BuildingBOM building;
-
+    @JsonIgnore
     private CabinBOM cabin;
 
     private EngineStatus status;

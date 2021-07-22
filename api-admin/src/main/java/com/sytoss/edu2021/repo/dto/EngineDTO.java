@@ -1,22 +1,31 @@
 package com.sytoss.edu2021.repo.dto;
 
+import com.sytoss.edu2021.common.EngineStatus;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
+import javax.persistence.*;
+@Getter
+@Setter
 @Entity(name = "app_engine")
 public class EngineDTO {
 
-    @Getter
-    @Setter
+
     @Id
     @Column(name = "id_engine")
-    Integer id;
-    @Getter
-    @Setter
+    private Integer id;
+
     @Column(name="current_floor")
-    int currentFloor;
+    private int currentFloor;
+
+    @ManyToOne
+    @JoinColumn(name = "id_build")
+    private BuildingDTO building;
+
+    @OneToOne
+    @JoinColumn(name = "id_cabin")
+    private CabinDTO cabin;
+
+    @Column(name="status")
+    private EngineStatus engineStatus;
 }

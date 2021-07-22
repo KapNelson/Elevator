@@ -47,4 +47,5 @@ public class CabinBOM {
     public boolean isValid() {
         return number > 0;
     }
+
 }

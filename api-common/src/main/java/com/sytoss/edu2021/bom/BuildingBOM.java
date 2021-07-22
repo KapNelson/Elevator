@@ -17,6 +17,7 @@ public class BuildingBOM {
     private String address;
     private int floorsAmount;
 
+    @JsonIgnore
     private List<EngineBOM> engines;
 
     public BuildingBOM() {
@@ -29,7 +30,7 @@ public class BuildingBOM {
 
     @JsonIgnore
     public List<EngineBOM> getEngines() {
-        return Collections.unmodifiableList(engines);
+        return engines;
     }
 
 

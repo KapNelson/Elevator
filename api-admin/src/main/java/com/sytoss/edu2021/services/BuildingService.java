@@ -6,6 +6,7 @@ import com.sytoss.edu2021.bom.EngineBOM;
 import com.sytoss.edu2021.controllers.FeignProxyEngine;
 import com.sytoss.edu2021.repo.BuildingRepository;
 import com.sytoss.edu2021.repo.CabinRepository;
+import com.sytoss.edu2021.repo.dto.BuildingDTO;
 import com.sytoss.edu2021.services.convertor.BuildingConvertor;
 import com.sytoss.edu2021.services.convertor.CabinConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class BuildingService {
     @Autowired
     private FeignProxyEngine proxy;
 
-    public BuildingBOM getBuildingById(int id) {
+/*    public BuildingBOM getBuildingById(int id) {
         BuildingDTO dto = buildingRepository.findBuildingById(id);
         if (dto == null) {
             throw new EntityNotFoundException(id, "There is no such building " + id);
@@ -35,7 +36,7 @@ public class BuildingService {
         BuildingBOM result = new BuildingBOM();
         new BuildingConvertor().fromDTO(dto, result);
         return result;
-    }
+    }*/
 
     public BuildingBOM register(BuildingBOM building) {
         if (building.isValid()) {
@@ -55,7 +56,7 @@ public class BuildingService {
     }
 
 
-    public BuildingBOM addCabin(int buildingId, CabinBOM cabin) {
+ /*   public BuildingBOM addCabin(int buildingId, CabinBOM cabin) {
         if (cabin.isValid()) {
             BuildingBOM building = getBuildingById(buildingId);
             if (building.findCabinByNumber(cabin.getNumber()) != null) {
@@ -80,7 +81,7 @@ public class BuildingService {
         } else {
             throw new ValidationException("Invalid cabin number (number should be > 0)");
         }
-    }
+    }*/
 
 
     public BuildingBOM searchByAddress(String address) {
@@ -94,7 +95,8 @@ public class BuildingService {
         }
     }
 
-    public BuildingBOM searchById(Integer id) {
+
+    /*public BuildingBOM searchById(Integer id) {
         BuildingDTO building = buildingRepository.findBuildingById(id);
         if (building != null) {
             BuildingBOM buildingBOM = new BuildingBOM();
@@ -103,5 +105,5 @@ public class BuildingService {
         } else {
             throw new EntityNotFoundException("There is no building on this id: " + id);
         }
-    }
+    }*/
 }

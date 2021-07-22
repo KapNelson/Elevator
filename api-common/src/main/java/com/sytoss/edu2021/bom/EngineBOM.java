@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 public class EngineBOM {
     private Integer id;
-
+    @JsonIgnore
     private BuildingBOM building;
 
     private CabinBOM cabin;

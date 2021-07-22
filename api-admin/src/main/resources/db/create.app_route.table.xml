@@ -15,9 +15,15 @@
         </preConditions>
         <createTable tableName="app_route">
             <column name="floorNumber"  type="int">
-                <constraints nullable="false"
-                             primaryKey="true"/>
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_engine" type="int">
+                <constraints nullable="false" foreignKeyName="fk_route_engine" references="app_engine(id_engine)"/>
             </column>
         </createTable>
+        <addPrimaryKey  columnNames="floorNumber, id_engine"
+                        constraintName="pk_app_route"
+                        schemaName="api_admin"
+                        tableName="app_route"/>
     </changeSet>
 </databaseChangeLog>

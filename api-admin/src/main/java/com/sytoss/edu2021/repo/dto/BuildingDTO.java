@@ -49,8 +49,8 @@ public class BuildingDTO {
         return engines;
     }
 
-    public void addEngine(EngineDTO cabin) {
-        engines.add(cabin);
+    public void addEngine(EngineDTO engine) {
+        engines.add(engine);
     }
 
     public boolean isValid() {

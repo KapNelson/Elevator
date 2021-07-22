@@ -2,8 +2,10 @@ package com.sytoss.edu2021.controllers;
 
 import com.sytoss.edu2021.bom.BuildingBOM;
 import com.sytoss.edu2021.bom.CabinBOM;
+import com.sytoss.edu2021.bom.EngineBOM;
 import com.sytoss.edu2021.services.BuildingService;
 import com.sytoss.edu2021.services.CabinService;
+import com.sytoss.edu2021.services.EngineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,16 +17,25 @@ public class BuildingController {
     private BuildingService buildingService;
     @Autowired
     private CabinService cabinService;
+    @Autowired
+    private EngineService engineService;
 
     @PostMapping
     public BuildingBOM registerBuilding(@RequestBody BuildingBOM buildingBOM) {
         return buildingService.register(buildingBOM);
     }
 
-    @PostMapping("{buildingId}/cabin")
-    public BuildingBOM registerCabin(@PathVariable Integer buildingId, @RequestBody CabinBOM cabin) {
-        return buildingService.addCabin(buildingId, cabin);
+    @PostMapping("/{buildingId}/engine")
+    public EngineBOM registerEngine(@PathVariable Integer buildingId,@RequestBody CabinBOM cabin) {
+        return engineService.addEngine(buildingId,cabin);
     }
+
+    @PostMapping("/cabin")
+    public CabinBOM registerCabin(@RequestBody CabinBOM cabin) {
+        return cabinService.addCabin(cabin);
+    }
+
+    /*
 
     @GetMapping("/find/address/{address}")
     public BuildingBOM searchBuildingByAddress(@PathVariable String address) {
@@ -55,5 +66,5 @@ public class BuildingController {
     @GetMapping("/get/information/about/cabin/{idCabin}")
     public String getMessageAboutEmergencyInCabin(@PathVariable Integer idCabin){
         return cabinService.getMessageAboutEmergencyInCabin(idCabin);
-    }
+    }*/
 }

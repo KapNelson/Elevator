@@ -21,9 +21,6 @@
             <column name="number" type="int">
                 <constraints nullable="false" />
             </column>
-            <column name="id_build" type="int">
-                <constraints nullable="false" foreignKeyName="fk_cabin_build" references="app_build(id_build)"/>
-            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

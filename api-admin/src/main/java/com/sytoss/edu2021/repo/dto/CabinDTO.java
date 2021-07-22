@@ -1,4 +1,4 @@
-package com.sytoss.edu2021;
+package com.sytoss.edu2021.repo.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +24,7 @@ public class CabinDTO {
     @JoinColumn(name = "id_build")
     @Getter
     @Setter
-    private BuildingDTO building;
+    private com.sytoss.edu2021.BuildingDTO building;
 
     public CabinDTO(int number, BuildingDTO building) {
         this.number = number;

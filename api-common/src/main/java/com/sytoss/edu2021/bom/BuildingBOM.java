@@ -17,7 +17,7 @@ public class BuildingBOM {
     private String address;
     private int floorsAmount;
 
-    private ArrayList<CabinBOM> cabins = new ArrayList<>();
+    private List<EngineBOM> engines;
 
     public BuildingBOM() {
     }
@@ -28,44 +28,33 @@ public class BuildingBOM {
     }
 
     @JsonIgnore
-    public List<CabinBOM> getCabins() {
-        return Collections.unmodifiableList(cabins);
+    public List<EngineBOM> getEngines() {
+        return Collections.unmodifiableList(engines);
     }
 
-//    public List<String> getCabinsInfo() {
-//        List<String> cabinNumbers = new ArrayList<>();
-//
-//        if(cabins!=null) {
-//            for (CabinBOM cabin : cabins) {
-//                String tmp = "number: " + cabin.getNumber() + " engine id: " + cabin.getEngine().getId();
-//                cabinNumbers.add(tmp);
-//
-//            }
-//        }
-//        return Collections.unmodifiableList(cabinNumbers);
-//    }
 
-    public void addCabin(CabinBOM cabin) {
-        cabins.add(cabin);
+    public void addEngine(EngineBOM engine) {
+        engines.add(engine);
     }
 
     public boolean isValid() {
         return !ObjectUtils.isEmpty(address) && floorsAmount > 1;
     }
 
-    public CabinBOM findCabinByNumber(int cabinNumber) {
-        for(CabinBOM cabin : cabins){
-            if (cabin.getNumber() == cabinNumber)
-                return cabin;
+    public EngineBOM findEngineById(int idEngine) {
+        for(EngineBOM engine : engines){
+            if (engine.getId() == idEngine)
+                return engine;
         }
         return null;
     }
+
     @JsonIgnore
-    public Integer[] getCabinIdList(){
-        Integer[] cabId = new Integer[cabins.size()];
-        for (int i = 0; i < cabins.size(); i++) {
-            cabId[i]=cabins.get(i).getId();
+    public Integer[] getEngineIdList(){
+        Integer[] engineId = new Integer[engines.size()];
+        for (int i = 0; i < engines.size(); i++) {
+            engineId[i]=engines.get(i).getId();
         }
-        return cabId;
+        return engineId;
     }
 }

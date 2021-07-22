@@ -12,19 +12,16 @@ import lombok.ToString;
 @Setter
 @ToString
 public class EngineBOM {
-    @JsonIgnore
+    private Integer id;
+
     private BuildingBOM building;
-    @JsonIgnore
+
     private CabinBOM cabin;
 
     private EngineStatus status;
 
     private Route route;
 
-    private boolean isEmergencyStop;
-
-    @JsonIgnore
-    private Integer id;
 
     private Integer currentFloor = 1;
 
@@ -35,7 +32,6 @@ public class EngineBOM {
     public EngineBOM(int id) {
         this.id = id;
         route = new Route();
-
     }
 
     public EngineBOM(Route route, Integer currentFloor) {
@@ -75,7 +71,6 @@ public class EngineBOM {
             status = EngineStatus.RUNNING_UP;
         if(route.getDirection().equals(Direction.DOWN))
             status = EngineStatus.RUNNING_DOWN;
-        isEmergencyStop = false;
         move();
     }
 
@@ -92,7 +87,6 @@ public class EngineBOM {
     public void callEmergencyStop() {
         if (status.equals(EngineStatus.RUNNING_UP) || status.equals(EngineStatus.RUNNING_DOWN)) {
             emergencyStop();
-            isEmergencyStop = true;
         }
     }
 }

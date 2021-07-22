@@ -1,9 +1,7 @@
 package com.sytoss.edu2021.services.convertor;
 
 import com.sytoss.edu2021.bom.BuildingBOM;
-import com.sytoss.edu2021.BuildingDTO;
 import com.sytoss.edu2021.bom.CabinBOM;
-import com.sytoss.edu2021.CabinDTO;
 
 public class BuildingConvertor {
 

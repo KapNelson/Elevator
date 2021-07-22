@@ -1,8 +1,5 @@
 package com.sytoss.edu2021.services;
 
-import com.sytoss.edu2021.BuildingDTO;
-import com.sytoss.edu2021.CabinDTO;
-import com.sytoss.edu2021.LogDTO;
 import com.sytoss.edu2021.bom.BuildingBOM;
 import com.sytoss.edu2021.bom.CabinBOM;
 import com.sytoss.edu2021.repo.BuildingRepository;

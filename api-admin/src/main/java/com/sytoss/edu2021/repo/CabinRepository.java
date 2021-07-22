@@ -1,6 +1,5 @@
 package com.sytoss.edu2021.repo;
 
-import com.sytoss.edu2021.CabinDTO;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

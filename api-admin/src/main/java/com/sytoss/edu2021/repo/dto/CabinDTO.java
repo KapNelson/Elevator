@@ -24,6 +24,7 @@ public class CabinDTO {
     private int number;
 
 
+
     public CabinDTO(int number) {
         this.number = number;
     }

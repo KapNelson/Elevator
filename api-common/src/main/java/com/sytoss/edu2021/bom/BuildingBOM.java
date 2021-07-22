@@ -17,8 +17,8 @@ public class BuildingBOM {
     private String address;
     private int floorsAmount;
 
-    @JsonIgnore
-    private List<EngineBOM> engines;
+
+    private List<EngineBOM> engines = new ArrayList<>();
 
     public BuildingBOM() {
     }

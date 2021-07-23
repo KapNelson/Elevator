@@ -7,7 +7,7 @@ import com.sytoss.edu2021.repo.dto.CabinDTO;
 
 public class CabinConvertor {
     public void toDTO(CabinBOM source, CabinDTO destination){
-        if(source.getId() != null)
+        if(source.getId() != 0)
         {
             destination.setId(source.getId());
         }

@@ -8,7 +8,7 @@ import lombok.ToString;
 @ToString
 public class CabinBOM {
 
-    private Integer id;
+    private int id;
 
     private int number;
 

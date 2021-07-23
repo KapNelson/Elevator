@@ -1,5 +1,6 @@
 package com.sytoss.edu2021.common;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -47,11 +48,11 @@ public class RouteBOM {
             direction = Direction.STABLE;
         }
     }
-
+    @JsonIgnore
     public int getMaxValue() {
         return Collections.max(queueOfFloors);
     }
-
+    @JsonIgnore
     public int getMinValue() {
         return Collections.min(queueOfFloors);
     }

@@ -12,7 +12,7 @@ import java.util.Objects;
 public class RouteDTOId implements Serializable {
 
     private int floorNumber;
-    private int id_engine;
+    private int idEngine;
 
     public RouteDTOId() {
     }
@@ -22,11 +22,11 @@ public class RouteDTOId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RouteDTOId that = (RouteDTOId) o;
-        return floorNumber == that.floorNumber && id_engine == that.id_engine;
+        return floorNumber == that.floorNumber && idEngine == that.idEngine;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(floorNumber, id_engine);
+        return Objects.hash(floorNumber, idEngine);
     }
 }

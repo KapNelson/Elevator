@@ -1,14 +1,10 @@
 package com.sytoss.edu2021.services;
 
 import com.sytoss.edu2021.bom.BuildingBOM;
-import com.sytoss.edu2021.bom.CabinBOM;
-import com.sytoss.edu2021.bom.EngineBOM;
-import com.sytoss.edu2021.controllers.FeignProxyEngine;
 import com.sytoss.edu2021.repo.BuildingRepository;
 import com.sytoss.edu2021.repo.CabinRepository;
 import com.sytoss.edu2021.repo.dto.BuildingDTO;
 import com.sytoss.edu2021.services.convertor.BuildingConvertor;
-import com.sytoss.edu2021.services.convertor.CabinConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -25,8 +21,6 @@ public class BuildingService {
     @Autowired
     RestTemplate restTemplate;
 
-    @Autowired
-    private FeignProxyEngine proxy;
 
 /*    public BuildingBOM getBuildingById(int id) {
         BuildingDTO dto = buildingRepository.findBuildingById(id);

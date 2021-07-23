@@ -14,9 +14,6 @@
             </not>
         </preConditions>
         <createTable tableName="app_route">
-            <!--<column name="id_route"  type="int" autoIncrement="true">
-                <constraints nullable="false"/>
-            </column>-->
             <column name="floor_number"  type="int">
                 <constraints nullable="false"/>
             </column>

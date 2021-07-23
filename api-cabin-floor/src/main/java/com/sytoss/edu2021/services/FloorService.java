@@ -1,8 +1,6 @@
 package com.sytoss.edu2021.services;
 
 import com.sytoss.edu2021.contollers.FeignProxyAdmin;
-import com.sytoss.edu2021.contollers.FeignProxyCabin;
-import com.sytoss.edu2021.contollers.FeignProxyEngine;
 import com.sytoss.edu2021.bom.CabinBOM;
 import com.sytoss.edu2021.bom.EngineBOM;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +12,10 @@ public class FloorService {
     @Autowired
     private FeignProxyAdmin proxyAdmin;
 
-    @Autowired
-    private FeignProxyEngine proxyEngine;
-
-    @Autowired
-    private FeignProxyCabin proxyCabin;
 
 
     public CabinBOM goToFloor(int buildingId, int cabinNumber, int endFloor) {
-        CabinBOM cabin;
+        /*CabinBOM cabin;
         try {
             cabin = proxyAdmin.getCabinByIdBuilding(buildingId, cabinNumber);
         } catch (HttpStatusCodeException e) {
@@ -40,6 +33,7 @@ public class FloorService {
             engine.start();
             proxyEngine.update(engine);
         }
-        return cabin;
+        return cabin;*/
+        return null;
     }
 }

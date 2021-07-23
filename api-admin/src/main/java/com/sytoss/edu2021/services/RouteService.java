@@ -12,7 +12,6 @@ import com.sytoss.edu2021.services.convertor.RouteConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Entity;
 
 @Service
 public class RouteService {
@@ -38,7 +37,7 @@ public class RouteService {
         }
         RouteDTOId routeDTOId = new RouteDTOId();
         routeDTOId.setFloorNumber(floorNumber);
-        routeDTOId.setId_engine(engineDTO.getId());
+        routeDTOId.setIdEngine(engineDTO.getId());
         RouteDTO checkRoute = routeRepository.findRouteDTOByRouteDTOId(routeDTOId);
         if (checkRoute != null) {
             throw new AlreadyExistsException("This point is already in route");
@@ -47,7 +46,7 @@ public class RouteService {
             routeDTO.setRouteDTOId(routeDTOId);
             routeRepository.save(routeDTO);
         }
-        RouteDTO[] routeDTOS = routeRepository.findRouteDTOSByRouteDTOIdId_engine(routeDTOId.getId_engine());
+        RouteDTO[] routeDTOS = routeRepository.findAllByRouteDTOId_IdEngine(routeDTOId.getIdEngine());
         RouteBOM route = new RouteBOM();
         new RouteConvertor().fromDTO(routeDTOS,route);
         return route;

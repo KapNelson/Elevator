@@ -30,14 +30,8 @@ public class BuildingController {
         return engineService.addEngine(buildingId,cabin);
     }
 
-    @PostMapping("/cabin")
-    public CabinBOM registerCabin(@RequestBody CabinBOM cabin) {
-        return cabinService.addCabin(cabin);
-    }
-
-
-    @GetMapping("/find/cabin/id/{buildingId}/{number}")
-    public EngineBOM getCabinByIdBuilding(@PathVariable Integer buildingId, @PathVariable Integer number){
+    @GetMapping("/find/engine/{buildingId}/{number}")
+    public EngineBOM getEngineByIdBuilding(@PathVariable Integer buildingId, @PathVariable Integer number){
         return engineService.getEngineByIdBuildingAndNumber(buildingId,number);
     }
     /*

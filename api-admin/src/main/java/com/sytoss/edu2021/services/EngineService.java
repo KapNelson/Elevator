@@ -26,35 +26,25 @@ public class EngineService {
     private CabinRepository cabinRepository;
 
 
-    public EngineBOM addEngine(Integer buildingId, CabinBOM cabin){
-        BuildingDTO contlollBuilding = buildingRepository.findBuildingById(buildingId);
-        if(contlollBuilding == null)
-        {
-            throw new EntityNotFoundException("There is no building with id= " + buildingId + ".\nYou can not add a cabin.");
-        }
-        EngineDTO controllEngine = engineRepository.findEngineDTOByBuildingIdAndCabinNumber(buildingId,cabin.getNumber());
-        if(controllEngine != null)
-        {
+    public EngineBOM addEngine(Integer buildingId, CabinBOM cabin) {
+        BuildingBOM building = findBuilding(buildingId);
+        EngineDTO controllEngine = engineRepository.findEngineDTOByBuildingIdAndCabinNumber(buildingId, cabin.getNumber());
+        if (controllEngine != null) {
             throw new AlreadyExistsException("Building id= " + buildingId + " already contains cabin with number = " + cabin.getNumber());
         }
-        if(cabin.isValid())
-        {
+        if (cabin.isValid()) {
             saveCabin(cabin);
             EngineBOM engine = new EngineBOM();
-            engine.setId(cabin.getId());
-            BuildingBOM building = findBuilding(buildingId);
-            fillEngineBOM( engine, building, cabin);
+
+            fillEngineBOM(engine, building, cabin);
             saveEngineBOM(engine, building, cabin);
             return engine;
-        }
-        else
-        {
+        } else {
             throw new ValidationException("The cabin is invalid");
         }
     }
 
-    private void saveEngineBOM(EngineBOM engine,BuildingBOM building,CabinBOM cabin)
-    {
+    private void saveEngineBOM(EngineBOM engine, BuildingBOM building, CabinBOM cabin) {
         EngineDTO engineDTO = new EngineDTO();
         new EngineConvertor().toDTO(engine, engineDTO);
         new EngineConvertor().toDTO(cabin, engineDTO);
@@ -63,32 +53,32 @@ public class EngineService {
         new EngineConvertor().fromDTO(engineDTO, engine);
     }
 
-    private void fillEngineBOM(EngineBOM engine,BuildingBOM building,CabinBOM cabin)
-    {
+    private void fillEngineBOM(EngineBOM engine, BuildingBOM building, CabinBOM cabin) {
+        engine.setId(cabin.getId());
         engine.setBuilding(building);
         engine.setCabin(cabin);
         engine.setCurrentFloor(1);
         engine.setStatus(EngineStatus.STOP);
     }
 
-    private void saveCabin(CabinBOM cabin)
-    {
+    private void saveCabin(CabinBOM cabin) {
         CabinDTO cabinDTO = new CabinDTO();
-        new CabinConvertor().toDTO(cabin,cabinDTO);
+        new CabinConvertor().toDTO(cabin, cabinDTO);
         cabinDTO = cabinRepository.save(cabinDTO);
-        new CabinConvertor().fromDTO(cabinDTO,cabin);
+        new CabinConvertor().fromDTO(cabinDTO, cabin);
     }
 
-    private BuildingBOM findBuilding(Integer buildingId)
-    {
+    private BuildingBOM findBuilding(Integer buildingId) {
         BuildingDTO buildingDTO = buildingRepository.findBuildingById(buildingId);
+        if (buildingDTO == null) {
+            throw new EntityNotFoundException("There is no building with id= " + buildingId + ".\nYou can not add a cabin.");
+        }
         BuildingBOM buildingBOM = new BuildingBOM();
         new BuildingConvertor().fromDTO(buildingDTO, buildingBOM);
         return buildingBOM;
     }
 
-    public EngineBOM getEngineByIdBuildingAndNumber(int idBuilding,int numberOfCabin)
-    {
+    public EngineBOM getEngineByIdBuildingAndNumber(int idBuilding, int numberOfCabin) {
         BuildingDTO buildingDTO = buildingRepository.findBuildingById(idBuilding);
         EngineDTO engineDTO = engineRepository.findEngineDTOByBuildingIdAndCabinNumber(buildingDTO.getId(), numberOfCabin);
         if (engineDTO == null) {

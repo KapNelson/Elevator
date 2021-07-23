@@ -19,7 +19,7 @@ public class RouteService {
     private EngineRepository engineRepository;
 
     public String add(Integer buildingId, Integer cabinNumber, Integer floorNumber) {
-        EngineDTO engineDTO = engineRepository.getEngineDTOByBuildingIdAndCabinNumber(buildingId, cabinNumber);
+        EngineDTO engineDTO = engineRepository.findEngineDTOByBuildingIdAndCabinNumber(buildingId, cabinNumber);
         RouteDTOId routeDTOId = new RouteDTOId();
         routeDTOId.setFloorNumber(floorNumber);
         routeDTOId.setId_engine(engineDTO.getId());

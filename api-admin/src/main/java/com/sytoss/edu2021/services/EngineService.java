@@ -35,7 +35,6 @@ public class EngineService {
         if (cabin.isValid()) {
             saveCabin(cabin);
             EngineBOM engine = new EngineBOM();
-
             fillEngineBOM(engine, building, cabin);
             saveEngineBOM(engine, building, cabin);
             return engine;

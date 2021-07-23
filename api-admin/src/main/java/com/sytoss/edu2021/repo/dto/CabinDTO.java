@@ -23,8 +23,6 @@ public class CabinDTO {
     @Setter
     private int number;
 
-
-
     public CabinDTO(int number) {
         this.number = number;
     }

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EngineRepository extends JpaRepository<EngineDTO,Integer> {
+    EngineDTO getEngineDTOByBuildingIdAndCabinNumber(Integer buildingId, Integer cabinNumber);
 }

@@ -7,12 +7,12 @@ import java.util.*;
 
 @Setter
 @Getter
-public class Route {
+public class RouteBOM {
 
     private Set<Integer> queueOfFloors;
     private Direction direction = Direction.STABLE;
 
-    public Route() {
+    public RouteBOM() {
         queueOfFloors = new TreeSet<>();
     }
 

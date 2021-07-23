@@ -12,7 +12,6 @@ import com.sytoss.edu2021.services.convertor.RouteConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class RouteService {
     @Autowired
@@ -30,11 +29,16 @@ public class RouteService {
             throw new EntityNotFoundException("There is no building with id= " + buildingId + ".");
         }
 
+        if (floorNumber > checkBuilding.getFloorsAmount()) {
+            throw new ValidationException("There is no floor with number= " + floorNumber + " in this building");
+        }
+
         EngineDTO engineDTO = engineRepository.findEngineDTOByBuildingIdAndCabinNumber(buildingId, cabinNumber);
         if (engineDTO == null) {
             throw new EntityNotFoundException("There is no cabin with number= " + cabinNumber +
                     " in building with id= " + buildingId + ".");
         }
+
         RouteDTOId routeDTOId = new RouteDTOId();
         routeDTOId.setFloorNumber(floorNumber);
         routeDTOId.setIdEngine(engineDTO.getId());
@@ -46,9 +50,9 @@ public class RouteService {
             routeDTO.setRouteDTOId(routeDTOId);
             routeRepository.save(routeDTO);
         }
-        RouteDTO[] routeDTOS = routeRepository.findAllByRouteDTOId_IdEngine(routeDTOId.getIdEngine());
+        RouteDTO[] routeDTOS = routeRepository.findAllRouteDTOSByRouteDTO_IdIdEngin(routeDTOId.getIdEngine());
         RouteBOM route = new RouteBOM();
-        new RouteConvertor().fromDTO(routeDTOS,route);
+        new RouteConvertor().fromDTO(routeDTOS, route);
         return route;
     }
 

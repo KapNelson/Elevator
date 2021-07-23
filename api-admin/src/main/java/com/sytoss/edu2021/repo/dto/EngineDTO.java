@@ -29,7 +29,7 @@ public class EngineDTO {
     @Getter
     @Setter
     @OneToOne
-    @JoinColumn(name = "id_cabin")
+    @JoinColumn(name = "id_cabin",referencedColumnName = "id_cabin")
     private CabinDTO cabin;
 
     @Getter

@@ -4,6 +4,8 @@ import com.sytoss.edu2021.repo.BuildingRepository;
 import com.sytoss.edu2021.repo.CabinRepository;
 import com.sytoss.edu2021.bom.BuildingBOM;
 import com.sytoss.edu2021.bom.CabinBOM;
+import com.sytoss.edu2021.repo.dto.BuildingDTO;
+import com.sytoss.edu2021.repo.dto.CabinDTO;
 import com.sytoss.edu2021.services.convertor.BuildingConvertor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +36,7 @@ public class BuildingServiceTest {
 
         BuildingBOM building = service.getBuildingById(1);
         assertEquals(1, (int)building.getId());
-        assertEquals(0, building.getCabins().size());
+        assertEquals(0, building.getEngines().size());
         assertEquals(9, building.getFloorsAmount());
         assertEquals("USSR, Leningrad", building.getAddress());
     }

@@ -16,7 +16,7 @@ public class RouteController {
     private RouteService routeService;
 
     @PostMapping("/{buildingId}/{cabinNumber}/{floorNumber}")
-    public String addPoint(@PathVariable Integer buildingId,@PathVariable Integer cabinNumber,@PathVariable Integer floorNumber){
+    public RouteBOM addPoint(@PathVariable Integer buildingId,@PathVariable Integer cabinNumber,@PathVariable Integer floorNumber){
         return routeService.add(buildingId,cabinNumber,floorNumber);
     }
 }

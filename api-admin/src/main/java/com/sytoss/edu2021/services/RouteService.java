@@ -8,6 +8,7 @@ import com.sytoss.edu2021.repo.dto.BuildingDTO;
 import com.sytoss.edu2021.repo.dto.EngineDTO;
 import com.sytoss.edu2021.repo.dto.RouteDTO;
 import com.sytoss.edu2021.repo.dto.RouteDTOId;
+import com.sytoss.edu2021.services.convertor.RouteConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class RouteService {
     @Autowired
     private BuildingRepository buildingRepository;
 
-    public String add(Integer buildingId, Integer cabinNumber, Integer floorNumber) {
+    public RouteBOM add(Integer buildingId, Integer cabinNumber, Integer floorNumber) {
 
         BuildingDTO checkBuilding = buildingRepository.findBuildingById(buildingId);
         if (checkBuilding == null) {
@@ -46,7 +47,10 @@ public class RouteService {
             routeDTO.setRouteDTOId(routeDTOId);
             routeRepository.save(routeDTO);
         }
-        return "saved " + floorNumber;
+        RouteDTO[] routeDTOS = routeRepository.findRouteDTOSByRouteDTOIdId_engine(routeDTOId.getId_engine());
+        RouteBOM route = new RouteBOM();
+        new RouteConvertor().fromDTO(routeDTOS,route);
+        return route;
     }
 
 

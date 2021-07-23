@@ -20,4 +20,12 @@ public class RouteConvertor {
         set.add(source.getFloorNumber());
         destination.setQueueOfFloors(set);*/
     }
+
+    public void fromDTO(RouteDTO[] source, RouteBOM destination) {
+        Set<Integer> points = new TreeSet<>();
+        for (RouteDTO point : source) {
+            points.add(point.getRouteDTOId().getFloorNumber());
+        }
+        destination.setQueueOfFloors(points);
+    }
 }

@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface RouteRepository extends CrudRepository<RouteDTO, RouteDTOId> {
     RouteDTO findRouteDTOByRouteDTOId(RouteDTOId routeDTOId);
-    RouteDTO[] findRouteDTOSByRouteDTOIdId_engine(int id);
+    RouteDTO[] findAllByRouteDTOId_IdEngine(int id);
 }

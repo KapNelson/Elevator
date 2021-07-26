@@ -50,7 +50,7 @@ public class RouteService {
             routeDTO.setRouteDTOId(routeDTOId);
             routeRepository.save(routeDTO);
         }
-        RouteDTO[] routeDTOS = routeRepository.findAllRouteDTOSByRouteDTO_IdIdEngin(routeDTOId.getIdEngine());
+        RouteDTO[] routeDTOS = routeRepository.findAllByRouteDTOId_IdEngine(routeDTOId.getIdEngine());
         RouteBOM route = new RouteBOM();
         new RouteConvertor().fromDTO(routeDTOS, route);
         return route;

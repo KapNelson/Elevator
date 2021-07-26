@@ -6,27 +6,24 @@
 
 
                                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
-                   logicalFilePath="create.app_deque.table.xml">
-    <changeSet author="Ruslan" id="initial creating table app_deque" context="all">
+                   logicalFilePath="create.app_route.table.xml">
+    <changeSet author="Ruslan" id="initial creating table app_route" context="all">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="app_deque"/>
+                <tableExists tableName="app_route"/>
             </not>
         </preConditions>
-        <createTable tableName="app_deque">
-            <column name="floorNumber"  type="int">
-                <constraints nullable="false"/>
-            </column>
-            <column name="direction"  type="varchar(4)">
+        <createTable tableName="app_route">
+            <column name="floor_number"  type="int">
                 <constraints nullable="false"/>
             </column>
             <column name="id_engine" type="int">
-                <constraints nullable="false" foreignKeyName="fk_deque_engine" references="app_engine(id_engine)"/>
+                <constraints nullable="false"/>
             </column>
         </createTable>
-        <addPrimaryKey  columnNames="floorNumber, direction, id_engine"
-                        constraintName="pk_app_deque"
-                        schemaName="api_admin"
-                        tableName="app_deque"/>
+        <addPrimaryKey  columnNames="floor_number, id_engine"
+                        constraintName="pk_app_route"
+                        schemaName="api_engine"
+                        tableName="app_route"/>
     </changeSet>
 </databaseChangeLog>

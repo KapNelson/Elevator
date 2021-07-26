@@ -19,25 +19,10 @@ public class CabinController {
         return cabinService.addFloorToRoute(buildingId,cabinNumber,floorNumber);
     }
 
- /*   @GetMapping("/send/message/{idCabin}")
-    public String sendMessage(@PathVariable int idCabin) {
-        return cabinService.sendMessage(idCabin);
-    }
-
-    @GetMapping("/add/floor/{buildingId}/{cabinNumber}/{floor}")
-    public void addFloorToRoute(@PathVariable int buildingId, @PathVariable int cabinNumber, @PathVariable int floor) {
-        cabinService.addFloorToRoute(buildingId, cabinNumber, floor);
-    }
-
     @PostMapping("/start/{buildingId}/{cabinNumber}")
-    public void startMovement(@PathVariable int buildingId, @PathVariable int cabinNumber) {
-        cabinService.startMovement(buildingId, cabinNumber);
+    public void startMovement(@PathVariable Integer buildingId, @PathVariable Integer cabinNumber){
+        cabinService.startMovement(buildingId,cabinNumber);
     }
-
-    @GetMapping("/get/info/{buildingId}/{cabinNumber}")
-    public CabinBOM getCabinInfo(@PathVariable int buildingId, @PathVariable int cabinNumber) {
-        return cabinService.getCabinInfo(buildingId, cabinNumber);
-    }*/
 
 }
 

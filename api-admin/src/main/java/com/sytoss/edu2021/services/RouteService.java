@@ -2,19 +2,13 @@ package com.sytoss.edu2021.services;
 
 import com.sytoss.edu2021.common.RouteBOM;
 import com.sytoss.edu2021.repo.BuildingRepository;
-import com.sytoss.edu2021.repo.EngineRepository;
-import com.sytoss.edu2021.repo.RouteRepository;
 import com.sytoss.edu2021.repo.dto.BuildingDTO;
-import com.sytoss.edu2021.repo.dto.EngineDTO;
-import com.sytoss.edu2021.repo.dto.RouteDTO;
-import com.sytoss.edu2021.repo.dto.RouteDTOId;
-import com.sytoss.edu2021.services.convertor.RouteConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RouteService {
-    @Autowired
+    /*@Autowired
     private RouteRepository routeRepository;
     @Autowired
     private EngineRepository engineRepository;
@@ -55,6 +49,6 @@ public class RouteService {
         new RouteConvertor().fromDTO(routeDTOS, route);
         return route;
     }
-
+*/
 
 }

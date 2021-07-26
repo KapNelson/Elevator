@@ -17,23 +17,17 @@ public class BuildingController {
     private BuildingService buildingService;
     @Autowired
     private CabinService cabinService;
-    @Autowired
-    private EngineService engineService;
 
     @PostMapping
     public BuildingBOM registerBuilding(@RequestBody BuildingBOM buildingBOM) {
         return buildingService.register(buildingBOM);
     }
 
-    @PostMapping("/{buildingId}/engine")
-    public EngineBOM registerEngine(@PathVariable Integer buildingId,@RequestBody CabinBOM cabin) {
-        return engineService.addEngine(buildingId,cabin);
+    @PostMapping("/cabin/{buildingId}")
+    public CabinBOM registerCabin(@PathVariable Integer buildingId,@RequestBody CabinBOM cabin) {
+        return cabinService.addCabin(buildingId,cabin);
     }
 
-    @GetMapping("/find/engine/{buildingId}/{number}")
-    public EngineBOM getEngineByIdBuilding(@PathVariable Integer buildingId, @PathVariable Integer number){
-        return engineService.getEngineByIdBuildingAndNumber(buildingId,number);
-    }
     /*
 
     @GetMapping("/find/address/{address}")

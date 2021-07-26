@@ -11,7 +11,7 @@ public class EngineController {
 
     @Autowired
     private EngineService engineService;
-
+/*
     @GetMapping("/{idCabin}")
     public EngineBOM create(@PathVariable Integer idCabin){
         return engineService.create(idCabin);
@@ -35,5 +35,11 @@ public class EngineController {
     @GetMapping("/start_move/{cabinId}")
     public EngineBOM goToFloor(@RequestBody Integer cabinId) {
         return engineService.goToFloor(cabinId);
+    }*/
+
+
+    @PostMapping("/add/{buildingId}/{cabinId}")
+    EngineBOM registerEngine(@PathVariable Integer buildingId, @PathVariable Integer cabinId){
+        return engineService.addEngine(buildingId,cabinId);
     }
 }

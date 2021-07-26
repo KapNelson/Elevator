@@ -1,32 +1,21 @@
 package com.sytoss.edu2021.services;
 
-import com.sytoss.edu2021.bom.BuildingBOM;
-import com.sytoss.edu2021.bom.CabinBOM;
-import com.sytoss.edu2021.bom.EngineBOM;
-import com.sytoss.edu2021.common.EngineStatus;
 import com.sytoss.edu2021.repo.BuildingRepository;
 import com.sytoss.edu2021.repo.CabinRepository;
-import com.sytoss.edu2021.repo.EngineRepository;
-import com.sytoss.edu2021.repo.dto.BuildingDTO;
-import com.sytoss.edu2021.repo.dto.CabinDTO;
-import com.sytoss.edu2021.repo.dto.EngineDTO;
-import com.sytoss.edu2021.services.convertor.BuildingConvertor;
-import com.sytoss.edu2021.services.convertor.CabinConvertor;
-import com.sytoss.edu2021.services.convertor.EngineConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EngineService {
-    @Autowired
+   /* @Autowired
     private EngineRepository engineRepository;
     @Autowired
     private BuildingRepository buildingRepository;
     @Autowired
     private CabinRepository cabinRepository;
+*/
 
-
-    public EngineBOM addEngine(Integer buildingId, CabinBOM cabin) {
+  /*  public EngineBOM addEngine(Integer buildingId, CabinBOM cabin) {
         BuildingBOM building = findBuilding(buildingId);
         EngineDTO controllEngine = engineRepository.findEngineDTOByBuildingIdAndCabinNumber(buildingId, cabin.getNumber());
         if (controllEngine != null) {
@@ -90,5 +79,5 @@ public class EngineService {
         new BuildingConvertor().fromDTO(buildingDTO, buildingBOM);
 
         return engineBOM;
-    }
+    }*/
 }

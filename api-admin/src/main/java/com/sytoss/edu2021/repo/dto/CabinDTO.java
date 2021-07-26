@@ -1,6 +1,7 @@
 package com.sytoss.edu2021.repo.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Entity(name = "app_cabin")
 @ToString
+@NoArgsConstructor
 public class CabinDTO {
     @Id
     @Column(name = "id_cabin")
@@ -23,18 +25,13 @@ public class CabinDTO {
     @Setter
     private int number;
 
-    @Getter
+    /*@Getter
     @Setter
     @OneToOne(mappedBy = "cabin", fetch = FetchType.EAGER)
-    private EngineDTO engine;
+    private EngineDTO engine;*/
 
 
     public CabinDTO(int number) {
         this.number = number;
     }
-
-    public CabinDTO() {
-
-    }
-
 }

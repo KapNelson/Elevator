@@ -6,4 +6,5 @@
                 http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
 
     <include file="create.app_engine.table.xml" relativeToChangelogFile="true"/>
+    <include file="create.app_route.table.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

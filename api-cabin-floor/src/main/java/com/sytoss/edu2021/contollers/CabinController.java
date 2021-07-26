@@ -21,10 +21,10 @@ public class CabinController {
         return cabinService.addFloorToRoute(buildingId,cabinNumber,floorNumber);
     }
 
-    @PostMapping("/start/{buildingId}/{cabinNumber}")
+   /* @PostMapping("/start/{buildingId}/{cabinNumber}")
     public void startMovement(@PathVariable Integer buildingId, @PathVariable Integer cabinNumber){
         cabinService.startMovement(buildingId,cabinNumber);
-    }
+    }*/
 
 }
 

@@ -61,4 +61,13 @@ public class CabinService {
         new BuildingConvertor().fromDTO(buildingDTO, buildingBOM);
         return buildingBOM;
     }
+
+    public CabinBOM getCabin(int buildingId, int cabinNumber) {
+        CabinDTO cabinDTO = cabinRepository.findCabinDTOByBuildingIdAndNumber(buildingId,cabinNumber);
+        if(cabinDTO == null)
+            throw  new EntityNotFoundException("There is no such engine with buildingId: "+buildingId+" and cabinNumber: "+cabinNumber);
+        CabinBOM cabinBOM = new CabinBOM();
+        new CabinConvertor().fromDTO(cabinDTO,cabinBOM);
+        return cabinBOM;
+    }
 }

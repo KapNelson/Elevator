@@ -30,11 +30,6 @@ public class BuildingDTO {
     @Column(name = "number_of_floors")
     private int floorsAmount;
 
-    @OneToMany(mappedBy = "building", fetch = FetchType.EAGER)
-    @Setter
-    @Getter
-    private List<EngineDTO> engines = new ArrayList<>();
-
     public BuildingDTO() {
 
     }
@@ -42,16 +37,8 @@ public class BuildingDTO {
     public BuildingDTO(String address, int floorsAmount) {
         this.address = address;
         this.floorsAmount = floorsAmount;
-        this.engines = new ArrayList<>();
     }
 
-    public List<EngineDTO> getEngine() {
-        return engines;
-    }
-
-    public void addEngine(EngineDTO engine) {
-        engines.add(engine);
-    }
 
     public boolean isValid() {
         return !ObjectUtils.isEmpty(address) && floorsAmount > 1;

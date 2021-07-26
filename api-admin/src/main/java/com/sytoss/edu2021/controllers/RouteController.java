@@ -1,6 +1,6 @@
 package com.sytoss.edu2021.controllers;
 
-import com.sytoss.edu2021.bom.RouteBOM;
+import com.sytoss.edu2021.common.RouteBOM;
 import com.sytoss.edu2021.services.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +15,8 @@ public class RouteController {
     @Autowired
     private RouteService routeService;
 
-    @PostMapping("/{buildingId}/{cabinNumber}/{floorNumber}")
+  /*  @PostMapping("/{buildingId}/{cabinNumber}/{floorNumber}")
     public RouteBOM addFloorToRouteFromCabinInBuilding(@PathVariable Integer buildingId,@PathVariable Integer cabinNumber,@PathVariable Integer floorNumber){
         return routeService.addFloorToRouteFromCabin(buildingId,cabinNumber,floorNumber);
-    }
+    }*/
 }

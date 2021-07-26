@@ -1,22 +1,14 @@
 package com.sytoss.edu2021.services;
 
-import com.sytoss.edu2021.bom.RouteBOM;
-import com.sytoss.edu2021.exceptions.AlreadyExistsException;
-import com.sytoss.edu2021.exceptions.EntityNotFoundException;
-import com.sytoss.edu2021.exceptions.ValidationException;
+import com.sytoss.edu2021.common.RouteBOM;
 import com.sytoss.edu2021.repo.BuildingRepository;
-import com.sytoss.edu2021.repo.EngineRepository;
-import com.sytoss.edu2021.repo.RouteRepository;
 import com.sytoss.edu2021.repo.dto.BuildingDTO;
-import com.sytoss.edu2021.repo.dto.EngineDTO;
-import com.sytoss.edu2021.repo.dto.RouteDTO;
-import com.sytoss.edu2021.repo.dto.RouteDTOId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RouteService {
-    @Autowired
+    /*@Autowired
     private RouteRepository routeRepository;
     @Autowired
     private EngineRepository engineRepository;
@@ -24,7 +16,7 @@ public class RouteService {
     @Autowired
     private BuildingRepository buildingRepository;
 
-    public RouteBOM addFloorToRouteFromCabin(Integer buildingId, Integer cabinNumber, Integer floorNumber) {
+    public RouteBOM add(Integer buildingId, Integer cabinNumber, Integer floorNumber) {
 
         BuildingDTO checkBuilding = buildingRepository.findBuildingById(buildingId);
         if (checkBuilding == null) {
@@ -57,6 +49,6 @@ public class RouteService {
         new RouteConvertor().fromDTO(routeDTOS, route);
         return route;
     }
-
+*/
 
 }

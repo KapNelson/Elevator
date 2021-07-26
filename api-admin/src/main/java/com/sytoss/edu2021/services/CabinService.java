@@ -3,6 +3,7 @@ package com.sytoss.edu2021.services;
 import com.sytoss.edu2021.bom.BuildingBOM;
 import com.sytoss.edu2021.bom.CabinBOM;
 import com.sytoss.edu2021.controllers.FeignProxyEngine;
+import com.sytoss.edu2021.exceptions.AlreadyExistsException;
 import com.sytoss.edu2021.exceptions.EntityNotFoundException;
 import com.sytoss.edu2021.exceptions.ValidationException;
 import com.sytoss.edu2021.repo.BuildingRepository;

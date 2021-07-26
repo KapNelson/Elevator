@@ -23,10 +23,10 @@ public class RouteService {
     private FeignProxyCabin feignProxyCabin;
 
     public RouteBOM addFloorToRoute(Integer buildingId, Integer cabinNumber, Integer floorNumber) {
-        CabinBOM cabinBOM = feignProxyCabin.getCabin(buildingId,cabinNumber);
-        EngineDTO engineDTO = engineRepository.findEngineDTOByBuildingIdAndCabinId(buildingId,cabinNumber);
-        if(engineDTO == null)
-            throw new EntityNotFoundException("There is no such engine with buildingId: "+buildingId+" and cabinNumber: "+cabinNumber);
+        CabinBOM cabinBOM = feignProxyCabin.getCabin(buildingId, cabinNumber);
+        EngineDTO engineDTO = engineRepository.findEngineDTOByBuildingIdAndCabinId(buildingId, cabinNumber);
+        if (engineDTO == null)
+            throw new EntityNotFoundException("There is no such engine with buildingId: " + buildingId + " and cabinNumber: " + cabinNumber);
         RouteDTO routeDTO = new RouteDTO();
         RouteDTOId routeDTOId = new RouteDTOId();
         routeDTOId.setIdEngine(engineDTO.getId());

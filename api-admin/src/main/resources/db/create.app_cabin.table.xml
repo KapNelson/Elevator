@@ -21,6 +21,9 @@
             <column name="number" type="int">
                 <constraints nullable="false" />
             </column>
+            <column name="id_building" type="int">
+                <constraints nullable="false" />
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

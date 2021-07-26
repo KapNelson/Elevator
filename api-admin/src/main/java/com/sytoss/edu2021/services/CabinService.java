@@ -35,8 +35,13 @@ public class CabinService {
         if (buildingDTO == null) {
             throw new EntityNotFoundException("There is no building with id= " + buildingId + ".\nYou can not add a cabin.");
         }
+        CabinDTO checkCabin = cabinRepository.findCabinDTOByBuildingIdAndNumber(buildingId,cabin.getNumber());
+        if(checkCabin != null){
+            throw new AlreadyExistsException("Such cabin already exists");
+        }
         if (cabin.isValid()) {
             CabinDTO cabinDTO = new CabinDTO();
+            cabinDTO.setBuildingId(buildingId);
             cabinDTO.setNumber(cabin.getNumber());
             cabinDTO = cabinRepository.save(cabinDTO);
             new CabinConvertor().fromDTO(cabinDTO,cabin);

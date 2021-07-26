@@ -29,7 +29,7 @@ public class EngineService {
     private CabinRepository cabinRepository;
 
 
-    public EngineBOM addEngineToBuilding(Integer buildingId, CabinBOM cabin) {
+    public EngineBOM addEngineToBuilding(int buildingId, CabinBOM cabin) {
         BuildingBOM building = findBuildingById(buildingId);
         EngineDTO controllEngine = engineRepository.findEngineDTOByBuildingIdAndCabinNumber(buildingId, cabin.getNumber());
         if (controllEngine != null) {
@@ -70,7 +70,7 @@ public class EngineService {
         new CabinConvertor().fromDTO(cabinDTO, cabin);
     }
 
-    private BuildingBOM findBuildingById(Integer buildingId) {
+    private BuildingBOM findBuildingById(int buildingId) {
         BuildingDTO buildingDTO = buildingRepository.findBuildingById(buildingId);
         if (buildingDTO == null) {
             throw new EntityNotFoundException("There is no building with id= " + buildingId + ".\nYou can not add a cabin.");

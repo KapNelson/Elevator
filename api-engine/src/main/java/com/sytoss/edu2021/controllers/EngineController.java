@@ -23,7 +23,7 @@ public class EngineController {
     }
 
     @GetMapping ("/get/{buildingId}/{cabinNo}")
-    public EngineBOM getEngine(@PathVariable Integer idCabin){
+    public EngineBOM getEngineById(@PathVariable Integer idCabin){
         return engineService.getEngine(idCabin);
     }
   

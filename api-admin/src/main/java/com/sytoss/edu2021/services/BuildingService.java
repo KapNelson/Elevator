@@ -32,7 +32,7 @@ public class BuildingService {
         return result;
     }*/
 
-    public BuildingBOM register(BuildingBOM building) {
+    public BuildingBOM registerBuilding(BuildingBOM building) {
         if (building.isValid()) {
             try {
                 BuildingBOM checkBuilding = searchByAddress(building.getAddress());

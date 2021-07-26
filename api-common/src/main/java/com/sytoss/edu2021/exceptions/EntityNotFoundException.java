@@ -1,4 +1,4 @@
-package com.sytoss.edu2021.exeption;
+package com.sytoss.edu2021.exceptions;
 
 import lombok.Getter;
 

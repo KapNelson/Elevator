@@ -1,5 +1,6 @@
 package com.sytoss.edu2021.contollers;
 
+import com.sytoss.edu2021.common.RouteBOM;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,4 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface FeignProxyEngine {
     @PostMapping("/start")
     void startMovement(@PathVariable Integer buildingId, @PathVariable Integer cabinNumber);
+
+    @PostMapping("/add/route/{buildingId}/{cabinNumber}/{floorNumber}")
+    RouteBOM addFloorToRoute(@PathVariable Integer buildingId, @PathVariable Integer cabinNumber, @PathVariable Integer floorNumber);
 }

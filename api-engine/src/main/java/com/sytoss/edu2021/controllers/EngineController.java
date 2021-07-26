@@ -1,7 +1,11 @@
 package com.sytoss.edu2021.controllers;
 
+import com.sytoss.edu2021.bom.CabinBOM;
 import com.sytoss.edu2021.bom.EngineBOM;
+import com.sytoss.edu2021.common.RouteBOM;
+import com.sytoss.edu2021.repo.dto.EngineDTO;
 import com.sytoss.edu2021.services.EngineService;
+import com.sytoss.edu2021.services.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +15,8 @@ public class EngineController {
 
     @Autowired
     private EngineService engineService;
+    @Autowired
+    private RouteService routeService;
 /*
     @GetMapping("/{idCabin}")
     public EngineBOM create(@PathVariable Integer idCabin){
@@ -39,7 +45,12 @@ public class EngineController {
 
 
     @PostMapping("/add/{buildingId}/{cabinId}")
-    EngineBOM registerEngine(@PathVariable Integer buildingId, @PathVariable Integer cabinId){
+    public EngineBOM registerEngine(@PathVariable Integer buildingId, @PathVariable Integer cabinId){
         return engineService.addEngine(buildingId,cabinId);
+    }
+
+    @PostMapping("/add/route/{buildingId}/{cabinNumber}/{floorNumber}")
+    RouteBOM addFloorToRoute(@PathVariable Integer buildingId, @PathVariable Integer cabinNumber, @PathVariable Integer floorNumber){
+        return routeService.addFloorToRoute(buildingId,cabinNumber,floorNumber);
     }
 }

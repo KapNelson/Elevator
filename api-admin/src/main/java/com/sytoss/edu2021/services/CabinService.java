@@ -3,8 +3,8 @@ package com.sytoss.edu2021.services;
 import com.sytoss.edu2021.bom.BuildingBOM;
 import com.sytoss.edu2021.bom.CabinBOM;
 import com.sytoss.edu2021.controllers.FeignProxyEngine;
-import com.sytoss.edu2021.exeption.EntityNotFoundException;
-import com.sytoss.edu2021.exeption.ValidationException;
+import com.sytoss.edu2021.exceptions.EntityNotFoundException;
+import com.sytoss.edu2021.exceptions.ValidationException;
 import com.sytoss.edu2021.repo.BuildingRepository;
 import com.sytoss.edu2021.repo.CabinRepository;
 import com.sytoss.edu2021.repo.dto.BuildingDTO;
@@ -31,8 +31,13 @@ public class CabinService {
         if (buildingDTO == null) {
             throw new EntityNotFoundException("There is no building with id= " + buildingId + ".\nYou can not add a cabin.");
         }
+        CabinDTO checkCabin = cabinRepository.findCabinDTOByBuildingIdAndNumber(buildingId,cabin.getNumber());
+        if(checkCabin != null){
+            throw new AlreadyExistsException("Such cabin already exists");
+        }
         if (cabin.isValid()) {
             CabinDTO cabinDTO = new CabinDTO();
+            cabinDTO.setBuildingId(buildingId);
             cabinDTO.setNumber(cabin.getNumber());
             cabinDTO = cabinRepository.save(cabinDTO);
             new CabinConvertor().fromDTO(cabinDTO,cabin);
@@ -51,5 +56,14 @@ public class CabinService {
         BuildingBOM buildingBOM = new BuildingBOM();
         new BuildingConvertor().fromDTO(buildingDTO, buildingBOM);
         return buildingBOM;
+    }
+
+    public CabinBOM getCabin(int buildingId, int cabinNumber) {
+        CabinDTO cabinDTO = cabinRepository.findCabinDTOByBuildingIdAndNumber(buildingId,cabinNumber);
+        if(cabinDTO == null)
+            throw  new EntityNotFoundException("There is no such engine with buildingId: "+buildingId+" and cabinNumber: "+cabinNumber);
+        CabinBOM cabinBOM = new CabinBOM();
+        new CabinConvertor().fromDTO(cabinDTO,cabinBOM);
+        return cabinBOM;
     }
 }

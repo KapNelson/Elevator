@@ -1,9 +1,9 @@
 package com.sytoss.edu2021.services;
 
 import com.sytoss.edu2021.bom.BuildingBOM;
-import com.sytoss.edu2021.exeption.AlreadyExistsException;
-import com.sytoss.edu2021.exeption.EntityNotFoundException;
-import com.sytoss.edu2021.exeption.ValidationException;
+import com.sytoss.edu2021.exceptions.AlreadyExistsException;
+import com.sytoss.edu2021.exceptions.EntityNotFoundException;
+import com.sytoss.edu2021.exceptions.ValidationException;
 import com.sytoss.edu2021.repo.BuildingRepository;
 import com.sytoss.edu2021.repo.CabinRepository;
 import com.sytoss.edu2021.repo.dto.BuildingDTO;
@@ -81,7 +81,7 @@ public class BuildingService {
     }*/
 
 
-    public BuildingBOM searchByAddress(String address) {
+    private BuildingBOM searchByAddress(String address) {
         BuildingDTO building = buildingRepository.findBuildingByAddress(address);
         if (building != null) {
             BuildingBOM buildingBOM = new BuildingBOM();

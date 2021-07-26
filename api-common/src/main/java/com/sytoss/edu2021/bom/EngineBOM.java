@@ -12,11 +12,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class EngineBOM {
-    private Integer id;
 
-    /*private BuildingBOM building;
-    @JsonIgnore
-    private CabinBOM cabin;*/
+    private Integer id;
     private int buildingId;
     private int cabinId;
 

@@ -25,10 +25,10 @@ public class CabinDTO {
     @Setter
     private int number;
 
-    /*@Getter
+    @Getter
     @Setter
-    @OneToOne(mappedBy = "cabin", fetch = FetchType.EAGER)
-    private EngineDTO engine;*/
+    @Column(name = "id_building")
+    private int buildingId;
 
 
     public CabinDTO(int number) {

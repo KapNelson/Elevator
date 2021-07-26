@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface EngineRepository extends JpaRepository<EngineDTO,Integer> {
     EngineDTO findEngineDTOById(int id);
     //EngineDTO[] findEngineDTOSById(Integer[] ids);
-    EngineDTO findEngineDTById(Integer id);
+    EngineDTO findEngineDTOByBuildingIdAndCabinId(int buildingId, int cabinId);
 }

@@ -16,8 +16,6 @@ public class BuildingController {
     @Autowired
     private BuildingService buildingService;
     @Autowired
-    private CabinService cabinService;
-    @Autowired
     private EngineService engineService;
 
     @PostMapping

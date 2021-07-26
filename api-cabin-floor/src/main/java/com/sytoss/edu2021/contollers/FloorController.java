@@ -1,6 +1,5 @@
 package com.sytoss.edu2021.contollers;
 import com.sytoss.edu2021.bom.CabinBOM;
-import com.sytoss.edu2021.services.FloorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

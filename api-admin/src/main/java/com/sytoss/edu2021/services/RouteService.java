@@ -1,6 +1,9 @@
 package com.sytoss.edu2021.services;
 
-import com.sytoss.edu2021.common.RouteBOM;
+import com.sytoss.edu2021.bom.RouteBOM;
+import com.sytoss.edu2021.exceptions.AlreadyExistsException;
+import com.sytoss.edu2021.exceptions.EntityNotFoundException;
+import com.sytoss.edu2021.exceptions.ValidationException;
 import com.sytoss.edu2021.repo.BuildingRepository;
 import com.sytoss.edu2021.repo.EngineRepository;
 import com.sytoss.edu2021.repo.RouteRepository;
@@ -22,7 +25,7 @@ public class RouteService {
     @Autowired
     private BuildingRepository buildingRepository;
 
-    public RouteBOM add(Integer buildingId, Integer cabinNumber, Integer floorNumber) {
+    public RouteBOM addFloorToRouteFromCabin(Integer buildingId, Integer cabinNumber, Integer floorNumber) {
 
         BuildingDTO checkBuilding = buildingRepository.findBuildingById(buildingId);
         if (checkBuilding == null) {

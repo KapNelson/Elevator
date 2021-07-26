@@ -1,6 +1,7 @@
-package com.sytoss.edu2021.common;
+package com.sytoss.edu2021.bom;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sytoss.edu2021.common.Direction;
 import lombok.Getter;
 import lombok.Setter;
 

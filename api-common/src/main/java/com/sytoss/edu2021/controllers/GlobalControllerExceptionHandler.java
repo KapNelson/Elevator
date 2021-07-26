@@ -1,8 +1,8 @@
 package com.sytoss.edu2021.controllers;
 
-import com.sytoss.edu2021.services.AlreadyExistsException;
-import com.sytoss.edu2021.services.EntityNotFoundException;
-import com.sytoss.edu2021.services.ValidationException;
+import com.sytoss.edu2021.exceptions.AlreadyExistsException;
+import com.sytoss.edu2021.exceptions.EntityNotFoundException;
+import com.sytoss.edu2021.exceptions.ValidationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

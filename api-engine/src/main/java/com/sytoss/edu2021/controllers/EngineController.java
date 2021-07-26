@@ -13,7 +13,7 @@ public class EngineController {
     private EngineService engineService;
 
     @GetMapping("/{idCabin}")
-    public EngineBOM create(@PathVariable Integer idCabin){
+    public EngineBOM createEngine(@PathVariable Integer idCabin){
         return engineService.create(idCabin);
     }
 
@@ -23,12 +23,12 @@ public class EngineController {
     }
 
     @GetMapping ("/get/{buildingId}/{cabinNo}")
-    public EngineBOM getEngine(@PathVariable Integer idCabin){
+    public EngineBOM getEngineById(@PathVariable Integer idCabin){
         return engineService.getEngine(idCabin);
     }
   
     @PostMapping("/update")
-    public void update(@RequestBody EngineBOM engine){
+    public void updateCurrentFloor(@RequestBody EngineBOM engine){
         engineService.update(engine);
     }
 

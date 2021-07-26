@@ -2,6 +2,7 @@ package com.sytoss.edu2021.services;
 
 import com.sytoss.edu2021.common.RouteBOM;
 import com.sytoss.edu2021.contollers.FeignProxyAdmin;
+import com.sytoss.edu2021.exeption.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;

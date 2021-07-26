@@ -1,4 +1,4 @@
-package com.sytoss.edu2021.services;
+package com.sytoss.edu2021.exeption;
 
 
 public class ValidationException extends RuntimeException{

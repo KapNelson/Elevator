@@ -7,7 +7,7 @@
     <parent>
         <artifactId>ElevatorDriver</artifactId>
         <groupId>com.sytoss.edu2021</groupId>
-        <version>0.0.6-SNAPSHOT</version>
+        <version>0.0.7-SNAPSHOT</version>
     </parent>
 
 

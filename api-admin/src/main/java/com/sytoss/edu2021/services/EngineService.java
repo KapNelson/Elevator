@@ -4,6 +4,9 @@ import com.sytoss.edu2021.bom.BuildingBOM;
 import com.sytoss.edu2021.bom.CabinBOM;
 import com.sytoss.edu2021.bom.EngineBOM;
 import com.sytoss.edu2021.common.EngineStatus;
+import com.sytoss.edu2021.exceptions.AlreadyExistsException;
+import com.sytoss.edu2021.exceptions.EntityNotFoundException;
+import com.sytoss.edu2021.exceptions.ValidationException;
 import com.sytoss.edu2021.repo.BuildingRepository;
 import com.sytoss.edu2021.repo.CabinRepository;
 import com.sytoss.edu2021.repo.EngineRepository;
@@ -26,8 +29,8 @@ public class EngineService {
     private CabinRepository cabinRepository;
 
 
-    public EngineBOM addEngine(Integer buildingId, CabinBOM cabin) {
-        BuildingBOM building = findBuilding(buildingId);
+    public EngineBOM addEngineToBuilding(Integer buildingId, CabinBOM cabin) {
+        BuildingBOM building = findBuildingById(buildingId);
         EngineDTO controllEngine = engineRepository.findEngineDTOByBuildingIdAndCabinNumber(buildingId, cabin.getNumber());
         if (controllEngine != null) {
             throw new AlreadyExistsException("Building id= " + buildingId + " already contains cabin with number = " + cabin.getNumber());
@@ -35,15 +38,15 @@ public class EngineService {
         if (cabin.isValid()) {
             saveCabin(cabin);
             EngineBOM engine = new EngineBOM();
-            fillEngineBOM(engine, building, cabin);
-            saveEngineBOM(engine, building, cabin);
+            setEngineBOM(engine, building, cabin);
+            saveEngine(engine, building, cabin);
             return engine;
         } else {
             throw new ValidationException("The cabin is invalid");
         }
     }
 
-    private void saveEngineBOM(EngineBOM engine, BuildingBOM building, CabinBOM cabin) {
+    private void saveEngine(EngineBOM engine, BuildingBOM building, CabinBOM cabin) {
         EngineDTO engineDTO = new EngineDTO();
         new EngineConvertor().toDTO(engine, engineDTO);
         new EngineConvertor().toDTO(cabin, engineDTO);
@@ -52,7 +55,7 @@ public class EngineService {
         new EngineConvertor().fromDTO(engineDTO, engine);
     }
 
-    private void fillEngineBOM(EngineBOM engine, BuildingBOM building, CabinBOM cabin) {
+    private void setEngineBOM(EngineBOM engine, BuildingBOM building, CabinBOM cabin) {
         engine.setId(cabin.getId());
         engine.setBuilding(building);
         engine.setCabin(cabin);
@@ -67,7 +70,7 @@ public class EngineService {
         new CabinConvertor().fromDTO(cabinDTO, cabin);
     }
 
-    private BuildingBOM findBuilding(Integer buildingId) {
+    private BuildingBOM findBuildingById(Integer buildingId) {
         BuildingDTO buildingDTO = buildingRepository.findBuildingById(buildingId);
         if (buildingDTO == null) {
             throw new EntityNotFoundException("There is no building with id= " + buildingId + ".\nYou can not add a cabin.");

@@ -3,7 +3,6 @@ package com.sytoss.edu2021.bom;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sytoss.edu2021.common.Direction;
 import com.sytoss.edu2021.common.EngineStatus;
-import com.sytoss.edu2021.common.RouteBOM;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

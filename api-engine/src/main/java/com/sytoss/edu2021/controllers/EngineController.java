@@ -45,7 +45,7 @@ public class EngineController {
 
 
     @PostMapping("/add/{buildingId}/{cabinId}")
-    EngineBOM registerEngine(@PathVariable Integer buildingId, @PathVariable Integer cabinId){
+    public EngineBOM registerEngine(@PathVariable Integer buildingId, @PathVariable Integer cabinId){
         return engineService.addEngine(buildingId,cabinId);
     }
 

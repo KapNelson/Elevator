@@ -1,6 +1,5 @@
 package com.sytoss.edu2021;
 
-import com.sytoss.edu2021.services.EngineService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;

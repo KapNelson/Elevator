@@ -1,9 +1,10 @@
 package com.sytoss.edu2021.services.convertor;
 
-import com.sytoss.edu2021.repo.dto.BuildingBOM;
+import com.sytoss.edu2021.bom.BuildingBOM;
+import com.sytoss.edu2021.bom.CabinBOM;
+import com.sytoss.edu2021.bom.EngineBOM;
 import com.sytoss.edu2021.repo.dto.BuildingDTO;
-import com.sytoss.edu2021.repo.dto.CabinBOM;
-import com.sytoss.edu2021.repo.dto.CabinDTO;
+import com.sytoss.edu2021.repo.dto.EngineDTO;
 
 public class BuildingConvertor {
 
@@ -13,11 +14,11 @@ public class BuildingConvertor {
         }
         destination.setAddress(source.getAddress());
         destination.setFloorsAmount(source.getFloorsAmount());
-        if (source.getCabins() != null && source.getCabins().size() > 0) {
-            for (CabinBOM cabinBOM : source.getCabins()) {
-                CabinDTO cabinDTO = new CabinDTO();
-                new CabinConvertor().toDTO(cabinBOM, cabinDTO);
-                destination.addCabin(cabinDTO);
+        if (source.getEngines() != null && source.getEngines().size() > 0) {
+            for (EngineBOM engineBOM : source.getEngines()) {
+                 EngineDTO engineDTO = new EngineDTO();
+                new EngineConvertor().toDTO(engineBOM, engineDTO);
+                destination.addEngine(engineDTO);
             }
         }
     }
@@ -26,11 +27,11 @@ public class BuildingConvertor {
         destination.setId(source.getId());
         destination.setAddress(source.getAddress());
        destination.setFloorsAmount(source.getFloorsAmount());
-        if (source.getCabins() != null && source.getCabins().size() > 0) {
-            for (CabinDTO cabinDTO : source.getCabins()) {
-                CabinBOM cabinBOM = new CabinBOM();
-                new CabinConvertor().fromDTO(cabinDTO, cabinBOM);
-                destination.addCabin(cabinBOM);
+        if (source.getEngines() != null && source.getEngines().size() > 0) {
+            for (EngineDTO engineDTO : source.getEngines()) {
+                EngineBOM engineBOM = new EngineBOM();
+                new EngineConvertor().fromDTO(engineDTO, engineBOM);
+                destination.addEngine(engineBOM);
             }
         }
     }

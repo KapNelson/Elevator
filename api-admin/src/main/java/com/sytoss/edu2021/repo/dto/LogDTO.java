@@ -1,8 +1,6 @@
 package com.sytoss.edu2021.repo.dto;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity(name = "app_log")

@@ -5,6 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity(name = "app_cabin")
@@ -20,15 +22,15 @@ public class CabinDTO {
     @Getter
     @Setter
     private int number;
-    @ManyToOne
-    @JoinColumn(name = "id_build")
+
     @Getter
     @Setter
-    private BuildingDTO building;
+    @OneToOne(mappedBy = "cabin", fetch = FetchType.EAGER)
+    private EngineDTO engine;
 
-    public CabinDTO(int number, BuildingDTO building) {
+
+    public CabinDTO(int number) {
         this.number = number;
-        this.building = building;
     }
 
     public CabinDTO() {

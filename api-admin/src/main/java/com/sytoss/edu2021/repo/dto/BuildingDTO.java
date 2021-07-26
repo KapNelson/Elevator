@@ -3,12 +3,10 @@ package com.sytoss.edu2021.repo.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.springframework.util.ObjectUtils;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -35,7 +33,7 @@ public class BuildingDTO {
     @OneToMany(mappedBy = "building", fetch = FetchType.EAGER)
     @Setter
     @Getter
-    private List<CabinDTO> cabins = new ArrayList<>();
+    private List<EngineDTO> engines = new ArrayList<>();
 
     public BuildingDTO() {
 
@@ -44,15 +42,15 @@ public class BuildingDTO {
     public BuildingDTO(String address, int floorsAmount) {
         this.address = address;
         this.floorsAmount = floorsAmount;
-        this.cabins = new ArrayList<>();
+        this.engines = new ArrayList<>();
     }
 
-    public List<CabinDTO> getCabins() {
-        return cabins;
+    public List<EngineDTO> getEngine() {
+        return engines;
     }
 
-    public void addCabin(CabinDTO cabin) {
-        cabins.add(cabin);
+    public void addEngine(EngineDTO engine) {
+        engines.add(engine);
     }
 
     public boolean isValid() {

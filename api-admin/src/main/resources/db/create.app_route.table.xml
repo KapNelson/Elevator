@@ -6,21 +6,24 @@
 
 
                                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
-                   logicalFilePath="create.app_cabin.table.xml">
-    <changeSet author="YevgenyV" id="initial creating table app_cabins" context="all">
+                   logicalFilePath="create.app_route.table.xml">
+    <changeSet author="Ruslan" id="initial creating table app_route" context="all">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="app_cabin"/>
+                <tableExists tableName="app_route"/>
             </not>
         </preConditions>
-        <createTable tableName="app_cabin">
-            <column name="id_cabin"  type="int" autoIncrement="true">
-                <constraints nullable="false"
-                             primaryKey="true"/>
+        <createTable tableName="app_route">
+            <column name="floor_number"  type="int">
+                <constraints nullable="false"/>
             </column>
-            <column name="number" type="int">
-                <constraints nullable="false" />
+            <column name="id_engine" type="int">
+                <constraints nullable="false" foreignKeyName="fk_route_engine" references="app_engine(id_engine)"/>
             </column>
         </createTable>
+        <addPrimaryKey  columnNames="floor_number, id_engine"
+                        constraintName="pk_app_route"
+                        schemaName="api_admin"
+                        tableName="app_route"/>
     </changeSet>
 </databaseChangeLog>

@@ -1,32 +1,36 @@
-package com.sytoss.edu2021.repo.dto;
+package com.sytoss.edu2021.common;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Setter
 @Getter
-public class Route {
+public class RouteBOM {
 
-    private List<Integer> queueOfFloors;
+    private Set<Integer> queueOfFloors;
     private Direction direction = Direction.STABLE;
 
-    public Route() {
-        queueOfFloors = new ArrayList<>();
+    public RouteBOM() {
+        queueOfFloors = new TreeSet<>();
     }
 
     public void addRoutFloor(int currentFloor, int floorNumber) {
         if (queueOfFloors.contains(floorNumber)) {
             return;
         }
+        if (direction.equals(Direction.UP) && floorNumber < this.getMinValue()) {
+            return;
+        }
+        if (direction.equals(Direction.DOWN) && floorNumber > this.getMaxValue()) {
+            return;
+        }
+
         setDirection(currentFloor, floorNumber);
         if (currentFloor != floorNumber)
             queueOfFloors.add(floorNumber);
-        queueOfFloors.sort(Collections.reverseOrder());
     }
 
     public void clearRoute() {
@@ -43,5 +47,13 @@ public class Route {
         else {
             direction = Direction.STABLE;
         }
+    }
+    @JsonIgnore
+    public int getMaxValue() {
+        return Collections.max(queueOfFloors);
+    }
+    @JsonIgnore
+    public int getMinValue() {
+        return Collections.min(queueOfFloors);
     }
 }

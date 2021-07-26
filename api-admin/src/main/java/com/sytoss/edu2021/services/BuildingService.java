@@ -1,10 +1,10 @@
 package com.sytoss.edu2021.services;
 
+import com.sytoss.edu2021.bom.BuildingBOM;
 import com.sytoss.edu2021.repo.BuildingRepository;
 import com.sytoss.edu2021.repo.CabinRepository;
-import com.sytoss.edu2021.repo.dto.*;
+import com.sytoss.edu2021.repo.dto.BuildingDTO;
 import com.sytoss.edu2021.services.convertor.BuildingConvertor;
-import com.sytoss.edu2021.services.convertor.CabinConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -21,7 +21,8 @@ public class BuildingService {
     @Autowired
     RestTemplate restTemplate;
 
-    public BuildingBOM getBuildingById(int id) {
+
+/*    public BuildingBOM getBuildingById(int id) {
         BuildingDTO dto = buildingRepository.findBuildingById(id);
         if (dto == null) {
             throw new EntityNotFoundException(id, "There is no such building " + id);
@@ -29,7 +30,7 @@ public class BuildingService {
         BuildingBOM result = new BuildingBOM();
         new BuildingConvertor().fromDTO(dto, result);
         return result;
-    }
+    }*/
 
     public BuildingBOM register(BuildingBOM building) {
         if (building.isValid()) {
@@ -49,7 +50,7 @@ public class BuildingService {
     }
 
 
-    public BuildingBOM addCabin(int buildingId, CabinBOM cabin) {
+ /*   public BuildingBOM addCabin(int buildingId, CabinBOM cabin) {
         if (cabin.isValid()) {
             BuildingBOM building = getBuildingById(buildingId);
             if (building.findCabinByNumber(cabin.getNumber()) != null) {
@@ -57,23 +58,24 @@ public class BuildingService {
             } else {
                 Integer[] cabinIds = building.getCabinIdList();
 
-                EngineBOM[] engines = restTemplate.postForEntity("http://127.0.0.1:6050/api/engine/engines/",cabinIds, EngineBOM[].class).getBody();
+                EngineBOM[] engines = proxy.getEngines(cabinIds);
+
                 for (int i = 0; i < building.getCabins().size(); i++) {
-                    building.getCabins().get(i).setEngine(engines[i]);
+                    engines[i].setCabin(building.getCabins().get(i));
                 }
                 CabinDTO cabinDTO = new CabinDTO();
                 new CabinConvertor().toDTO(cabin, cabinDTO);
                 new CabinConvertor().toDTO(building, cabinDTO);
                 cabinRepository.save(cabinDTO);
                 building.addCabin(cabin);
-                EngineBOM engineBOM = restTemplate.getForEntity("http://127.0.0.1:6050/api/engine/{idCabin}", EngineBOM.class,cabinDTO.getId()).getBody();
-                cabin.setEngine(engineBOM);
+                EngineBOM engineBOM = proxy.getEngine(cabinDTO.getId());
+                engineBOM.setCabin(cabin);
                 return building;
             }
         } else {
             throw new ValidationException("Invalid cabin number (number should be > 0)");
         }
-    }
+    }*/
 
 
     public BuildingBOM searchByAddress(String address) {
@@ -87,7 +89,8 @@ public class BuildingService {
         }
     }
 
-    public BuildingBOM searchById(Integer id) {
+
+    /*public BuildingBOM searchById(Integer id) {
         BuildingDTO building = buildingRepository.findBuildingById(id);
         if (building != null) {
             BuildingBOM buildingBOM = new BuildingBOM();
@@ -96,5 +99,5 @@ public class BuildingService {
         } else {
             throw new EntityNotFoundException("There is no building on this id: " + id);
         }
-    }
+    }*/
 }

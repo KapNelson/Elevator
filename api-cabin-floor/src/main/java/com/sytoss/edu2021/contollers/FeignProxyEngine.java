@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @FeignClient(name="api-engine", url="localhost:6050/api/engine")
 public interface FeignProxyEngine {
-    @PostMapping("/start")
+    @PostMapping("/start/{buildingId}/{cabinNumber}")
     void startMovement(@PathVariable Integer buildingId, @PathVariable Integer cabinNumber);
 
     @PostMapping("/add/route/{buildingId}/{cabinNumber}/{floorNumber}")

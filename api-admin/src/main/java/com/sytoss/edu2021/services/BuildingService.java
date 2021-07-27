@@ -92,6 +92,16 @@ public class BuildingService {
         }
     }
 
+    public BuildingBOM findBuildingById(Integer buildingId) {
+        BuildingDTO dto = buildingRepository.findBuildingById(buildingId);
+        if (dto == null) {
+            throw new EntityNotFoundException(buildingId, "There is no such building " + buildingId);
+        }
+        BuildingBOM result = new BuildingBOM();
+        new BuildingConvertor().fromDTO(dto, result);
+        return result;
+    }
+
 
     /*public BuildingBOM searchById(Integer id) {
         BuildingDTO building = buildingRepository.findBuildingById(id);

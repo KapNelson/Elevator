@@ -24,4 +24,9 @@ class GlobalControllerExceptionHandler {
     public ResponseEntity<?> handleValidationException(EntityNotFoundException exception, WebRequest request) {
         return ResponseEntity.status(418).body(exception.getMessage());
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<?> handleIllegalArgumentException(IllegalArgumentException exception, WebRequest request) {
+        return ResponseEntity.status(418).body(exception.getMessage());
+    }
 }

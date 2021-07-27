@@ -53,4 +53,14 @@ public class EngineController {
     public RouteBOM addFloorToRoute(@PathVariable Integer buildingId, @PathVariable Integer cabinNumber, @PathVariable Integer floorNumber){
         return routeService.addFloorToRoute(buildingId,cabinNumber,floorNumber);
     }
+
+    @PostMapping("/start/{buildingId}/{cabinNumber}")
+    public void startMovement(@PathVariable Integer buildingId, @PathVariable Integer cabinNumber){
+        engineService.startMovement(buildingId,cabinNumber);
+    }
+
+    @GetMapping ("/get/{engineId}")
+    public EngineBOM getEngine(@PathVariable Integer engineId){
+        return engineService.getEngine(engineId);
+    }
 }

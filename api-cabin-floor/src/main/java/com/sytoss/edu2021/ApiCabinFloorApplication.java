@@ -15,10 +15,13 @@ import org.springframework.web.client.RestTemplate;
 public class ApiCabinFloorApplication {
     public static void main(String[] args) {
         SpringApplication.run(ApiCabinFloorApplication.class, args);
+
     }
 
     @Bean
     public RestTemplate getRestTemplate() {
         return new RestTemplate();
     }
+
+
 }

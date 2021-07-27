@@ -40,34 +40,6 @@ public class Scheduler implements Job{
         engineBOMS.add(engineBOM);
     }
 
-//    @Scheduled(fixedDelay = 5000)
-//    public void check() {
-//        System.out.println("5 sec.");
-//        for (EngineBOM engine : engineBOMS) {
-//            RouteDTO[] routeDTOS = routeRepository.findAllByRouteDTOId_IdEngine(engine.getId());
-//
-//            Set<Integer> set = new HashSet<>();
-//            for (RouteDTO route : routeDTOS) {
-//                set.add(route.getRouteDTOId().getFloorNumber());
-//            }
-//            engine.getRoute().setQueueOfFloors(set);
-//            engine.getRoute().setDirection(Direction.UP);
-//            switch (engine.getStatus()) {
-//                case RUNNING_DOWN:
-//                case RUNNING_UP:
-//                    engine.move();
-//                    break;
-//                case STOP:
-//                    if (!engine.getRoute().getQueueOfFloors().isEmpty()) {
-//                        engine.start();
-//                    }
-//                    break;
-//                case BROKEN:
-//                    break;
-//            }
-//        }
-//    }
-
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         System.out.println("Прошло 5 секунд!");

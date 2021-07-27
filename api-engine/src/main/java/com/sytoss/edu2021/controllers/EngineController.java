@@ -45,12 +45,12 @@ public class EngineController {
 
 
     @PostMapping("/add/{buildingId}/{cabinId}")
-    public EngineBOM registerEngine(@PathVariable Integer buildingId, @PathVariable Integer cabinId){
+    private EngineBOM registerEngine(@PathVariable Integer buildingId, @PathVariable Integer cabinId){
         return engineService.addEngine(buildingId,cabinId);
     }
 
     @PostMapping("/add/route/{buildingId}/{cabinNumber}/{floorNumber}")
-    RouteBOM addFloorToRoute(@PathVariable Integer buildingId, @PathVariable Integer cabinNumber, @PathVariable Integer floorNumber){
+    public RouteBOM addFloorToRoute(@PathVariable Integer buildingId, @PathVariable Integer cabinNumber, @PathVariable Integer floorNumber){
         return routeService.addFloorToRoute(buildingId,cabinNumber,floorNumber);
     }
 }

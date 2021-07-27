@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RouteRepository extends JpaRepository<RouteDTO, RouteDTOId> {
 
+    RouteDTO findRouteDTOByRouteDTOId(RouteDTOId routeDTOId);
+
+    RouteDTO[] findAllByRouteDTOId_IdEngine(int idEngine);
 }

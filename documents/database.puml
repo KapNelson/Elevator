@@ -1,0 +1,18 @@
+@startuml
+interface WaitingStrategy{
+   execute();
+}
+
+class FutureTask implements WaitingStrategy{
+   + execute();
+}
+
+class JobQuartz implements WaitingStrategy{
+   + execute();
+}
+
+class EngineService{
+}
+
+EngineService.. "use" WaitingStrategy
+@enduml

@@ -1,5 +1,6 @@
 package com.sytoss.edu2021.services;
 
+import com.sytoss.edu2021.ApiEngineApplication;
 import com.sytoss.edu2021.ElevatorJob;
 import com.sytoss.edu2021.bom.EngineBOM;
 import com.sytoss.edu2021.common.EngineStatus;
@@ -10,14 +11,12 @@ import com.sytoss.edu2021.services.convertor.EngineConvertor;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@EnableScheduling
 public class EngineService {
 
     @Autowired
@@ -26,47 +25,45 @@ public class EngineService {
     RouteRepository routeRepository;
 
     public EngineBOM addEngine(Integer buildingId, Integer cabinId) {
-            EngineDTO engineDTO = new EngineDTO();
-            engineDTO.setId(cabinId);
-            engineDTO.setBuildingId(buildingId);
-            engineDTO.setCabinId(cabinId);
-            engineDTO.setCurrentFloor(1);
-            engineDTO.setEngineStatus(EngineStatus.STOP);
-            engineDTO = engineRepository.save(engineDTO);
-            EngineBOM engineBOM = new EngineBOM();
-            new EngineConvertor().fromDTO(engineDTO,engineBOM);
-            return engineBOM;
-        }
+        EngineDTO engineDTO = new EngineDTO();
+        engineDTO.setId(cabinId);
+        engineDTO.setBuildingId(buildingId);
+        engineDTO.setCabinId(cabinId);
+        engineDTO.setCurrentFloor(1);
+        engineDTO.setEngineStatus(EngineStatus.STOP);
+        engineDTO = engineRepository.save(engineDTO);
+        EngineBOM engineBOM = new EngineBOM();
+        new EngineConvertor().fromDTO(engineDTO, engineBOM);
+        return engineBOM;
+    }
 
     public void startMovement(Integer buildingId, Integer cabinNumber) {
-        EngineDTO engineDTO = engineRepository.findEngineDTOByBuildingIdAndCabinId(buildingId,cabinNumber);
+        EngineDTO engineDTO = engineRepository.findEngineDTOByBuildingIdAndCabinId(buildingId, cabinNumber);
         EngineBOM engineBOM = new EngineBOM();
-        new EngineConvertor().fromDTO(engineDTO,engineBOM);
+        new EngineConvertor().fromDTO(engineDTO, engineBOM);
 
-        SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+        JobDataMap data = new JobDataMap();
+        data.put("routeRepository", routeRepository);
+        data.put("engineRepository", engineRepository);
+        data.put("engine", engineBOM);
+
         try {
-            Scheduler scheduler = schedulerFactory.getScheduler();
-            scheduler.start();
+            if (!ApiEngineApplication.scheduler.checkExists(new JobKey("myJob", "group1"))) {
+                JobDetail job = JobBuilder.newJob(ElevatorJob.class)
+                        .withIdentity("myJob", "group1")
+                        .usingJobData(data)
+                        .build();
 
-            JobDataMap data = new JobDataMap();
-            data.put("routeRepository", routeRepository);
-            data.put("engineRepository", engineRepository);
-            data.put("engine", engineBOM);
+                Trigger trigger = TriggerBuilder.newTrigger()
+                        .withIdentity("myTrigger", "group1")
+                        .startNow()
+                        .withSchedule(SimpleScheduleBuilder.simpleSchedule()
+                                .withIntervalInSeconds(5)
+                                .repeatForever())
+                        .build();
 
-            JobDetail job = JobBuilder.newJob(ElevatorJob.class)
-                    .withIdentity("myJob", "group1")
-                    .usingJobData(data)
-                    .build();
-
-            Trigger trigger = TriggerBuilder.newTrigger()
-                    .withIdentity("myTrigger", "group1")
-                    .startNow()
-                    .withSchedule(SimpleScheduleBuilder.simpleSchedule()
-                            .withIntervalInSeconds(5)
-                            .repeatForever())
-                    .build();
-
-            scheduler.scheduleJob(job, trigger);
+                ApiEngineApplication.scheduler.scheduleJob(job, trigger);
+            }
         } catch (SchedulerException e) {
             e.printStackTrace();
         }
@@ -76,38 +73,35 @@ public class EngineService {
         List<EngineDTO> engines = engineRepository.findAll();
         List<EngineBOM> engineBOMs = new ArrayList<>();
 
-        for (EngineDTO engineDTO: engines) {
+        for (EngineDTO engineDTO : engines) {
             EngineBOM engineBOM = new EngineBOM();
             new EngineConvertor().fromDTO(engineDTO, engineBOM);
 
             engineBOMs.add(engineBOM);
         }
 
+        JobDataMap data = new JobDataMap();
+        data.put("routeRepository", routeRepository);
+        data.put("engineRepository", engineRepository);
+        data.put("engines", engineBOMs);
 
-        SchedulerFactory schedulerFactory = new StdSchedulerFactory();
         try {
-            Scheduler scheduler = schedulerFactory.getScheduler();
-            scheduler.start();
+            if (!ApiEngineApplication.scheduler.checkExists(new JobKey("myJob", "group1"))) {
+                JobDetail job = JobBuilder.newJob(ElevatorJob.class)
+                        .withIdentity("myJob", "group1")
+                        .usingJobData(data)
+                        .build();
 
-            JobDataMap data = new JobDataMap();
-            data.put("routeRepository", routeRepository);
-            data.put("engineRepository", engineRepository);
-            data.put("engines", engineBOMs);
+                Trigger trigger = TriggerBuilder.newTrigger()
+                        .withIdentity("myTrigger", "group1")
+                        .startNow()
+                        .withSchedule(SimpleScheduleBuilder.simpleSchedule()
+                                .withIntervalInSeconds(5)
+                                .repeatForever())
+                        .build();
 
-            JobDetail job = JobBuilder.newJob(ElevatorJob.class)
-                    .withIdentity("myJob", "group1")
-                    .usingJobData(data)
-                    .build();
-
-            Trigger trigger = TriggerBuilder.newTrigger()
-                    .withIdentity("myTrigger", "group1")
-                    .startNow()
-                    .withSchedule(SimpleScheduleBuilder.simpleSchedule()
-                            .withIntervalInSeconds(5)
-                            .repeatForever())
-                    .build();
-
-            scheduler.scheduleJob(job, trigger);
+                ApiEngineApplication.scheduler.scheduleJob(job, trigger);
+            }
         } catch (SchedulerException e) {
             e.printStackTrace();
         }
@@ -116,10 +110,9 @@ public class EngineService {
     public EngineBOM getEngine(Integer engineId) {
         EngineDTO engineDTO = engineRepository.findEngineDTOById(engineId);
         EngineBOM engineBOM = new EngineBOM();
-        new EngineConvertor().fromDTO(engineDTO,engineBOM);
+        new EngineConvertor().fromDTO(engineDTO, engineBOM);
         return engineBOM;
     }
-
 
 
 }

@@ -18,7 +18,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@EnableScheduling
 public class ElevatorJob implements Job{
 
     private List<EngineBOM> engineBOMS = new ArrayList<>();
@@ -35,6 +34,10 @@ public class ElevatorJob implements Job{
             for (RouteDTO route : routeDTOS) {
                 set.add(route.getRouteDTOId().getFloorNumber());
             }
+
+            if(set.isEmpty())
+                continue;
+
             engine.getRoute().setQueueOfFloors(set);
             engine.getRoute().setDirection(engine.getCurrentFloor(), engine.getRoute().getMinValue());
             switch (engine.getStatus()) {

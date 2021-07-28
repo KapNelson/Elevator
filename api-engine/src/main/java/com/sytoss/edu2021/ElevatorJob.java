@@ -10,9 +10,7 @@ import com.sytoss.edu2021.services.convertor.EngineConvertor;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,20 +18,18 @@ import java.util.List;
 import java.util.Set;
 
 @EnableScheduling
-public class Scheduler implements Job{
+public class ElevatorJob implements Job{
 
     private static List<EngineBOM> engineBOMS = new ArrayList<>();
-
     private static RouteRepository routeRepository;
-
     private static EngineRepository engineRepository;
 
 
-    public Scheduler(List<EngineBOM> engineBOM) {
+    public ElevatorJob(List<EngineBOM> engineBOM) {
         this.engineBOMS = engineBOM;
     }
 
-    public Scheduler() {
+    public ElevatorJob() {
     }
 
     public static void addEngine(EngineBOM engineBOM) {
@@ -72,11 +68,11 @@ public class Scheduler implements Job{
         }
     }
 
-    public void setRouteRepository(RouteRepository routeRepository) {
-        this.routeRepository = routeRepository;
+    public static void setRouteRepository(RouteRepository routeRepository) {
+        ElevatorJob.routeRepository = routeRepository;
     }
 
-    public void setEngineRepository(EngineRepository engineRepository) {
-        this.engineRepository = engineRepository;
+    public static void setEngineRepository(EngineRepository engineRepository) {
+        ElevatorJob.engineRepository = engineRepository;
     }
 }

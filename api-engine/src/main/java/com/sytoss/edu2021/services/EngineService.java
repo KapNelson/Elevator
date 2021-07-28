@@ -1,5 +1,6 @@
 package com.sytoss.edu2021.services;
 
+import com.sytoss.edu2021.ElevatorJob;
 import com.sytoss.edu2021.bom.EngineBOM;
 import com.sytoss.edu2021.common.EngineStatus;
 import com.sytoss.edu2021.repo.EngineRepository;
@@ -44,12 +45,12 @@ public class EngineService {
             Scheduler scheduler = schedulerFactory.getScheduler();
             scheduler.start();
 
-            com.sytoss.edu2021.Scheduler sched = new  com.sytoss.edu2021.Scheduler();
-            sched.setRouteRepository(routeRepository);
-            sched.setEngineRepository(engineRepository);
-            com.sytoss.edu2021.Scheduler.addEngine(engineBOM);
 
-            JobDetail job = JobBuilder.newJob(com.sytoss.edu2021.Scheduler.class)
+            ElevatorJob.setRouteRepository(routeRepository);
+            ElevatorJob.setEngineRepository(engineRepository);
+            ElevatorJob.addEngine(engineBOM);
+
+            JobDetail job = JobBuilder.newJob(ElevatorJob.class)
                     .withIdentity("myJob", "group1")
                     .build();
 

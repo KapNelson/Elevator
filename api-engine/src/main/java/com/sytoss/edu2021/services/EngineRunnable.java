@@ -39,15 +39,13 @@ public class EngineRunnable implements Runnable{
     @Override
     public void run() {
         try {
-            Thread.sleep(waitTime);
-            System.out.println("Прошло 5 секунд текущий этаж:" + engine.getCurrentFloor() + " Состояние " + engine.getStatus());
 
             RouteDTO routeDTOs[] = routeRepository.findAllByRouteDTOId_IdEngine(engine.getId());
 
             RouteBOM route = new RouteBOM();
             new RouteConvertor().fromDTO(routeDTOs,route);
             engine.setRoute(route);
-            engine.getRoute().setDirection(Direction.UP);
+            engine.getRoute().setDirection(engine.getCurrentFloor(), engine.getRoute().getMinValue());
             switch (engine.getStatus())
             {
                 case RUNNING_DOWN:
@@ -55,9 +53,20 @@ public class EngineRunnable implements Runnable{
                     engine.move();
                     break;
                 case STOP:
-                    if(engine.getCurrentFloor() < Collections.max(engine.getRoute().getQueueOfFloors()))
+                    RouteDTOId removeRoute = new RouteDTOId();
+                    removeRoute.setFloorNumber(engine.getCurrentFloor());
+                    removeRoute.setIdEngine(engine.getId());
+
+                    RouteDTO remove = new RouteDTO();
+                    remove.setRouteDTOId(removeRoute);
+                    routeRepository.delete(remove);
+                    if(!engine.getRoute().getQueueOfFloors().isEmpty())
                     {
                         engine.start();
+                    }
+                    else
+                    {
+                        return;
                     }
 
                     break;
@@ -68,28 +77,26 @@ public class EngineRunnable implements Runnable{
             EngineDTO engineDTO = new EngineDTO();
             new EngineConvertor().toDTO(engine, engineDTO);
             engineRepository.save(engineDTO);
-            System.out.println(Collections.max(engine.getRoute().getQueueOfFloors()));
-            if(engine.getCurrentFloor() < Collections.max(engine.getRoute().getQueueOfFloors()))
+            Thread.sleep(waitTime);
+            System.out.println("Прошло 5 секунд текущий этаж:" + engine.getCurrentFloor() + " Состояние " + engine.getStatus());
+            EngineRunnable runnable = new EngineRunnable(engine);
+            runnable.setEngineRepository(engineRepository);
+            runnable.setRouteRepository(routeRepository);
+            FutureTask<String>
+                    futureTask = new FutureTask<String>(runnable,"FutureTask is complete");
+
+            ExecutorService executor = Executors.newCachedThreadPool();
+
+
+            executor.submit(futureTask);
+            while(!futureTask.isDone())
             {
-                EngineRunnable runnable = new EngineRunnable(engine);
-                runnable.setEngineRepository(engineRepository);
-                runnable.setRouteRepository(routeRepository);
-                FutureTask<String>
-                        futureTask = new FutureTask<String>(runnable,"FutureTask is complete");
-
-                //ExecutorService executor = Executors.newFixedThreadPool(10);
-                ExecutorService executor = Executors.newCachedThreadPool();
-
-
-                executor.submit(futureTask);
-                while(!futureTask.isDone())
-                {
-                    Thread.sleep(100);
-                }
-
-
-                executor.shutdown();
+                Thread.sleep(100);
             }
+
+
+            executor.shutdown();
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

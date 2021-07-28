@@ -1,15 +1,17 @@
 package com.sytoss.edu2021.services;
 
 import com.sytoss.edu2021.ApiEngineApplication;
-import com.sytoss.edu2021.ElevatorJob;
+import com.sytoss.edu2021.strategy.WaitingStrategy;
+import com.sytoss.edu2021.strategy.future.EngineFutureTask;
+import com.sytoss.edu2021.strategy.quartz.ElevatorJob;
 import com.sytoss.edu2021.bom.EngineBOM;
 import com.sytoss.edu2021.common.EngineStatus;
 import com.sytoss.edu2021.repo.EngineRepository;
 import com.sytoss.edu2021.repo.RouteRepository;
 import com.sytoss.edu2021.repo.dto.EngineDTO;
 import com.sytoss.edu2021.services.convertor.EngineConvertor;
+import com.sytoss.edu2021.strategy.quartz.JobQuartz;
 import org.quartz.*;
-import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,9 @@ public class EngineService {
     @Autowired
     RouteRepository routeRepository;
 
+    private WaitingStrategy strategy;
+
+
     public EngineBOM addEngine(Integer buildingId, Integer cabinId) {
         EngineDTO engineDTO = new EngineDTO();
         engineDTO.setId(cabinId);
@@ -37,7 +42,7 @@ public class EngineService {
         return engineBOM;
     }
 
-    public void startMovement(Integer buildingId, Integer cabinNumber) {
+    public void startMovement(Integer buildingId, Integer cabinNumber, String strategyType) {
         EngineDTO engineDTO = engineRepository.findEngineDTOByBuildingIdAndCabinId(buildingId, cabinNumber);
         EngineBOM engineBOM = new EngineBOM();
         new EngineConvertor().fromDTO(engineDTO, engineBOM);
@@ -47,26 +52,12 @@ public class EngineService {
         data.put("engineRepository", engineRepository);
         data.put("engine", engineBOM);
 
-        try {
-            if (!ApiEngineApplication.scheduler.checkExists(new JobKey("myJob", "group1"))) {
-                JobDetail job = JobBuilder.newJob(ElevatorJob.class)
-                        .withIdentity("myJob", "group1")
-                        .usingJobData(data)
-                        .build();
+        if (strategyType.equals("JobQuartz"))
+            strategy = new JobQuartz();
+        if (strategyType.equals("FutureTask"))
+            strategy = new EngineFutureTask();
 
-                Trigger trigger = TriggerBuilder.newTrigger()
-                        .withIdentity("myTrigger", "group1")
-                        .startNow()
-                        .withSchedule(SimpleScheduleBuilder.simpleSchedule()
-                                .withIntervalInSeconds(5)
-                                .repeatForever())
-                        .build();
-
-                ApiEngineApplication.scheduler.scheduleJob(job, trigger);
-            }
-        } catch (SchedulerException e) {
-            e.printStackTrace();
-        }
+        strategy.startJob(data);
     }
 
     public void startMovement() {

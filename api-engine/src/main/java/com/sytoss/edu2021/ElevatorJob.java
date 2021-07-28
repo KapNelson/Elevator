@@ -6,13 +6,12 @@ import com.sytoss.edu2021.repo.EngineRepository;
 import com.sytoss.edu2021.repo.RouteRepository;
 import com.sytoss.edu2021.repo.dto.EngineDTO;
 import com.sytoss.edu2021.repo.dto.RouteDTO;
+import com.sytoss.edu2021.repo.dto.RouteDTOId;
 import com.sytoss.edu2021.services.convertor.EngineConvertor;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -20,29 +19,15 @@ import java.util.List;
 import java.util.Set;
 
 @EnableScheduling
-public class Scheduler implements Job{
+public class ElevatorJob implements Job{
 
-    private static List<EngineBOM> engineBOMS = new ArrayList<>();
-
-    private static RouteRepository routeRepository;
-
-    private static EngineRepository engineRepository;
-
-
-    public Scheduler(List<EngineBOM> engineBOM) {
-        this.engineBOMS = engineBOM;
-    }
-
-    public Scheduler() {
-    }
-
-    public static void addEngine(EngineBOM engineBOM) {
-        engineBOMS.add(engineBOM);
-    }
+    private List<EngineBOM> engineBOMS = new ArrayList<>();
+    private RouteRepository routeRepository;
+    private EngineRepository engineRepository;
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        System.out.println("Прошло 5 секунд!");
+
         for (EngineBOM engine : engineBOMS) {
             RouteDTO[] routeDTOS = routeRepository.findAllByRouteDTOId_IdEngine(engine.getId());
 
@@ -51,13 +36,21 @@ public class Scheduler implements Job{
                 set.add(route.getRouteDTOId().getFloorNumber());
             }
             engine.getRoute().setQueueOfFloors(set);
-            engine.getRoute().setDirection(Direction.UP);
+            engine.getRoute().setDirection(engine.getCurrentFloor(), engine.getRoute().getMinValue());
             switch (engine.getStatus()) {
                 case RUNNING_DOWN:
                 case RUNNING_UP:
                     engine.move();
                     break;
                 case STOP:
+                    RouteDTOId removeRoute = new RouteDTOId();
+                    removeRoute.setFloorNumber(engine.getCurrentFloor());
+                    removeRoute.setIdEngine(engine.getId());
+
+                    RouteDTO remove = new RouteDTO();
+                    remove.setRouteDTOId(removeRoute);
+                    routeRepository.delete(remove);
+
                     if (!engine.getRoute().getQueueOfFloors().isEmpty()) {
                         engine.start();
                     }
@@ -79,4 +72,13 @@ public class Scheduler implements Job{
     public void setEngineRepository(EngineRepository engineRepository) {
         this.engineRepository = engineRepository;
     }
+
+    public void setEngine(EngineBOM engineBOM) {
+        engineBOMS.add(engineBOM);
+    }
+
+    public void setEngines(List<EngineBOM> engines) {
+        this.engineBOMS = engines;
+    }
+
 }

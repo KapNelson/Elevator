@@ -36,7 +36,7 @@ public class ElevatorJob implements Job{
                 set.add(route.getRouteDTOId().getFloorNumber());
             }
             engine.getRoute().setQueueOfFloors(set);
-            engine.getRoute().setDirection(Direction.UP);
+            engine.getRoute().setDirection(engine.getCurrentFloor(), engine.getRoute().getMinValue());
             switch (engine.getStatus()) {
                 case RUNNING_DOWN:
                 case RUNNING_UP:

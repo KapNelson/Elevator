@@ -1,6 +1,11 @@
 package com.sytoss.edu2021.services;
 
 import com.sytoss.edu2021.ApiEngineApplication;
+import com.sytoss.edu2021.common.RouteBOM;
+import com.sytoss.edu2021.controllers.FeignProxyCabin;
+import com.sytoss.edu2021.repo.dto.RouteDTO;
+import com.sytoss.edu2021.repo.dto.RouteDTOId;
+import com.sytoss.edu2021.services.convertor.RouteConvertor;
 import com.sytoss.edu2021.strategy.WaitingStrategy;
 import com.sytoss.edu2021.strategy.future.EngineFutureTask;
 import com.sytoss.edu2021.strategy.quartz.ElevatorJob;
@@ -22,9 +27,11 @@ import java.util.List;
 public class EngineService {
 
     @Autowired
-    EngineRepository engineRepository;
+    private EngineRepository engineRepository;
     @Autowired
-    RouteRepository routeRepository;
+    private RouteRepository routeRepository;
+    @Autowired
+    private FeignProxyCabin proxyCabin;
 
     private WaitingStrategy strategy;
 
@@ -105,5 +112,21 @@ public class EngineService {
         return engineBOM;
     }
 
+    public EngineBOM getEngine(Integer buildingId, Integer cabinNumber) {
+        int idEngine = proxyCabin.getCabin(buildingId, cabinNumber).getId();
+        EngineDTO engineDTO = engineRepository.findEngineDTOById(idEngine);
+        EngineBOM engineBOM = new EngineBOM();
+        new EngineConvertor().fromDTO(engineDTO, engineBOM);
+        return engineBOM;
 
+    }
+
+
+    public int getRoute(Integer buildingId, Integer cabinNumber) {
+        int idEngine = proxyCabin.getCabin(buildingId, cabinNumber).getId();
+        RouteDTO[] routes =routeRepository.findAllByRouteDTOId_IdEngine(idEngine);
+        RouteBOM routeBOM = new RouteBOM();
+        new RouteConvertor().fromDTO(routes,routeBOM);
+        return routeBOM.getMinValue();
+    }
 }

@@ -47,6 +47,15 @@ public class EngineController {
         return engineService.getEngine(engineId);
     }
 
+    @GetMapping ("/get/{buildingId}/{cabinNumber}")
+    public EngineBOM getEngineByBuildingAndCabin(@PathVariable Integer buildingId, @PathVariable Integer cabinNumber){
+        return engineService.getEngine(buildingId, cabinNumber);
+    }
+    @GetMapping("/get/route/{buildingId}/{cabinNumber}")
+    public int getRoute(@PathVariable Integer buildingId, @PathVariable Integer cabinNumber)
+    {
+        return engineService.getRoute(buildingId, cabinNumber);
+    }
     @GetMapping("/getTest")
     private String test(){
         return type;

@@ -7,6 +7,7 @@ import com.sytoss.edu2021.repo.dto.EngineDTO;
 import com.sytoss.edu2021.services.EngineService;
 import com.sytoss.edu2021.services.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,6 +18,9 @@ public class EngineController {
     private EngineService engineService;
     @Autowired
     private RouteService routeService;
+
+    @Value("${waitingStrategy.type}")
+    private String abc;
 
     @PostMapping("/add/{buildingId}/{cabinId}")
     private EngineBOM registerEngine(@PathVariable Integer buildingId, @PathVariable Integer cabinId){
@@ -41,5 +45,10 @@ public class EngineController {
     @GetMapping ("/get/{engineId}")
     public EngineBOM getEngine(@PathVariable Integer engineId){
         return engineService.getEngine(engineId);
+    }
+
+    @GetMapping("/getTest")
+    private String test(){
+        return abc;
     }
 }

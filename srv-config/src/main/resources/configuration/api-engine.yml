@@ -12,4 +12,5 @@ spring:
     enabled: true
     change-log: classpath:/db/db.changelog.xml
     default-schema: api_engine
-
+waitingStrategy:
+  type: description_here

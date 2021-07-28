@@ -20,7 +20,7 @@ public class EngineController {
     private RouteService routeService;
 
     @Value("${waitingStrategy.type}")
-    private String abc;
+    private String type;
 
     @PostMapping("/add/{buildingId}/{cabinId}")
     private EngineBOM registerEngine(@PathVariable Integer buildingId, @PathVariable Integer cabinId){
@@ -34,7 +34,7 @@ public class EngineController {
 
     @PostMapping("/start/{buildingId}/{cabinNumber}")
     public void startMovement(@PathVariable Integer buildingId, @PathVariable Integer cabinNumber){
-        engineService.startMovement(buildingId,cabinNumber);
+        engineService.startMovement(buildingId,cabinNumber,type);
     }
 
     @PostMapping("/startAllEngines")
@@ -49,6 +49,6 @@ public class EngineController {
 
     @GetMapping("/getTest")
     private String test(){
-        return abc;
+        return type;
     }
 }

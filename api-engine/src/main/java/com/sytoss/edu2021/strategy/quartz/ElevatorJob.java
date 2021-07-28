@@ -1,7 +1,6 @@
-package com.sytoss.edu2021;
+package com.sytoss.edu2021.strategy.quartz;
 
 import com.sytoss.edu2021.bom.EngineBOM;
-import com.sytoss.edu2021.common.Direction;
 import com.sytoss.edu2021.repo.EngineRepository;
 import com.sytoss.edu2021.repo.RouteRepository;
 import com.sytoss.edu2021.repo.dto.EngineDTO;
@@ -11,7 +10,6 @@ import com.sytoss.edu2021.services.convertor.EngineConvertor;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -11,6 +11,7 @@ public class RouteConvertor {
     public void toDTO(RouteBOM source, RouteDTO destination) {
     }
 
+
     public void fromDTO(RouteDTO[] source, RouteBOM destination) {
         Set<Integer> points = new TreeSet<>();
         for (RouteDTO point : source) {

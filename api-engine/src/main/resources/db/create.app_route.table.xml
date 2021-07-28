@@ -20,6 +20,7 @@
             <column name="id_engine" type="int">
                 <constraints nullable="false"/>
             </column>
+
         </createTable>
         <addPrimaryKey  columnNames="floor_number, id_engine"
                         constraintName="pk_app_route"

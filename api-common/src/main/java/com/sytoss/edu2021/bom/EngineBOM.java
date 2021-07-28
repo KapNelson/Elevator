@@ -46,6 +46,7 @@ public class EngineBOM {
                 if (route.getQueueOfFloors().contains(currentFloor)) {
                     stop();
                     route.getQueueOfFloors().remove(currentFloor);
+
                 }
             }
         }

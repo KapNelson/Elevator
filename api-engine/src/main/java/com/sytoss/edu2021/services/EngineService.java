@@ -12,6 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
+
 @Service
 @EnableScheduling
 public class EngineService {
@@ -35,36 +40,47 @@ public class EngineService {
         }
 
     public void startMovement(Integer buildingId, Integer cabinNumber) {
+
         EngineDTO engineDTO = engineRepository.findEngineDTOByBuildingIdAndCabinId(buildingId,cabinNumber);
         EngineBOM engineBOM = new EngineBOM();
         new EngineConvertor().fromDTO(engineDTO,engineBOM);
+        EngineRunnable runnable = new EngineRunnable(engineBOM);
+        runnable.setEngineRepository(engineRepository);
+        runnable.setRouteRepository(routeRepository);
+        FutureTask<String>
+                futureTask = new FutureTask<>(runnable,
+                "FutureTask is complete");
 
-        SchedulerFactory schedulerFactory = new StdSchedulerFactory();
-        try {
-            Scheduler scheduler = schedulerFactory.getScheduler();
-            scheduler.start();
+        ExecutorService executor = Executors.newCachedThreadPool();
 
-            com.sytoss.edu2021.Scheduler sched = new  com.sytoss.edu2021.Scheduler();
-            sched.setRouteRepository(routeRepository);
-            sched.setEngineRepository(engineRepository);
-            com.sytoss.edu2021.Scheduler.addEngine(engineBOM);
+        executor.submit(futureTask);
 
-            JobDetail job = JobBuilder.newJob(com.sytoss.edu2021.Scheduler.class)
-                    .withIdentity("myJob", "group1")
-                    .build();
 
-            Trigger trigger = TriggerBuilder.newTrigger()
-                    .withIdentity("myTrigger", "group1")
-                    .startNow()
-                    .withSchedule(SimpleScheduleBuilder.simpleSchedule()
-                            .withIntervalInSeconds(5)
-                            .repeatForever())
-                    .build();
 
-            scheduler.scheduleJob(job, trigger);
-        } catch (SchedulerException e) {
-            e.printStackTrace();
+        while(!futureTask.isDone())
+        {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+//            if(!engineBOM.getRoute().getQueueOfFloors().isEmpty())
+//            {
+//                executor.shutdown();
+//                runnable = new EngineRunnable(engineBOM);
+//                futureTask = new FutureTask<>(runnable,"FutureTask is complete");
+//
+//                executor = Executors.newCachedThreadPool();
+//
+//                executor.submit(futureTask);
+//
+//            }
+
         }
+
+        executor.shutdown();
+
     }
 
     public EngineBOM getEngine(Integer engineId) {

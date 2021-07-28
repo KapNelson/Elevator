@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @EnableScheduling
 public class EngineService {
@@ -45,17 +48,51 @@ public class EngineService {
             Scheduler scheduler = schedulerFactory.getScheduler();
             scheduler.start();
 
-
-            /*ElevatorJob.setRouteRepository(routeRepository);
-            ElevatorJob.setEngineRepository(engineRepository);
-            ElevatorJob.addEngine(engineBOM);
-*/
-
             JobDataMap data = new JobDataMap();
             data.put("routeRepository", routeRepository);
             data.put("engineRepository", engineRepository);
             data.put("engine", engineBOM);
-            data.put("msg", "Five seconds passed. . .");
+
+            JobDetail job = JobBuilder.newJob(ElevatorJob.class)
+                    .withIdentity("myJob", "group1")
+                    .usingJobData(data)
+                    .build();
+
+            Trigger trigger = TriggerBuilder.newTrigger()
+                    .withIdentity("myTrigger", "group1")
+                    .startNow()
+                    .withSchedule(SimpleScheduleBuilder.simpleSchedule()
+                            .withIntervalInSeconds(5)
+                            .repeatForever())
+                    .build();
+
+            scheduler.scheduleJob(job, trigger);
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void startMovement() {
+        List<EngineDTO> engines = engineRepository.findAll();
+        List<EngineBOM> engineBOMs = new ArrayList<>();
+
+        for (EngineDTO engineDTO: engines) {
+            EngineBOM engineBOM = new EngineBOM();
+            new EngineConvertor().fromDTO(engineDTO, engineBOM);
+
+            engineBOMs.add(engineBOM);
+        }
+
+
+        SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+        try {
+            Scheduler scheduler = schedulerFactory.getScheduler();
+            scheduler.start();
+
+            JobDataMap data = new JobDataMap();
+            data.put("routeRepository", routeRepository);
+            data.put("engineRepository", engineRepository);
+            data.put("engines", engineBOMs);
 
             JobDetail job = JobBuilder.newJob(ElevatorJob.class)
                     .withIdentity("myJob", "group1")

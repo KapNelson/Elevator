@@ -33,6 +33,11 @@ public class EngineController {
         engineService.startMovement(buildingId,cabinNumber);
     }
 
+    @PostMapping("/startAllEngines")
+    public void startMovement(){
+        engineService.startMovement();
+    }
+
     @GetMapping ("/get/{engineId}")
     public EngineBOM getEngine(@PathVariable Integer engineId){
         return engineService.getEngine(engineId);

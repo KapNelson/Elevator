@@ -20,7 +20,7 @@ public class CabinService {
 
     public RouteBOM addFloorToRoute(int buildingId, int cabinNumber, int floorNumber) {
         BuildingBOM buildingBOM = proxyAdmin.findBuildingById(buildingId);
-        if(floorNumber>buildingBOM.getFloorsAmount())
+        if(floorNumber>buildingBOM.getFloorsAmount() || floorNumber <= 0)
             throw new IllegalArgumentException("You can`t get to this floor. There is no such floor");
         try {
             return proxyEngine.addFloorToRoute(buildingId, cabinNumber, floorNumber);

@@ -6,9 +6,9 @@ import com.sytoss.edu2021.repo.EngineRepository;
 import com.sytoss.edu2021.repo.RouteRepository;
 import com.sytoss.edu2021.repo.dto.EngineDTO;
 import com.sytoss.edu2021.repo.dto.RouteDTO;
+import com.sytoss.edu2021.repo.dto.RouteDTOId;
 import com.sytoss.edu2021.services.convertor.EngineConvertor;
 import org.quartz.Job;
-import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -24,21 +24,10 @@ public class ElevatorJob implements Job{
     private List<EngineBOM> engineBOMS = new ArrayList<>();
     private RouteRepository routeRepository;
     private EngineRepository engineRepository;
-    private String msg;
-
-
-    public ElevatorJob(List<EngineBOM> engineBOM) {
-        this.engineBOMS = engineBOM;
-    }
-
-    public ElevatorJob() {
-    }
-
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
-        System.out.println(msg);
         for (EngineBOM engine : engineBOMS) {
             RouteDTO[] routeDTOS = routeRepository.findAllByRouteDTOId_IdEngine(engine.getId());
 
@@ -54,6 +43,14 @@ public class ElevatorJob implements Job{
                     engine.move();
                     break;
                 case STOP:
+                    RouteDTOId removeRoute = new RouteDTOId();
+                    removeRoute.setFloorNumber(engine.getCurrentFloor());
+                    removeRoute.setIdEngine(engine.getId());
+
+                    RouteDTO remove = new RouteDTO();
+                    remove.setRouteDTOId(removeRoute);
+                    routeRepository.delete(remove);
+
                     if (!engine.getRoute().getQueueOfFloors().isEmpty()) {
                         engine.start();
                     }
@@ -80,7 +77,8 @@ public class ElevatorJob implements Job{
         engineBOMS.add(engineBOM);
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setEngines(List<EngineBOM> engines) {
+        this.engineBOMS = engines;
     }
+
 }

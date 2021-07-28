@@ -8,6 +8,7 @@ import com.sytoss.edu2021.repo.dto.EngineDTO;
 import com.sytoss.edu2021.repo.dto.RouteDTO;
 import com.sytoss.edu2021.services.convertor.EngineConvertor;
 import org.quartz.Job;
+import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -20,9 +21,10 @@ import java.util.Set;
 @EnableScheduling
 public class ElevatorJob implements Job{
 
-    private static List<EngineBOM> engineBOMS = new ArrayList<>();
-    private static RouteRepository routeRepository;
-    private static EngineRepository engineRepository;
+    private List<EngineBOM> engineBOMS = new ArrayList<>();
+    private RouteRepository routeRepository;
+    private EngineRepository engineRepository;
+    private String msg;
 
 
     public ElevatorJob(List<EngineBOM> engineBOM) {
@@ -32,13 +34,11 @@ public class ElevatorJob implements Job{
     public ElevatorJob() {
     }
 
-    public static void addEngine(EngineBOM engineBOM) {
-        engineBOMS.add(engineBOM);
-    }
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        System.out.println("Прошло 5 секунд!");
+
+        System.out.println(msg);
         for (EngineBOM engine : engineBOMS) {
             RouteDTO[] routeDTOS = routeRepository.findAllByRouteDTOId_IdEngine(engine.getId());
 
@@ -68,11 +68,19 @@ public class ElevatorJob implements Job{
         }
     }
 
-    public static void setRouteRepository(RouteRepository routeRepository) {
-        ElevatorJob.routeRepository = routeRepository;
+    public void setRouteRepository(RouteRepository routeRepository) {
+        this.routeRepository = routeRepository;
     }
 
-    public static void setEngineRepository(EngineRepository engineRepository) {
-        ElevatorJob.engineRepository = engineRepository;
+    public void setEngineRepository(EngineRepository engineRepository) {
+        this.engineRepository = engineRepository;
+    }
+
+    public void setEngine(EngineBOM engineBOM) {
+        engineBOMS.add(engineBOM);
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }

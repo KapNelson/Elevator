@@ -46,12 +46,20 @@ public class EngineService {
             scheduler.start();
 
 
-            ElevatorJob.setRouteRepository(routeRepository);
+            /*ElevatorJob.setRouteRepository(routeRepository);
             ElevatorJob.setEngineRepository(engineRepository);
             ElevatorJob.addEngine(engineBOM);
+*/
+
+            JobDataMap data = new JobDataMap();
+            data.put("routeRepository", routeRepository);
+            data.put("engineRepository", engineRepository);
+            data.put("engine", engineBOM);
+            data.put("msg", "Five seconds passed. . .");
 
             JobDetail job = JobBuilder.newJob(ElevatorJob.class)
                     .withIdentity("myJob", "group1")
+                    .usingJobData(data)
                     .build();
 
             Trigger trigger = TriggerBuilder.newTrigger()

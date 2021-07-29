@@ -37,7 +37,7 @@ public class EngineController {
     @PostMapping("/start/{buildingId}/{cabinNumber}")
     public void startMovement(@PathVariable Integer buildingId, @PathVariable Integer cabinNumber){
 
-        engineService.startMovement(buildingId,cabinNumber,type);
+        engineService.startMovement(buildingId,cabinNumber,type,waitTime);
     }
 
     @PostMapping("/startAllEngines")

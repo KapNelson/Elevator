@@ -6,9 +6,11 @@ import org.quartz.impl.StdSchedulerFactory;
 
 public class JobQuartz implements WaitingStrategy {
     public Scheduler scheduler = null;
+    private long waitTime;
 
-    public JobQuartz() {
+    public JobQuartz(long waitTime) {
         SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+        this.waitTime = waitTime;
         try {
             scheduler = schedulerFactory.getScheduler();
             scheduler.start();
@@ -30,7 +32,7 @@ public class JobQuartz implements WaitingStrategy {
                         .withIdentity("myTrigger", "group1")
                         .startNow()
                         .withSchedule(SimpleScheduleBuilder.simpleSchedule()
-                                .withIntervalInSeconds(5)
+                                .withIntervalInMilliseconds(waitTime)
                                 .repeatForever())
                         .build();
 

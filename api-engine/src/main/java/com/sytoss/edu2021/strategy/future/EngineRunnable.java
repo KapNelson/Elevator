@@ -28,9 +28,9 @@ public class EngineRunnable implements Runnable{
     private EngineRepository engineRepository;
     private long waitTime;
     private EngineBOM engine;
-    public EngineRunnable(EngineBOM engineBOM)
+    public EngineRunnable(EngineBOM engineBOM,long waitTime)
     {
-        waitTime = 5000;
+        this.waitTime = waitTime;
         engine = engineBOM;
     }
 
@@ -77,7 +77,7 @@ public class EngineRunnable implements Runnable{
             new EngineConvertor().toDTO(engine, engineDTO);
             engineRepository.save(engineDTO);
 
-            EngineRunnable runnable = new EngineRunnable(engine);
+            EngineRunnable runnable = new EngineRunnable(engine,waitTime);
             runnable.setEngineRepository(engineRepository);
             runnable.setRouteRepository(routeRepository);
             FutureTask<String>

@@ -42,7 +42,7 @@ public class EngineService {
         return engineBOM;
     }
 
-    public void startMovement(Integer buildingId, Integer cabinNumber, String strategyType) {
+    public void startMovement(Integer buildingId, Integer cabinNumber, String strategyType,long waitTime) {
         EngineDTO engineDTO = engineRepository.findEngineDTOByBuildingIdAndCabinId(buildingId, cabinNumber);
         EngineBOM engineBOM = new EngineBOM();
         new EngineConvertor().fromDTO(engineDTO, engineBOM);
@@ -53,9 +53,9 @@ public class EngineService {
         data.put("engine", engineBOM);
 
         if (strategyType.equals("JobQuartz"))
-            strategy = new JobQuartz();
+            strategy = new JobQuartz(waitTime);
         if (strategyType.equals("FutureTask"))
-            strategy = new EngineFutureTask();
+            strategy = new EngineFutureTask(waitTime);
 
         strategy.startJob(data);
     }

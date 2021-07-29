@@ -12,6 +12,7 @@ import org.springframework.util.RouteMatcher;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
@@ -40,22 +41,9 @@ public class EngineFutureTask implements WaitingStrategy {
 
         ExecutorService executor = Executors.newCachedThreadPool();
 
-        executor.submit(futureTask);
-
-
-
-        while(!futureTask.isDone())
-        {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-        executor.shutdown();
-
-
+        //executor.submit(futureTask);
+        CompletableFuture<String> future = new CompletableFuture();
+        future.runAsync(runnable);
+        //future.join();
     }
 }

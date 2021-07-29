@@ -1,18 +1,17 @@
 package com.sytoss.edu2021.services;
 
-import com.sytoss.edu2021.ApiEngineApplication;
 import com.sytoss.edu2021.bom.BuildingBOM;
 import com.sytoss.edu2021.bom.CabinBOM;
-import com.sytoss.edu2021.controllers.FeignProxyAdmin;
-import com.sytoss.edu2021.strategy.WaitingStrategy;
-import com.sytoss.edu2021.strategy.future.EngineFutureTask;
-import com.sytoss.edu2021.strategy.quartz.ElevatorJob;
 import com.sytoss.edu2021.bom.EngineBOM;
 import com.sytoss.edu2021.common.EngineStatus;
+import com.sytoss.edu2021.controllers.FeignProxyAdmin;
 import com.sytoss.edu2021.repo.EngineRepository;
 import com.sytoss.edu2021.repo.RouteRepository;
 import com.sytoss.edu2021.repo.dto.EngineDTO;
 import com.sytoss.edu2021.services.convertor.EngineConvertor;
+import com.sytoss.edu2021.strategy.WaitingStrategy;
+import com.sytoss.edu2021.strategy.future.EngineFutureTask;
+import com.sytoss.edu2021.strategy.quartz.ElevatorJob;
 import com.sytoss.edu2021.strategy.quartz.JobQuartz;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +47,7 @@ public class EngineService {
     }
 
     public void startMovement(Integer buildingId, Integer cabinNumber, String strategyType) {
-        CabinBOM cabinBOM = proxyAdmin.getCabin(buildingId,cabinNumber);
+        CabinBOM cabinBOM = proxyAdmin.getCabin(buildingId, cabinNumber);
         BuildingBOM buildingBOM = proxyAdmin.findBuildingById(buildingId);
         EngineDTO engineDTO = engineRepository.findEngineDTOById(cabinBOM.getId());
         EngineBOM engineBOM = new EngineBOM();
@@ -83,7 +82,7 @@ public class EngineService {
             engineBOMs.add(engineBOM);
         }
 
-        for(int i=0;i<engines.size();++i){
+        for (int i = 0; i < engines.size(); ++i) {
             cabinBOM = proxyAdmin.getCabin(engines.get(i).getCabinId());
             engineBOMs.get(i).setCabin(cabinBOM);
             buildingBOM = proxyAdmin.findBuildingById(engines.get(i).getBuildingId());

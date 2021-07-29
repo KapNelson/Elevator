@@ -67,4 +67,13 @@ public class CabinService {
         new CabinConvertor().fromDTO(cabinDTO,cabinBOM);
         return cabinBOM;
     }
+
+    public CabinBOM getCabin(int cabinId) {
+        CabinDTO cabinDTO = cabinRepository.findCabinDTOById(cabinId);
+        if(cabinDTO == null)
+            throw  new EntityNotFoundException("There is no such cabin with id: "+ cabinId);
+        CabinBOM cabinBOM = new CabinBOM();
+        new CabinConvertor().fromDTO(cabinDTO,cabinBOM);
+        return cabinBOM;
+    }
 }

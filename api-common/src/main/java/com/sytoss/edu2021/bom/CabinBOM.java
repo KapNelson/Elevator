@@ -8,13 +8,13 @@ import lombok.ToString;
 @ToString
 public class CabinBOM {
 
-    private int id;
+    private Integer id;
 
-    private int number;
+    private Integer number;
 
-    private boolean isDoorOpened;
+    private Boolean isDoorOpened;
 
-    private boolean isOverloaded;
+    private Boolean isOverloaded;
 
     public CabinBOM() {
     }

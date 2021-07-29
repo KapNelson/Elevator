@@ -39,7 +39,7 @@ public class EngineController {
 
     @PostMapping("/startAllEngines")
     public void startMovement(){
-        engineService.startMovement();
+        engineService.startMovement(type);
     }
 
     @GetMapping ("/get/{engineId}")

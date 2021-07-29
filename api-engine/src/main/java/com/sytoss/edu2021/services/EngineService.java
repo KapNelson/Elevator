@@ -42,7 +42,7 @@ public class EngineService {
         return engineBOM;
     }
 
-    public void startMovement(Integer buildingId, Integer cabinNumber, String strategyType,long waitTime) {
+    public void startMovement(Integer buildingId, Integer cabinNumber, String strategyType, long waitTime) {
         EngineDTO engineDTO = engineRepository.findEngineDTOByBuildingIdAndCabinId(buildingId, cabinNumber);
         EngineBOM engineBOM = new EngineBOM();
         new EngineConvertor().fromDTO(engineDTO, engineBOM);
@@ -54,13 +54,15 @@ public class EngineService {
 
         if (strategyType.equals("JobQuartz"))
             strategy = new JobQuartz(waitTime);
-        if (strategyType.equals("FutureTask"))
+        else if (strategyType.equals("FutureTask"))
             strategy = new EngineFutureTask(waitTime);
-
+        else
+            throw new RuntimeException("Unsupported type");
         strategy.startJob(data);
+
     }
 
-    public void startMovement() {
+    public void startMovement(String strategyType, long waitTime) {
         List<EngineDTO> engines = engineRepository.findAll();
         List<EngineBOM> engineBOMs = new ArrayList<>();
 
@@ -76,26 +78,14 @@ public class EngineService {
         data.put("engineRepository", engineRepository);
         data.put("engines", engineBOMs);
 
-        try {
-            if (!ApiEngineApplication.scheduler.checkExists(new JobKey("myJob", "group1"))) {
-                JobDetail job = JobBuilder.newJob(ElevatorJob.class)
-                        .withIdentity("myJob", "group1")
-                        .usingJobData(data)
-                        .build();
+        if (strategyType.equals("JobQuartz"))
+            strategy = new JobQuartz(waitTime);
+        else if (strategyType.equals("FutureTask"))
+            strategy = new EngineFutureTask(waitTime);
+        else
+            throw new RuntimeException("Unsupported type");
+        strategy.startJob(data);
 
-                Trigger trigger = TriggerBuilder.newTrigger()
-                        .withIdentity("myTrigger", "group1")
-                        .startNow()
-                        .withSchedule(SimpleScheduleBuilder.simpleSchedule()
-                                .withIntervalInSeconds(5)
-                                .repeatForever())
-                        .build();
-
-                ApiEngineApplication.scheduler.scheduleJob(job, trigger);
-            }
-        } catch (SchedulerException e) {
-            e.printStackTrace();
-        }
     }
 
     public EngineBOM getEngine(Integer engineId) {

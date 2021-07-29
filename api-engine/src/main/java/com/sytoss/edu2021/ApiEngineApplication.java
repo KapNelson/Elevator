@@ -25,23 +25,8 @@ import org.springframework.web.client.RestTemplate;
 @EnableFeignClients
 public class ApiEngineApplication {
 
-    public static Scheduler scheduler = null;
-
-
     public static void main(String[] args) {
-        startScheduler();
         SpringApplication.run(ApiEngineApplication.class, args);
-
-    }
-
-    private static void startScheduler() {
-        SchedulerFactory schedulerFactory = new StdSchedulerFactory();
-        try {
-            scheduler = schedulerFactory.getScheduler();
-            scheduler.start();
-        } catch (SchedulerException e) {
-            e.printStackTrace();
-        }
 
     }
 }

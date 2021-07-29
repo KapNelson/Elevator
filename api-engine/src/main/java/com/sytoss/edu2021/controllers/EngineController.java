@@ -1,9 +1,7 @@
 package com.sytoss.edu2021.controllers;
 
-import com.sytoss.edu2021.bom.CabinBOM;
 import com.sytoss.edu2021.bom.EngineBOM;
 import com.sytoss.edu2021.common.RouteBOM;
-import com.sytoss.edu2021.repo.dto.EngineDTO;
 import com.sytoss.edu2021.services.EngineService;
 import com.sytoss.edu2021.services.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +19,7 @@ public class EngineController {
 
     @Value("${waitingStrategy.type}")
     private String type;
-    @Value("${waitingTime.time}")
+    @Value("${waitingStrategy.time}")
     private long waitTime;
 
     @PostMapping("/add/{buildingId}/{cabinId}")
@@ -42,7 +40,7 @@ public class EngineController {
 
     @PostMapping("/startAllEngines")
     public void startMovement(){
-        engineService.startMovement();
+        engineService.startMovement(type, waitTime);
     }
 
     @GetMapping ("/get/{engineId}")

@@ -5,7 +5,7 @@ import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
 public class JobQuartz implements WaitingStrategy {
-    public Scheduler scheduler = null;
+    public Scheduler scheduler;
     private long waitTime;
 
     public JobQuartz(long waitTime) {
@@ -15,7 +15,7 @@ public class JobQuartz implements WaitingStrategy {
             scheduler = schedulerFactory.getScheduler();
             scheduler.start();
         } catch (SchedulerException e) {
-            e.printStackTrace();
+           throw new RuntimeException("Error while creating JobQuartz.class");
         }
     }
 
@@ -39,7 +39,7 @@ public class JobQuartz implements WaitingStrategy {
                 scheduler.scheduleJob(job, trigger);
             }
         } catch (SchedulerException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error while starting JobQuartz.startJob");
         }
     }
 }

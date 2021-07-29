@@ -13,7 +13,6 @@ spring:
     change-log: classpath:/db/db.changelog.xml
     default-schema: api_engine
 waitingStrategy:
-#  type: FutureTask
+  #type: Possible Values: JobQuartz, FutureTask
   type: JobQuartz
-waitingTime:
   time: 5000

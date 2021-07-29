@@ -13,8 +13,8 @@ services:
   srv-config:
     image: edu2021/srv-config:latest
     container_name: srv-config
-    environment:
-      - APP_ENV=dev
+#    environment:
+#      - APP_ENV=dev
     ports:
       - "16002:6002"
     healthcheck:
@@ -47,7 +47,7 @@ services:
       - "16070:6070"
     depends_on:
       srv-config:
-       condition: service_healthy
+        condition: service_healthy
 
   api-engine:
     image: edu2021/api-engine:latest
@@ -58,4 +58,4 @@ services:
       - "16050:6050"
     depends_on:
       srv-config:
-       condition: service_healthy
+        condition: service_healthy

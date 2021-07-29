@@ -3,7 +3,6 @@ package com.sytoss.edu2021.bom;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sytoss.edu2021.common.Direction;
 import com.sytoss.edu2021.common.EngineStatus;
-import com.sytoss.edu2021.common.RouteBOM;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -60,15 +59,15 @@ public class EngineBOM {
             }
         }
 
-        if(route.getQueueOfFloors().isEmpty()) {
+        if (route.getQueueOfFloors().isEmpty()) {
             route.setDirection(Direction.STABLE);
         }
     }
 
     public void start() {
-        if(route.getDirection().equals(Direction.UP))
+        if (route.getDirection().equals(Direction.UP))
             status = EngineStatus.RUNNING_UP;
-        if(route.getDirection().equals(Direction.DOWN))
+        if (route.getDirection().equals(Direction.DOWN))
             status = EngineStatus.RUNNING_DOWN;
         move();
     }

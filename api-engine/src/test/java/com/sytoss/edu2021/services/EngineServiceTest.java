@@ -1,16 +1,7 @@
 package com.sytoss.edu2021.services;
 
-import com.sytoss.edu2021.repo.EngineRepository;
-import com.sytoss.edu2021.bom.EngineBOM;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class EngineServiceTest {

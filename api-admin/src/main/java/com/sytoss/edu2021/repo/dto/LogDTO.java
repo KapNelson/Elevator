@@ -19,9 +19,4 @@ public class LogDTO {
 
     public LogDTO() {
     }
-
-    public LogDTO(String bodyLog, LocalDateTime dateLog) {
-        this.bodyLog = bodyLog;
-        this.dateLog = dateLog;
-    }
 }

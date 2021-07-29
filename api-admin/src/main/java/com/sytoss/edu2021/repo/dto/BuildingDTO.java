@@ -6,8 +6,6 @@ import lombok.Setter;
 import org.springframework.util.ObjectUtils;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Entity(name = "app_build")
@@ -32,15 +30,5 @@ public class BuildingDTO {
 
     public BuildingDTO() {
 
-    }
-
-    public BuildingDTO(String address, int floorsAmount) {
-        this.address = address;
-        this.floorsAmount = floorsAmount;
-    }
-
-
-    public boolean isValid() {
-        return !ObjectUtils.isEmpty(address) && floorsAmount > 1;
     }
 }

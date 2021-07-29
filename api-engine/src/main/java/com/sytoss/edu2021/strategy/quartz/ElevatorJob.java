@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ElevatorJob implements Job{
+public class ElevatorJob implements Job {
 
     private List<EngineBOM> engineBOMS = new ArrayList<>();
     private RouteRepository routeRepository;
@@ -33,7 +33,7 @@ public class ElevatorJob implements Job{
                 set.add(route.getRouteDTOId().getFloorNumber());
             }
 
-            if(set.isEmpty())
+            if (set.isEmpty())
                 continue;
 
             engine.getRoute().setQueueOfFloors(set);

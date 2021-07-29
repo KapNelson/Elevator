@@ -5,8 +5,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name="api-admin", url="localhost:6060/api/building")
+@FeignClient(name = "api-admin", url = "localhost:6060/api/building")
 public interface FeignProxyAdmin {
     @GetMapping("/find/{buildingId}")
-    public BuildingBOM findBuildingById(@PathVariable Integer buildingId);
+    BuildingBOM findBuildingById(@PathVariable Integer buildingId);
 }

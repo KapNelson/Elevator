@@ -5,4 +5,3 @@ spring:
     url: jdbc:mysql://mariadb:3306/api_admin?enabledTLSProtocols=TLSv1.2&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: admin123
-

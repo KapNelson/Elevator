@@ -6,8 +6,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Entity(name = "app_cabin")
@@ -29,9 +27,4 @@ public class CabinDTO {
     @Setter
     @Column(name = "id_building")
     private int buildingId;
-
-
-    public CabinDTO(int number) {
-        this.number = number;
-    }
 }

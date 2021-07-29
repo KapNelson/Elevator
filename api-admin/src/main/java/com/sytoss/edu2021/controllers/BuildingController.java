@@ -22,12 +22,12 @@ public class BuildingController {
     }
 
     @PostMapping("/cabin/{buildingId}")
-    public CabinBOM registerCabin(@PathVariable Integer buildingId,@RequestBody CabinBOM cabin) {
-        return cabinService.addCabin(buildingId,cabin);
+    public CabinBOM registerCabin(@PathVariable Integer buildingId, @RequestBody CabinBOM cabin) {
+        return cabinService.addCabin(buildingId, cabin);
     }
 
     @GetMapping("/find/{buildingId}")
-    public BuildingBOM findBuildingById(@PathVariable Integer buildingId){
+    public BuildingBOM findBuildingById(@PathVariable Integer buildingId) {
         return buildingService.findBuildingById(buildingId);
     }
 }

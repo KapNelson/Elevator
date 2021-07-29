@@ -1,21 +1,7 @@
 package com.sytoss.edu2021.services;
 
-import com.sytoss.edu2021.repo.BuildingRepository;
-import com.sytoss.edu2021.repo.CabinRepository;
-import com.sytoss.edu2021.bom.BuildingBOM;
-import com.sytoss.edu2021.bom.CabinBOM;
-import com.sytoss.edu2021.repo.dto.BuildingDTO;
-import com.sytoss.edu2021.repo.dto.CabinDTO;
-import com.sytoss.edu2021.services.convertor.BuildingConvertor;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class BuildingServiceTest {

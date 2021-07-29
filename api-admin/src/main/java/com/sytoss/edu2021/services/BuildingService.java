@@ -16,13 +16,9 @@ import org.springframework.web.client.RestTemplate;
 public class BuildingService {
 
     @Autowired
-    private BuildingRepository buildingRepository;
-
-    @Autowired
-    private CabinRepository cabinRepository;
-
-    @Autowired
     RestTemplate restTemplate;
+    @Autowired
+    private BuildingRepository buildingRepository;
 
     public BuildingBOM registerBuilding(BuildingBOM building) {
         if (building.isValid()) {
@@ -62,5 +58,4 @@ public class BuildingService {
         new BuildingConvertor().fromDTO(dto, result);
         return result;
     }
-
 }

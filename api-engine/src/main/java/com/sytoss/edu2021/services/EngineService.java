@@ -1,6 +1,9 @@
 package com.sytoss.edu2021.services;
 
 import com.sytoss.edu2021.ApiEngineApplication;
+import com.sytoss.edu2021.bom.BuildingBOM;
+import com.sytoss.edu2021.bom.CabinBOM;
+import com.sytoss.edu2021.controllers.FeignProxyAdmin;
 import com.sytoss.edu2021.strategy.WaitingStrategy;
 import com.sytoss.edu2021.strategy.future.EngineFutureTask;
 import com.sytoss.edu2021.strategy.quartz.ElevatorJob;
@@ -22,9 +25,11 @@ import java.util.List;
 public class EngineService {
 
     @Autowired
-    EngineRepository engineRepository;
+    private EngineRepository engineRepository;
     @Autowired
-    RouteRepository routeRepository;
+    private RouteRepository routeRepository;
+    @Autowired
+    private FeignProxyAdmin proxyAdmin;
 
     private WaitingStrategy strategy;
 
@@ -43,8 +48,12 @@ public class EngineService {
     }
 
     public void startMovement(Integer buildingId, Integer cabinNumber, String strategyType) {
-        EngineDTO engineDTO = engineRepository.findEngineDTOByBuildingIdAndCabinId(buildingId, cabinNumber);
+        CabinBOM cabinBOM = proxyAdmin.getCabin(buildingId,cabinNumber);
+        BuildingBOM buildingBOM = proxyAdmin.findBuildingById(buildingId);
+        EngineDTO engineDTO = engineRepository.findEngineDTOById(cabinBOM.getId());
         EngineBOM engineBOM = new EngineBOM();
+        engineBOM.setCabin(cabinBOM);
+        engineBOM.setBuilding(buildingBOM);
         new EngineConvertor().fromDTO(engineDTO, engineBOM);
 
         JobDataMap data = new JobDataMap();
@@ -54,15 +63,18 @@ public class EngineService {
 
         if (strategyType.equals("JobQuartz"))
             strategy = new JobQuartz();
-        if (strategyType.equals("FutureTask"))
+        else if (strategyType.equals("FutureTask"))
             strategy = new EngineFutureTask();
-
+        else
+            throw new RuntimeException("Unsupported type");
         strategy.startJob(data);
     }
 
-    public void startMovement() {
+    public void startMovement(String strategyType) {
         List<EngineDTO> engines = engineRepository.findAll();
         List<EngineBOM> engineBOMs = new ArrayList<>();
+        CabinBOM cabinBOM;
+        BuildingBOM buildingBOM;
 
         for (EngineDTO engineDTO : engines) {
             EngineBOM engineBOM = new EngineBOM();
@@ -71,13 +83,28 @@ public class EngineService {
             engineBOMs.add(engineBOM);
         }
 
+        for(int i=0;i<engines.size();++i){
+            cabinBOM = proxyAdmin.getCabin(engines.get(i).getCabinId());
+            engineBOMs.get(i).setCabin(cabinBOM);
+            buildingBOM = proxyAdmin.findBuildingById(engines.get(i).getBuildingId());
+            engineBOMs.get(i).setBuilding(buildingBOM);
+        }
+
         JobDataMap data = new JobDataMap();
         data.put("routeRepository", routeRepository);
         data.put("engineRepository", engineRepository);
         data.put("engines", engineBOMs);
 
+        if (strategyType.equals("JobQuartz"))
+            strategy = new JobQuartz();
+        else if (strategyType.equals("FutureTask"))
+            strategy = new EngineFutureTask();
+        else
+            throw new RuntimeException("Unsupported type");
+        strategy.startJob(data);
+
         try {
-            if (!ApiEngineApplication.scheduler.checkExists(new JobKey("myJob", "group1"))) {
+            if (!JobQuartz.scheduler.checkExists(new JobKey("myJob", "group1"))) {
                 JobDetail job = JobBuilder.newJob(ElevatorJob.class)
                         .withIdentity("myJob", "group1")
                         .usingJobData(data)
@@ -91,7 +118,7 @@ public class EngineService {
                                 .repeatForever())
                         .build();
 
-                ApiEngineApplication.scheduler.scheduleJob(job, trigger);
+                JobQuartz.scheduler.scheduleJob(job, trigger);
             }
         } catch (SchedulerException e) {
             e.printStackTrace();

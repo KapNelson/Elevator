@@ -5,7 +5,7 @@ import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
 public class JobQuartz implements WaitingStrategy {
-    public Scheduler scheduler = null;
+    public static Scheduler scheduler = null;
 
     public JobQuartz() {
         SchedulerFactory schedulerFactory = new StdSchedulerFactory();

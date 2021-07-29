@@ -18,16 +18,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 
 
+public class EngineRunnable implements Runnable {
 
-public class EngineRunnable implements Runnable{
-
-    private static RouteRepository routeRepository;
-
-    private static EngineRepository engineRepository;
+    private RouteRepository routeRepository;
+    private EngineRepository engineRepository;
     private long waitTime;
     private EngineBOM engine;
-    public EngineRunnable(EngineBOM engineBOM)
-    {
+
+    public EngineRunnable(EngineBOM engineBOM) {
         waitTime = 5000;
         engine = engineBOM;
     }
@@ -36,14 +34,13 @@ public class EngineRunnable implements Runnable{
     public void run() {
         try {
 
-            RouteDTO routeDTOs[] = routeRepository.findAllByRouteDTOId_IdEngine(engine.getId());
+            RouteDTO[] routeDTOs = routeRepository.findAllByRouteDTOId_IdEngine(engine.getId());
 
             RouteBOM route = new RouteBOM();
-            new RouteConvertor().fromDTO(routeDTOs,route);
+            new RouteConvertor().fromDTO(routeDTOs, route);
             engine.setRoute(route);
             engine.getRoute().setDirection(engine.getCurrentFloor(), engine.getRoute().getMinValue());
-            switch (engine.getStatus())
-            {
+            switch (engine.getStatus()) {
                 case RUNNING_DOWN:
                 case RUNNING_UP:
                     engine.move();
@@ -56,12 +53,9 @@ public class EngineRunnable implements Runnable{
                     RouteDTO remove = new RouteDTO();
                     remove.setRouteDTOId(removeRoute);
                     routeRepository.delete(remove);
-                    if(!engine.getRoute().getQueueOfFloors().isEmpty())
-                    {
+                    if (!engine.getRoute().getQueueOfFloors().isEmpty()) {
                         engine.start();
-                    }
-                    else
-                    {
+                    } else {
                         return;
                     }
 
@@ -74,19 +68,16 @@ public class EngineRunnable implements Runnable{
             new EngineConvertor().toDTO(engine, engineDTO);
             engineRepository.save(engineDTO);
             Thread.sleep(waitTime);
-            System.out.println("Прошло 5 секунд текущий этаж:" + engine.getCurrentFloor() + " Состояние " + engine.getStatus());
             EngineRunnable runnable = new EngineRunnable(engine);
             runnable.setEngineRepository(engineRepository);
             runnable.setRouteRepository(routeRepository);
-            FutureTask<String>
-                    futureTask = new FutureTask<String>(runnable,"FutureTask is complete");
+            FutureTask<String> futureTask = new FutureTask<>(runnable, "FutureTask is complete");
 
             ExecutorService executor = Executors.newCachedThreadPool();
 
 
             executor.submit(futureTask);
-            while(!futureTask.isDone())
-            {
+            while (!futureTask.isDone()) {
                 Thread.sleep(100);
             }
 

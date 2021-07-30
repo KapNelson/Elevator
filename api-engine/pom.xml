@@ -18,16 +18,22 @@
             <artifactId>api-common</artifactId>
             <version>2.0.0-SNAPSHOT</version>
         </dependency>
-        <!-- MySQL-->
+        <!-- MongoDB-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
-        <dependency>
+
+        <!-- MySQL-->
+      <!--  <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>-->
+      <!--  <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.25</version>
-        </dependency>
+        </dependency>-->
 
 
         <dependency>

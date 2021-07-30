@@ -47,21 +47,23 @@ public class EngineRunnable implements Runnable {
                         engine.move();
                         break;
                     case STOP:
+
                         RouteDTOId removeRoute = new RouteDTOId();
                         removeRoute.setFloorNumber(engine.getCurrentFloor());
                         removeRoute.setIdEngine(engine.getId());
 
                         RouteDTO remove = new RouteDTO();
                         remove.setRouteDTOId(removeRoute);
-                        routeRepository.delete(remove);
+                        RouteDTO check = routeRepository.findRouteDTOByRouteDTOId(removeRoute);
+                        if (check != null) {
+                            routeRepository.deleteByRouteDTOId(removeRoute);
+                        }
                         if (!engine.getRoute().getQueueOfFloors().isEmpty()) {
                             engine.start();
                         } else {
                             future.complete("");
                         }
-
                         break;
-
                     case BROKEN:
                         break;
                 }

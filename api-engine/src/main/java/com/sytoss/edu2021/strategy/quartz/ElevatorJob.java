@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ElevatorJob implements Job{
+public class ElevatorJob implements Job {
 
     private List<EngineBOM> engineBOMS = new ArrayList<>();
     private RouteRepository routeRepository;
@@ -33,7 +33,7 @@ public class ElevatorJob implements Job{
                 set.add(route.getRouteDTOId().getFloorNumber());
             }
 
-            if(set.isEmpty())
+            if (set.isEmpty())
                 continue;
 
             engine.getRoute().setQueueOfFloors(set);
@@ -50,8 +50,10 @@ public class ElevatorJob implements Job{
 
                     RouteDTO remove = new RouteDTO();
                     remove.setRouteDTOId(removeRoute);
-                    routeRepository.delete(remove);
-
+                    RouteDTO check = routeRepository.findRouteDTOByRouteDTOId(removeRoute);
+                    if (check != null) {
+                        routeRepository.deleteByRouteDTOId(removeRoute);
+                    }
                     if (!engine.getRoute().getQueueOfFloors().isEmpty()) {
                         engine.start();
                     }

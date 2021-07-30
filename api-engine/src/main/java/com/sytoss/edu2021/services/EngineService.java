@@ -1,15 +1,17 @@
 package com.sytoss.edu2021.services;
 
-import com.sytoss.edu2021.ApiEngineApplication;
-import com.sytoss.edu2021.strategy.WaitingStrategy;
-import com.sytoss.edu2021.strategy.future.EngineFutureTask;
-import com.sytoss.edu2021.strategy.quartz.ElevatorJob;
+import com.sytoss.edu2021.bom.BuildingBOM;
+import com.sytoss.edu2021.bom.CabinBOM;
 import com.sytoss.edu2021.bom.EngineBOM;
 import com.sytoss.edu2021.common.EngineStatus;
+import com.sytoss.edu2021.controllers.FeignProxyAdmin;
 import com.sytoss.edu2021.repo.EngineRepository;
 import com.sytoss.edu2021.repo.RouteRepository;
 import com.sytoss.edu2021.repo.dto.EngineDTO;
 import com.sytoss.edu2021.services.convertor.EngineConvertor;
+import com.sytoss.edu2021.strategy.WaitingStrategy;
+import com.sytoss.edu2021.strategy.future.EngineFutureTask;
+import com.sytoss.edu2021.strategy.quartz.ElevatorJob;
 import com.sytoss.edu2021.strategy.quartz.JobQuartz;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +24,11 @@ import java.util.List;
 public class EngineService {
 
     @Autowired
-    EngineRepository engineRepository;
+    private EngineRepository engineRepository;
     @Autowired
-    RouteRepository routeRepository;
+    private RouteRepository routeRepository;
+    @Autowired
+    private FeignProxyAdmin proxyAdmin;
 
     private WaitingStrategy strategy;
 
@@ -42,9 +46,13 @@ public class EngineService {
         return engineBOM;
     }
 
+
     public void startMovement(Integer buildingId, Integer cabinNumber, String strategyType, long waitTime) {
         EngineDTO engineDTO = engineRepository.findEngineDTOByBuildingIdAndCabinId(buildingId, cabinNumber);
+
         EngineBOM engineBOM = new EngineBOM();
+        engineBOM.setCabin(cabinBOM);
+        engineBOM.setBuilding(buildingBOM);
         new EngineConvertor().fromDTO(engineDTO, engineBOM);
 
         JobDataMap data = new JobDataMap();
@@ -56,21 +64,33 @@ public class EngineService {
             strategy = new JobQuartz(waitTime);
         else if (strategyType.equals("FutureTask"))
             strategy = new EngineFutureTask(waitTime);
+
         else
             throw new RuntimeException("Unsupported type");
         strategy.startJob(data);
 
     }
 
+
     public void startMovement(String strategyType, long waitTime) {
+
         List<EngineDTO> engines = engineRepository.findAll();
         List<EngineBOM> engineBOMs = new ArrayList<>();
+        CabinBOM cabinBOM;
+        BuildingBOM buildingBOM;
 
         for (EngineDTO engineDTO : engines) {
             EngineBOM engineBOM = new EngineBOM();
             new EngineConvertor().fromDTO(engineDTO, engineBOM);
 
             engineBOMs.add(engineBOM);
+        }
+
+        for (int i = 0; i < engines.size(); ++i) {
+            cabinBOM = proxyAdmin.getCabin(engines.get(i).getCabinId());
+            engineBOMs.get(i).setCabin(cabinBOM);
+            buildingBOM = proxyAdmin.findBuildingById(engines.get(i).getBuildingId());
+            engineBOMs.get(i).setBuilding(buildingBOM);
         }
 
         JobDataMap data = new JobDataMap();

@@ -3,18 +3,19 @@ package com.sytoss.edu2021.bom;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 @Setter
 @Getter
 @ToString
 public class CabinBOM {
 
-    private int id;
+    private Integer id;
 
-    private int number;
+    private Integer number;
 
-    private boolean isDoorOpened;
+    private Boolean isDoorOpened;
 
-    private boolean isOverloaded;
+    private Boolean isOverloaded;
 
     public CabinBOM() {
     }

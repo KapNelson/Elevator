@@ -7,8 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface EngineRepository extends JpaRepository<EngineDTO,Integer> {
+public interface EngineRepository extends JpaRepository<EngineDTO, Integer> {
     EngineDTO findEngineDTOById(int id);
+
     EngineDTO findEngineDTOByBuildingIdAndCabinId(int buildingId, int cabinId);
+
     List<EngineDTO> findAll();
 }

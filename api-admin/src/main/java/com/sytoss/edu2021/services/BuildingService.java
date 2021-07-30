@@ -22,7 +22,7 @@ public class BuildingService {
     private CabinRepository cabinRepository;
 
     @Autowired
-    RestTemplate restTemplate;
+    private RestTemplate restTemplate;
 
     public BuildingBOM registerBuilding(BuildingBOM building) {
         if (building.isValid()) {

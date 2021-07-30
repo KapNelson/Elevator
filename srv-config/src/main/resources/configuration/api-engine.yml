@@ -16,3 +16,4 @@ waitingStrategy:
   #type: Possible Values: JobQuartz, FutureTask
   type: JobQuartz
   time: 5000
+

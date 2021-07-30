@@ -1,6 +1,6 @@
 package com.sytoss.edu2021.services.convertor;
 
-import com.sytoss.edu2021.common.RouteBOM;
+import com.sytoss.edu2021.bom.RouteBOM;
 import com.sytoss.edu2021.repo.dto.RouteDTO;
 
 import java.util.Set;

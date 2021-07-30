@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
-
-
-                                       http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd"
                    logicalFilePath="create.app_route.table.xml">
     <changeSet author="Ruslan" id="initial creating table app_route" context="all">
         <preConditions onFail="MARK_RAN">
@@ -14,16 +10,16 @@
             </not>
         </preConditions>
         <createTable tableName="app_route">
-            <column name="floor_number"  type="int">
+            <column name="floor_number" type="int">
                 <constraints nullable="false"/>
             </column>
             <column name="id_engine" type="int">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addPrimaryKey  columnNames="floor_number, id_engine"
-                        constraintName="pk_app_route"
-                        schemaName="api_engine"
-                        tableName="app_route"/>
+        <addPrimaryKey columnNames="floor_number, id_engine"
+                       constraintName="pk_app_route"
+                       schemaName="api_engine"
+                       tableName="app_route"/>
     </changeSet>
 </databaseChangeLog>

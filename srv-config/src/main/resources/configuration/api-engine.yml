@@ -14,4 +14,6 @@ spring:
     default-schema: api_engine
 waitingStrategy:
   #type: Possible Values: JobQuartz, FutureTask
-  type: FutureTask
+  type: JobQuartz
+  time: 5000
+

@@ -46,10 +46,10 @@ public class EngineService {
         return engineBOM;
     }
 
-    public void startMovement(Integer buildingId, Integer cabinNumber, String strategyType) {
-        CabinBOM cabinBOM = proxyAdmin.getCabin(buildingId, cabinNumber);
-        BuildingBOM buildingBOM = proxyAdmin.findBuildingById(buildingId);
-        EngineDTO engineDTO = engineRepository.findEngineDTOById(cabinBOM.getId());
+
+    public void startMovement(Integer buildingId, Integer cabinNumber, String strategyType, long waitTime) {
+        EngineDTO engineDTO = engineRepository.findEngineDTOByBuildingIdAndCabinId(buildingId, cabinNumber);
+
         EngineBOM engineBOM = new EngineBOM();
         engineBOM.setCabin(cabinBOM);
         engineBOM.setBuilding(buildingBOM);
@@ -61,15 +61,19 @@ public class EngineService {
         data.put("engine", engineBOM);
 
         if (strategyType.equals("JobQuartz"))
-            strategy = new JobQuartz();
+            strategy = new JobQuartz(waitTime);
         else if (strategyType.equals("FutureTask"))
-            strategy = new EngineFutureTask();
+            strategy = new EngineFutureTask(waitTime);
+
         else
             throw new RuntimeException("Unsupported type");
         strategy.startJob(data);
+
     }
 
-    public void startMovement(String strategyType) {
+
+    public void startMovement(String strategyType, long waitTime) {
+
         List<EngineDTO> engines = engineRepository.findAll();
         List<EngineBOM> engineBOMs = new ArrayList<>();
         CabinBOM cabinBOM;
@@ -95,33 +99,13 @@ public class EngineService {
         data.put("engines", engineBOMs);
 
         if (strategyType.equals("JobQuartz"))
-            strategy = new JobQuartz();
+            strategy = new JobQuartz(waitTime);
         else if (strategyType.equals("FutureTask"))
-            strategy = new EngineFutureTask();
+            strategy = new EngineFutureTask(waitTime);
         else
             throw new RuntimeException("Unsupported type");
         strategy.startJob(data);
 
-        try {
-            if (!JobQuartz.scheduler.checkExists(new JobKey("myJob", "group1"))) {
-                JobDetail job = JobBuilder.newJob(ElevatorJob.class)
-                        .withIdentity("myJob", "group1")
-                        .usingJobData(data)
-                        .build();
-
-                Trigger trigger = TriggerBuilder.newTrigger()
-                        .withIdentity("myTrigger", "group1")
-                        .startNow()
-                        .withSchedule(SimpleScheduleBuilder.simpleSchedule()
-                                .withIntervalInSeconds(5)
-                                .repeatForever())
-                        .build();
-
-                JobQuartz.scheduler.scheduleJob(job, trigger);
-            }
-        } catch (SchedulerException e) {
-            e.printStackTrace();
-        }
     }
 
     public EngineBOM getEngine(Integer engineId) {

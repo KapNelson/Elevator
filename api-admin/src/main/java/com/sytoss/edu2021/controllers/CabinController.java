@@ -19,9 +19,4 @@ public class CabinController {
     public CabinBOM getCabin(@PathVariable int buildingId, @PathVariable int cabinNumber) {
         return cabinService.getCabin(buildingId, cabinNumber);
     }
-
-    @GetMapping("/get/{cabinId}")
-    public CabinBOM getCabin(@PathVariable int cabinId) {
-        return cabinService.getCabin(cabinId);
-    }
 }

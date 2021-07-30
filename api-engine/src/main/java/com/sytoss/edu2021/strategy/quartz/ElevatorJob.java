@@ -9,7 +9,7 @@ import com.sytoss.edu2021.repo.dto.RouteDTOId;
 import com.sytoss.edu2021.services.convertor.EngineConvertor;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.quartz.JobExecutionException;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -19,13 +19,11 @@ import java.util.Set;
 public class ElevatorJob implements Job {
 
     private List<EngineBOM> engineBOMS = new ArrayList<>();
-    @Autowired
     private RouteRepository routeRepository;
-    @Autowired
     private EngineRepository engineRepository;
 
     @Override
-    public void execute(JobExecutionContext jobExecutionContext) {
+    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
         for (EngineBOM engine : engineBOMS) {
             RouteDTO[] routeDTOS = routeRepository.findAllByRouteDTOId_IdEngine(engine.getId());
@@ -52,8 +50,10 @@ public class ElevatorJob implements Job {
 
                     RouteDTO remove = new RouteDTO();
                     remove.setRouteDTOId(removeRoute);
-                    routeRepository.delete(remove);
-
+                    RouteDTO check = routeRepository.findRouteDTOByRouteDTOId(removeRoute);
+                    if (check != null) {
+                        routeRepository.deleteByRouteDTOId(removeRoute);
+                    }
                     if (!engine.getRoute().getQueueOfFloors().isEmpty()) {
                         engine.start();
                     }

@@ -9,13 +9,13 @@ import lombok.ToString;
 @ToString
 public class CabinBOM {
 
-    private Integer id;
+    private int id;
 
-    private Integer number;
+    private int number;
 
-    private Boolean isDoorOpened;
+    private boolean isDoorOpened;
 
-    private Boolean isOverloaded;
+    private boolean isOverloaded;
 
     public CabinBOM() {
     }

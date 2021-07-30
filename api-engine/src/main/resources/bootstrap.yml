@@ -6,3 +6,7 @@ spring:
       fail-fast: true
       username: ${config.server.username:1}
       password: ${config.server.password:2}
+  main:
+    allow-bean-definition-overriding: true
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration

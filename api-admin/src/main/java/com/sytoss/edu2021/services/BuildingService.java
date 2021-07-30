@@ -16,13 +16,11 @@ import org.springframework.web.client.RestTemplate;
 public class BuildingService {
 
     @Autowired
+    RestTemplate restTemplate;
+    @Autowired
     private BuildingRepository buildingRepository;
-
     @Autowired
     private CabinRepository cabinRepository;
-
-    @Autowired
-    private RestTemplate restTemplate;
 
     public BuildingBOM registerBuilding(BuildingBOM building) {
         if (building.isValid()) {

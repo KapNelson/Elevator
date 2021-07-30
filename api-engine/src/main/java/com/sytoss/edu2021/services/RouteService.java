@@ -2,7 +2,7 @@ package com.sytoss.edu2021.services;
 
 import com.sytoss.edu2021.bom.CabinBOM;
 import com.sytoss.edu2021.bom.RouteBOM;
-import com.sytoss.edu2021.controllers.FeignProxyAdmin;
+import com.sytoss.edu2021.controllers.FeignProxyCabin;
 import com.sytoss.edu2021.exceptions.AlreadyExistsException;
 import com.sytoss.edu2021.exceptions.EntityNotFoundException;
 import com.sytoss.edu2021.repo.EngineRepository;
@@ -22,7 +22,7 @@ public class RouteService {
     @Autowired
     private EngineRepository engineRepository;
     @Autowired
-    private FeignProxyAdmin feignProxyCabin;
+    private FeignProxyCabin feignProxyCabin;
 
     public RouteBOM addFloorToRoute(Integer buildingId, Integer cabinNumber, Integer floorNumber) {
 

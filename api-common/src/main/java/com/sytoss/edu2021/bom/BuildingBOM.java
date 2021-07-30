@@ -1,7 +1,6 @@
 package com.sytoss.edu2021.bom;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.util.ObjectUtils;
@@ -15,11 +14,9 @@ public class BuildingBOM {
 
     private Integer id;
     private String address;
-    private Integer floorsAmount;
+    private int floorsAmount;
 
 
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
     private List<EngineBOM> engines = new ArrayList<>();
 
     public BuildingBOM() {

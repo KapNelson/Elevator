@@ -15,7 +15,7 @@ public class JobQuartz implements WaitingStrategy {
             scheduler = schedulerFactory.getScheduler();
             scheduler.start();
         } catch (SchedulerException e) {
-           throw new RuntimeException("Error while creating JobQuartz.class");
+            throw new RuntimeException("Error while creating JobQuartz.class");
         }
     }
 

@@ -6,9 +6,6 @@ spring:
       ddl-auto: none
   datasource:
     url: jdbc:mongodb://localhost:27017/api_engine
-    #url: jdbc:mysql://127.0.0.1:3306/api_engine
-    #username: root
-    #password: admin123
   liquibase:
     enabled: true
     change-log: classpath:/db/db.changelog.xml
@@ -20,4 +17,4 @@ waitingStrategy:
   main:
     allow-bean-definition-overriding: true
   autoconfigure:
-    exclude : org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration

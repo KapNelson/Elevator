@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
-
-
-                                       http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd"
                    logicalFilePath="create.app_user.table.xml">
 
     <changeSet author="YevgenyV" id="initial creating table app_builds" context="all">
@@ -15,15 +11,15 @@
             </not>
         </preConditions>
         <createTable tableName="app_build">
-            <column name="id_build"  type="int" autoIncrement="true">
+            <column name="id_build" type="int" autoIncrement="true">
                 <constraints nullable="false"
                              primaryKey="true"/>
             </column>
             <column name="address" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
             <column name="number_of_floors" type="varchar(255)">
-                <constraints nullable="false" />
+                <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>

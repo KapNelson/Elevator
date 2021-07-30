@@ -1,7 +1,7 @@
 package com.sytoss.edu2021.services;
 
 import com.sytoss.edu2021.bom.CabinBOM;
-import com.sytoss.edu2021.common.RouteBOM;
+import com.sytoss.edu2021.bom.RouteBOM;
 import com.sytoss.edu2021.controllers.FeignProxyCabin;
 import com.sytoss.edu2021.exceptions.AlreadyExistsException;
 import com.sytoss.edu2021.exceptions.EntityNotFoundException;

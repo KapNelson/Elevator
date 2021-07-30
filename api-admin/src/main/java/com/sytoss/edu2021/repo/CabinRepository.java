@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CabinRepository extends CrudRepository<CabinDTO, Integer> {
-    CabinDTO findCabinDTOById (Integer idCabin);
+    CabinDTO findCabinDTOById(Integer idCabin);
 
-    CabinDTO findCabinDTOByBuildingIdAndNumber(int buildingId,int cabinNumber);
+    CabinDTO findCabinDTOByBuildingIdAndNumber(int buildingId, int cabinNumber);
 }

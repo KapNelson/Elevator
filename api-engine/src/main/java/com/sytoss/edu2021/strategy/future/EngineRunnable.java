@@ -1,7 +1,7 @@
 package com.sytoss.edu2021.strategy.future;
 
 import com.sytoss.edu2021.bom.EngineBOM;
-import com.sytoss.edu2021.common.RouteBOM;
+import com.sytoss.edu2021.bom.RouteBOM;
 import com.sytoss.edu2021.repo.EngineRepository;
 import com.sytoss.edu2021.repo.RouteRepository;
 import com.sytoss.edu2021.repo.dto.EngineDTO;

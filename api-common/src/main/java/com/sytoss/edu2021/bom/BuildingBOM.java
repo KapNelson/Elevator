@@ -6,7 +6,6 @@ import lombok.Setter;
 import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Getter
@@ -23,8 +22,8 @@ public class BuildingBOM {
     public BuildingBOM() {
     }
 
-    public BuildingBOM(String address, int floorsAmount){
-        this.address =address;
+    public BuildingBOM(String address, int floorsAmount) {
+        this.address = address;
         this.floorsAmount = floorsAmount;
     }
 
@@ -42,7 +41,7 @@ public class BuildingBOM {
     }
 
     public EngineBOM findEngineById(int idEngine) {
-        for(EngineBOM engine : engines){
+        for (EngineBOM engine : engines) {
             if (engine.getId() == idEngine)
                 return engine;
         }
@@ -50,10 +49,10 @@ public class BuildingBOM {
     }
 
     @JsonIgnore
-    public Integer[] getEngineIdList(){
+    public Integer[] getEngineIdList() {
         Integer[] engineId = new Integer[engines.size()];
         for (int i = 0; i < engines.size(); i++) {
-            engineId[i]=engines.get(i).getId();
+            engineId[i] = engines.get(i).getId();
         }
         return engineId;
     }

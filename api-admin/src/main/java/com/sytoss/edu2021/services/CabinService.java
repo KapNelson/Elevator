@@ -32,8 +32,8 @@ public class CabinService {
         if (buildingDTO == null) {
             throw new EntityNotFoundException("There is no building with id= " + buildingId + ".\nYou can not add a cabin.");
         }
-        CabinDTO checkCabin = cabinRepository.findCabinDTOByBuildingIdAndNumber(buildingId,cabin.getNumber());
-        if(checkCabin != null){
+        CabinDTO checkCabin = cabinRepository.findCabinDTOByBuildingIdAndNumber(buildingId, cabin.getNumber());
+        if (checkCabin != null) {
             throw new AlreadyExistsException("Such cabin already exists");
         }
         if (cabin.isValid()) {
@@ -41,8 +41,8 @@ public class CabinService {
             cabinDTO.setBuildingId(buildingId);
             cabinDTO.setNumber(cabin.getNumber());
             cabinDTO = cabinRepository.save(cabinDTO);
-            new CabinConvertor().fromDTO(cabinDTO,cabin);
-            feignProxyEngine.registerEngine(buildingId,cabin.getId());
+            new CabinConvertor().fromDTO(cabinDTO, cabin);
+            feignProxyEngine.registerEngine(buildingId, cabin.getId());
             return cabin;
         } else {
             throw new ValidationException("The cabin is invalid");
@@ -60,11 +60,11 @@ public class CabinService {
     }
 
     public CabinBOM getCabin(int buildingId, int cabinNumber) {
-        CabinDTO cabinDTO = cabinRepository.findCabinDTOByBuildingIdAndNumber(buildingId,cabinNumber);
-        if(cabinDTO == null)
-            throw  new EntityNotFoundException("There is no such engine with buildingId: "+buildingId+" and cabinNumber: "+cabinNumber);
+        CabinDTO cabinDTO = cabinRepository.findCabinDTOByBuildingIdAndNumber(buildingId, cabinNumber);
+        if (cabinDTO == null)
+            throw new EntityNotFoundException("There is no such engine with buildingId: " + buildingId + " and cabinNumber: " + cabinNumber);
         CabinBOM cabinBOM = new CabinBOM();
-        new CabinConvertor().fromDTO(cabinDTO,cabinBOM);
+        new CabinConvertor().fromDTO(cabinDTO, cabinBOM);
         return cabinBOM;
     }
 }

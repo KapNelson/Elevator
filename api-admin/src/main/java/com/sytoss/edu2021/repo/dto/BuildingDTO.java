@@ -6,8 +6,6 @@ import lombok.Setter;
 import org.springframework.util.ObjectUtils;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Entity(name = "app_build")
